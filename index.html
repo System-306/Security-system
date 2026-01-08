@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول - شعبة 306</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="shortcut icon" href="img/WhatsApp Image 2025-12-31 at 4.21.28 AM.jpeg">
+<link rel="icon" type="image/png" sizes="32x32" href="img/WhatsApp Image 2025-12-31 at 4.21.28 AM.jpeg">
+<link rel="icon" type="image/png" sizes="16x16" href="img/WhatsApp Image 2025-12-31 at 4.21.28 AM.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary-color:#2c3e50; --secondary-color:#3498db; --accent-color:#1abc9c; --danger-color:#e74c3c; --success-color:#27ae60; --light-color:#ecf0f1; }
@@ -351,7 +355,7 @@
         } catch (error) {
             console.error("❌ خطأ تسجيل الدخول:", error.code, error.message);
             
-            let errorMessage = "حدث خطأ أثناء تسجيل الدخول";
+            let errorMessage = "اسم المستخدم أو كلمة المرور غير صحيحة";
             
             switch(error.code) {
                 case 'auth/invalid-email':
@@ -515,7 +519,7 @@
 
         try {
             await sendPasswordResetEmail(auth, email);
-            alert("✅ تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.\nيرجى التحقق من بريدك الإلكتروني.");
+            alert("يرجى التواصل مع مدير الموقع لاستعادة كلمة المرور");
         } catch (error) {
             let errorMessage = "حدث خطأ أثناء إرسال رابط الاستعادة";
             
@@ -621,12 +625,7 @@
             border-top: 1px solid #eee;
         `;
         
-        adminLink.innerHTML = `
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 10px;">هل أنت مدير النظام؟</p>
-            <a href="admin-login.html" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">
-                <i class="fas fa-user-shield"></i> تسجيل الدخول كمدير
-            </a>
-        `;
+        
         
         // إضافة الرابط بعد نموذج تسجيل الدخول
         const loginForm = document.getElementById('login-form');
