@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مكتبتي الرقمية</title>
+      <link rel="icon" type="image/x-icon" href="img//icon1.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: white;
+    background: url('img/LibraryS.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+  }
+
+  /* ✅ إصلاح الترتيب */
+  .library-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-top: 40px;
+    padding-bottom: 30px;
+    height: 590px;
+    overflow-y: auto;
+  }
+
+  .library-item {
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 8px;
+    width: 250px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255 255 255 / 0.15);
+    color: white;
+    height: 100px;
+    position: relative;
+  }
+
+  .library-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-left: 10px;
+  }
+
+  .text-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding-left: 5px;
+    text-align: right;
+  }
+
+  .title { font-weight: bold; font-size: 1.1em; margin: 0 0 3px 0; }
+  .purchase-date { font-size: 0.9em; color: #ddd; margin: 0; }
+
+  .download-btn {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    background-color: rgba(255 255 255 / 0.2);
+    color: white;
+    padding: 6px 15px;
+    border: none;
+    border-radius: 23px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+
+  .download-btn.disabled {
+    background: #ccc;
+    color: #444;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* زر الاسترجاع */
+  .refund-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #e63946;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .refund-btn i {
+    color: black;
+    font-size: 16px;
+  }
+
+  .refund-btn:hover {
+    background-color: #c71c28;
+    transform: scale(1.1);
+  }
+
+  /* المودال */
+  .confirm-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    text-align: center;
+    display: none;
+    z-index: 1000;
+  }
+
+  .confirm-box h3 { margin-bottom: 15px; }
+  .confirm-box button {
+    margin: 8px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .confirm-yes { background-color: #28a745; color: white; }
+  .confirm-no { background-color: #ccc; }
+
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+  }
+
+  p.empty-msg {
+    color: white;
+    position: absolute;
+    top: 330px;
+    right: 70px;
+    font-size: 18px;
+    width: 250px;
+    text-align: center;
+  }
+
+  #homeID { position: absolute; top: 0; left: 0; height: 70px; z-index: -1; }
+  .diVHome { position: absolute; top: 0; left: 0; height: 70px; width: 70px; z-index: 3; background-color: red; opacity: 0; }
+</style>
+</head>
+<body>
+
+<div class="library-list" id="libraryList"></div>
+
+<img id="homeID" src="img//home_img.png" alt="">
+<a href="index.html"> <div class="diVHome"></div> </a>
+
+<p class="empty-msg" id="emptyMsg" style="display:none;">
+  لا توجد اشتراكات حالية في<br>حال اشتركت سيتم عرض اشتراك هنا
+</p>
+
+<!-- المودال -->
+<div class="overlay" id="overlay"></div>
+<div class="confirm-box" id="confirmBox">
+  <h3>هل تريد استرجاع هذا المنتج؟</h3>
+  <button class="confirm-yes">نعم</button>
+  <button class="confirm-no">لا</button>
+</div>
+
+<script>
+  const loggedInUser = localStorage.getItem('loggedInUser') || 'demo';
+  const LIBRARY_KEY = `library_${loggedInUser}`;
+  const HISTORY_KEY = `history_${loggedInUser}`;
+  
+  const libraryList = document.getElementById('libraryList');
+  const emptyMsg = document.getElementById('emptyMsg');
+  const overlay = document.getElementById('overlay');
+  const confirmBox = document.getElementById('confirmBox');
+  const yesBtn = confirmBox.querySelector('.confirm-yes');
+  const noBtn = confirmBox.querySelector('.confirm-no');
+  
+  const originalBg = "url('img/LibraryS.png') no-repeat center center fixed";
+  const filledBg = "url('img/Library2-1.png') no-repeat center center fixed";
+  
+  let balance = parseFloat(localStorage.getItem(`balance_${loggedInUser}`)) || 0;
+  let library = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]');
+  let pendingRefund = null;
+  
+  function updateBackground() {
+    document.body.style.background = (library.length > 0 ? filledBg : originalBg);
+    document.body.style.backgroundSize = "cover";
+  }
+
+  function renderLibrary() {
+    libraryList.innerHTML = '';
+    emptyMsg.style.display = library.length === 0 ? 'block' : 'none';
+    
+    library.forEach(item => {
+      if (!item.id) item.id = 'item-' + Math.floor(Math.random() * 1e9);
+      if (item.downloaded === undefined) item.downloaded = false;
+
+      const div = document.createElement('div');
+      div.className = 'library-item';
+      div.innerHTML = `
+        <div class="text-container">
+          <div class="title">${item.title}</div>
+          <div class="purchase-date">تاريخ الشراء: ${item.purchaseDate}</div>
+          <div class="price">السعر: ${item.price.toFixed(2)} ريال</div>
+        </div>
+        <img src="${item.image}" alt="${item.title}" />
+        <a href="#" class="download-btn" target="_blank" download>تحميل</a>
+        ${!item.downloaded ? `
+          <button class="refund-btn" title="استرجاع المنتج">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        ` : ''}
+      `;
+      
+      const refundBtn = div.querySelector('.refund-btn');
+      const downloadBtn = div.querySelector('.download-btn');
+
+      // عند التحميل
+      downloadBtn.addEventListener('click', () => {
+        item.downloaded = true;
+        localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
+        renderLibrary();
+      });
+
+      // عند النقر على استرجاع
+      if (refundBtn) {
+        refundBtn.addEventListener('click', () => {
+          pendingRefund = item;
+          overlay.style.display = 'block';
+          confirmBox.style.display = 'block';
+        });
+      }
+
+      libraryList.appendChild(div);
+    });
+    localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
+    updateBackground();
+  }
+
+  yesBtn.addEventListener('click', () => {
+    if (!pendingRefund) return;
+    const idx = library.findIndex(i => i.id === pendingRefund.id);
+    if (idx !== -1 && !library[idx].downloaded) {
+      balance += library[idx].price;
+      localStorage.setItem(`balance_${loggedInUser}`, balance.toFixed(2));
+      
+      const returnedItem = library[idx];
+      library.splice(idx, 1);
+      localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
+
+      // تحديث سجل المشتريات
+      let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      history = history.map(h => {
+        if (h.id === returnedItem.id) h.status = 'تم الاسترجاع';
+        return h;
+      });
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+      
+      renderLibrary();
+    }
+    pendingRefund = null;
+    overlay.style.display = 'none';
+    confirmBox.style.display = 'none';
+  });
+
+  noBtn.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    confirmBox.style.display = 'none';
+    pendingRefund = null;
+  });
+
+  renderLibrary();
+</script>
+
+</body>
+</html>

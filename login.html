@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تسجيل الدخول / إنشاء حساب - مكتبة الفجر الرقمية</title>
+<link rel="icon" type="image/x-icon" href="img/icon1.jpg">
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+  import { getDatabase, ref, set, get, child, update, push } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBlcKC2ncX9mTOPlhDOnfmyzdJ5mLinWYY",
+    authDomain: "al-fajr-digital-library.firebaseapp.com",
+    databaseURL: "https://al-fajr-digital-library-default-rtdb.firebaseio.com",
+    projectId: "al-fajr-digital-library",
+    storageBucket: "al-fajr-digital-library.firebasestorage.app",
+    messagingSenderId: "739899495618",
+    appId: "1:739899495618:web:8e60409193ec1408b4d75b",
+    measurementId: "G-FFRQP9CXYK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const database = getDatabase(app);
+  
+  window.firebaseAuth = auth;
+  window.firebaseDatabase = database;
+  window.firebaseApp = app;
+  
+  window.firebase = {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    ref,
+    set,
+    get,
+    child,
+    update,
+    push,
+    onAuthStateChanged,
+    signOut,
+    getDatabase,
+    getAuth
+  };
+</script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Cairo', 'Amiri', sans-serif;
+    background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+    margin: 0;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+  }
+  
+  .container {
+    background: rgba(30, 30, 46, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  }
+  
+  .logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #ff6b35, #ff8e53);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+  }
+  
+  .logo i {
+    font-size: 36px;
+    color: white;
+  }
+  
+  h2 {
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b35, #ffab00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: right;
+  }
+  
+  label {
+    display: block;
+    text-align: right;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #e0e0e0;
+    font-size: 14px;
+  }
+  
+  .input-with-icon {
+    position: relative;
+  }
+  
+  .input-with-icon i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #ff6b35;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .show-password {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    user-select: none;
+    font-size: 14px;
+    color: #b0b0b0;
+  }
+  
+  .show-password input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .captcha-container {
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+  }
+  
+  #captchaCanvas {
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #ff6b35;
+    margin-bottom: 15px;
+    user-select: none;
+    background: white;
+  }
+  
+  .captcha-container p {
+    color: #b0b0b0;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  
+  button {
+    background: linear-gradient(135deg, #ff6b35, #ff8e53);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cairo', sans-serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  }
+  
+  button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    background: linear-gradient(135deg, #ff8e53, #ffab00);
+  }
+  
+  button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 22px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .message.success {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+  }
+  
+  .message.error {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+  }
+  
+  .message.info {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196f3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+  }
+  
+  .toggle-link {
+    margin-top: 25px;
+    color: #ffab00;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease;
+    font-size: 15px;
+  }
+  
+  .toggle-link:hover {
+    color: #ff6b35;
+    text-decoration: underline;
+  }
+  
+  #toggleText {
+    color: #b0b0b0;
+    font-size: 15px;
+  }
+  
+  .forgot-links {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #b0b0b0;
+  }
+  
+  .forgot-link {
+    color: #ffab00;
+    cursor: pointer;
+    margin: 0 8px;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .forgot-link:hover {
+    color: #ff6b35;
+    text-decoration: underline;
+  }
+  
+  .separator {
+    display: inline-block;
+    margin: 0 5px;
+    color: #666;
+  }
+  
+  #blockedOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 46, 0.95);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #ff6b35;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px;
+    z-index: 10;
+    flex-direction: column;
+  }
+  
+  #blockedOverlay i {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #f44336;
+  }
+  
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+  
+  .overlay-box {
+    background: rgba(30, 30, 46, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+  }
+  
+  .overlay-box h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 22px;
+    background: linear-gradient(135deg, #ff6b35, #ffab00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .overlay-box input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .overlay-box input:focus {
+    border-color: #ff6b35;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .overlay-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .overlay-buttons button {
+    flex: 1;
+    padding: 12px;
+  }
+  
+  .overlay-buttons button.secondary {
+    background: linear-gradient(135deg, #666, #888);
+  }
+  
+  .overlay-buttons button.secondary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #888, #999);
+  }
+  
+  .security-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    text-align: right;
+  }
+  
+  .security-info h4 {
+    color: #ffab00;
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .security-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .security-info li {
+    color: #b0b0b0;
+    margin-bottom: 8px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .security-info i {
+    color: #4caf50;
+    font-size: 14px;
+  }
+  
+  .loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ff6b35;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .password-strength {
+    height: 5px;
+    margin-top: 5px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .strength-0 { width: 0%; background: #f44336; }
+  .strength-1 { width: 25%; background: #f44336; }
+  .strength-2 { width: 50%; background: #ff9800; }
+  .strength-3 { width: 75%; background: #ffeb3b; }
+  .strength-4 { width: 100%; background: #4caf50; }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .container {
+      padding: 30px 25px;
+      margin: 10px;
+    }
+    
+    h2 {
+      font-size: 24px;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+      padding: 12px 40px 12px 12px;
+      font-size: 15px;
+    }
+    
+    button {
+      padding: 14px;
+      font-size: 16px;
+    }
+    
+    .overlay-box {
+      padding: 25px;
+      width: 95%;
+    }
+  }
+  
+  /* Animation for form switch */
+  .fade-in {
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+<style>
+  /* نفس الأنماط السابقة */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Cairo', 'Amiri', sans-serif;
+    background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+    margin: 0;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+  }
+  
+  .container {
+    background: rgba(30, 30, 46, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* ... باقي الأنماط كما هي ... */
+  
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Amiri&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">
+    <i class="fas fa-book-open"></i>
+  </div>
+  
+  <h2 id="formTitle">تسجيل الدخول</h2>
+  
+  <form id="authForm" class="fade-in">
+    <div class="form-group">
+      <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+      <div class="input-with-icon">
+        <input type="email" id="email" autocomplete="email" required />
+        <i class="fas fa-envelope"></i>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="password"><i class="fas fa-lock"></i> كلمة المرور</label>
+      <div class="input-with-icon">
+        <input type="password" id="password" autocomplete="current-password" required />
+        <i class="fas fa-lock"></i>
+      </div>
+    </div>
+    
+    <div class="form-group" id="usernameGroup">
+      <label for="username"><i class="fas fa-user"></i> اسم المستخدم</label>
+      <div class="input-with-icon">
+        <input type="text" id="username" autocomplete="username" required />
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+    
+    <div class="form-group" id="phoneGroup">
+      <label for="phone"><i class="fas fa-phone"></i> رقم الهاتف</label>
+      <div class="input-with-icon">
+        <input type="tel" id="phone" placeholder="05xxxxxxxx" required />
+        <i class="fas fa-phone"></i>
+      </div>
+    </div>
+    
+    <div id="passwordStrengthContainer" style="display: none;">
+      <div class="password-strength" id="passwordStrength"></div>
+      <small style="color: #888; display: block; text-align: right; margin-top: 5px;">قوة كلمة المرور</small>
+    </div>
+    
+    <div class="show-password">
+      <input type="checkbox" id="showPass" />
+      <label for="showPass">إظهار كلمة المرور</label>
+    </div>
+    
+    <div class="captcha-container">
+      <p>الرجاء كتابة الحروف من الصورة أدناه</p>
+      <canvas id="captchaCanvas" width="250" height="60" title="انقر لتحديث الكابتشا"></canvas>
+      <div class="input-with-icon">
+        <input type="text" id="captchaInput" placeholder="اكتب الحروف من الصورة أعلاه" autocomplete="off" required />
+        <i class="fas fa-shield-alt"></i>
+      </div>
+    </div>
+    
+    <div class="security-info">
+      <h4><i class="fas fa-shield-alt"></i> معلومات الأمان</h4>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> بياناتك مشفرة وآمنة</li>
+        <li><i class="fas fa-check-circle"></i> لن نشارك بياناتك مع أحد</li>
+        <li><i class="fas fa-check-circle"></i> يمكنك حذف حسابك في أي وقت</li>
+      </ul>
+    </div>
+    
+    <button type="submit" id="submitBtn">
+      <span id="btnText">دخول</span>
+      <span id="btnLoader" style="display: none;"><div class="loader"></div>جاري المعالجة...</span>
+    </button>
+  </form>
+  
+  <div class="message" id="message"></div>
+  
+  <div class="forgot-links">
+    <span class="forgot-link" id="forgotPasswordLink">نسيت كلمة المرور؟</span>
+    <span class="separator">|</span>
+    <span class="forgot-link" id="forgotAccountLink">استرجاع الحساب</span>
+  </div>
+  
+  <div style="margin-top: 25px;">
+    <span id="toggleText">ليس لديك حساب؟ </span>
+    <span class="toggle-link" id="toggleForm">إنشاء حساب جديد</span>
+  </div>
+  
+  <div id="blockedOverlay">
+    <i class="fas fa-ban"></i>
+    <h3>تم حظر الدخول مؤقتًا</h3>
+    <p>لقد تجاوزت عدد المحاولات المسموح بها.</p>
+    <p>الرجاء المحاولة مرة أخرى بعد <span id="blockTime">5</span> دقائق</p>
+    <button onclick="location.reload()" style="margin-top: 20px; width: auto; padding: 10px 20px;">إعادة تحميل الصفحة</button>
+  </div>
+</div>
+
+<div class="overlay" id="forgotOverlay">
+  <div class="overlay-box">
+    <h3 id="forgotTitle">استرجاع كلمة المرور</h3>
+    <p style="color: #b0b0b0; margin-bottom: 20px;">أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور</p>
+    <input type="email" id="forgotEmail" placeholder="البريد الإلكتروني المسجل" autocomplete="email" />
+    <div class="overlay-buttons">
+      <button id="forgotSubmitBtn">إرسال رابط التعيين</button>
+      <button class="secondary" id="forgotCloseBtn">إلغاء</button>
+    </div>
+    <div class="message" id="forgotMessage"></div>
+  </div>
+</div>
+
+<div class="overlay" id="accountChooserOverlay">
+  <div class="overlay-box">
+    <h3 id="chooserTitle">اختر حسابًا للدخول</h3>
+    <div id="accountsList" style="margin: 20px 0;"></div>
+    <div class="overlay-buttons">
+      <button class="secondary" id="cancelChooserBtn">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== متغيرات عامة ======
+let isLoginMode = true;
+let failedAttempts = 0;
+const maxAttempts = 5;
+let blockUntil = 0;
+let captchaText = '';
+
+// ====== عناصر DOM ======
+const formTitle = document.getElementById('formTitle');
+const authForm = document.getElementById('authForm');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const usernameInput = document.getElementById('username');
+const usernameGroup = document.getElementById('usernameGroup');
+const phoneInput = document.getElementById('phone');
+const phoneGroup = document.getElementById('phoneGroup');
+const submitBtn = document.getElementById('submitBtn');
+const btnText = document.getElementById('btnText');
+const btnLoader = document.getElementById('btnLoader');
+const messageDiv = document.getElementById('message');
+const toggleFormLink = document.getElementById('toggleForm');
+const toggleText = document.getElementById('toggleText');
+const showPassCheckbox = document.getElementById('showPass');
+const captchaCanvas = document.getElementById('captchaCanvas');
+const captchaInput = document.getElementById('captchaInput');
+const blockedOverlay = document.getElementById('blockedOverlay');
+const blockTimeSpan = document.getElementById('blockTime');
+const forgotOverlay = document.getElementById('forgotOverlay');
+const forgotEmailInput = document.getElementById('forgotEmail');
+const forgotSubmitBtn = document.getElementById('forgotSubmitBtn');
+const forgotMessage = document.getElementById('forgotMessage');
+const forgotCloseBtn = document.getElementById('forgotCloseBtn');
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+const forgotAccountLink = document.getElementById('forgotAccountLink');
+const passwordStrengthContainer = document.getElementById('passwordStrengthContainer');
+const passwordStrength = document.getElementById('passwordStrength');
+
+// ====== توليد الكابتشا ======
+function generateCaptcha() {
+  const ctx = captchaCanvas.getContext('2d');
+  ctx.clearRect(0, 0, captchaCanvas.width, captchaCanvas.height);
+  
+  const gradient = ctx.createLinearGradient(0, 0, captchaCanvas.width, 0);
+  gradient.addColorStop(0, '#ff6b35');
+  gradient.addColorStop(1, '#ffab00');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, captchaCanvas.width, captchaCanvas.height);
+  
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  captchaText = '';
+  for (let i = 0; i < 6; i++) {
+    captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  
+  for (let i = 0; i < 50; i++) {
+    ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.3})`;
+    ctx.fillRect(
+      Math.random() * captchaCanvas.width,
+      Math.random() * captchaCanvas.height,
+      Math.random() * 3,
+      Math.random() * 3
+    );
+  }
+  
+  ctx.font = 'bold 32px Arial';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  
+  for (let i = 0; i < captchaText.length; i++) {
+    const x = captchaCanvas.width / (captchaText.length + 1) * (i + 1);
+    const y = captchaCanvas.height / 2;
+    const offsetX = (Math.random() - 0.5) * 5;
+    const offsetY = (Math.random() - 0.5) * 5;
+    
+    ctx.save();
+    ctx.translate(x + offsetX, y + offsetY);
+    ctx.rotate((Math.random() - 0.5) * 0.2);
+    
+    const hue = 20 + Math.random() * 20;
+    ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+    ctx.fillText(captchaText[i], 0, 0);
+    ctx.restore();
+  }
+  
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.moveTo(Math.random() * captchaCanvas.width, 0);
+    ctx.lineTo(Math.random() * captchaCanvas.width, captchaCanvas.height);
+    ctx.stroke();
+  }
+}
+
+// ====== التحقق من الكابتشا ======
+function validateCaptcha() {
+  const userInput = captchaInput.value.trim();
+  return userInput.toLowerCase() === captchaText.toLowerCase();
+}
+
+// ====== تحديث قوة كلمة المرور ======
+function updatePasswordStrength(password) {
+  let strength = 0;
+  
+  if (password.length >= 8) strength++;
+  if (/[A-Z]/.test(password)) strength++;
+  if (/[0-9]/.test(password)) strength++;
+  if (/[^A-Za-z0-9]/.test(password)) strength++;
+  
+  passwordStrength.className = `password-strength strength-${strength}`;
+}
+
+// ====== التبديل بين وضعي الدخول والتسجيل ======
+function toggleFormMode() {
+  isLoginMode = !isLoginMode;
+  
+  if (isLoginMode) {
+    formTitle.textContent = 'تسجيل الدخول';
+    btnText.textContent = 'دخول';
+    toggleText.textContent = 'ليس لديك حساب؟ ';
+    toggleFormLink.textContent = 'إنشاء حساب جديد';
+    usernameGroup.style.display = 'none';
+    phoneGroup.style.display = 'none';
+    passwordStrengthContainer.style.display = 'none';
+    forgotPasswordLink.style.display = 'inline';
+    forgotAccountLink.style.display = 'inline';
+  } else {
+    formTitle.textContent = 'إنشاء حساب جديد';
+    btnText.textContent = 'إنشاء حساب';
+    toggleText.textContent = 'لديك حساب بالفعل؟ ';
+    toggleFormLink.textContent = 'تسجيل الدخول';
+    usernameGroup.style.display = 'block';
+    phoneGroup.style.display = 'block';
+    passwordStrengthContainer.style.display = 'block';
+    forgotPasswordLink.style.display = 'none';
+    forgotAccountLink.style.display = 'none';
+  }
+  
+  messageDiv.textContent = '';
+  messageDiv.className = 'message';
+  captchaInput.value = '';
+  generateCaptcha();
+  
+  authForm.classList.remove('fade-in');
+  void authForm.offsetWidth;
+  authForm.classList.add('fade-in');
+}
+
+// ====== التحقق من حالة الحظر ======
+function checkBlockStatus() {
+  const now = Date.now();
+  if (blockUntil > now) {
+    const minutesLeft = Math.ceil((blockUntil - now) / 60000);
+    blockTimeSpan.textContent = minutesLeft;
+    blockedOverlay.style.display = 'flex';
+    return true;
+  }
+  
+  blockedOverlay.style.display = 'none';
+  return false;
+}
+
+// ====== إضافة محاولة فاشلة ======
+function addFailedAttempt() {
+  failedAttempts++;
+  localStorage.setItem('failedAttempts', failedAttempts.toString());
+  
+  if (failedAttempts >= maxAttempts) {
+    blockUntil = Date.now() + 5 * 60 * 1000;
+    localStorage.setItem('blockUntil', blockUntil.toString());
+    checkBlockStatus();
+  }
+}
+
+// ====== إعادة تعيين المحاولات ======
+function resetFailedAttempts() {
+  failedAttempts = 0;
+  localStorage.setItem('failedAttempts', '0');
+  localStorage.removeItem('blockUntil');
+  blockUntil = 0;
+}
+
+// ====== عرض الرسالة ======
+function showMessage(text, type = 'info') {
+  messageDiv.textContent = text;
+  messageDiv.className = `message ${type}`;
+}
+
+// ====== التحقق من رقم الهاتف ======
+function validatePhone(phone) {
+  const phoneRegex = /^05[0-9]{8}$/;
+  return phoneRegex.test(phone);
+}
+
+// ====== حفظ بيانات المستخدم في قاعدة البيانات ======
+async function saveUserToFirebase(userId, email, username, phone) {
+  try {
+    const userData = {
+      email: email,
+      username: username,
+      phone: phone,
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+      role: 'user',
+      status: 'active'
+    };
+    
+    await window.firebase.set(window.firebase.ref(window.firebaseDatabase, 'users/' + userId), userData);
+    
+    // حفظ البيانات المحلية للتخزين المؤقت
+    const user = {
+      uid: userId,
+      email: email,
+      username: username,
+      phone: phone,
+      lastLogin: new Date().toISOString()
+    };
+    
+    // حفظ الحساب في القائمة المحلية
+    let savedAccounts = JSON.parse(localStorage.getItem('savedAccounts') || '[]');
+    const existingIndex = savedAccounts.findIndex(acc => acc.email === email);
+    
+    if (existingIndex !== -1) {
+      savedAccounts[existingIndex] = user;
+    } else {
+      savedAccounts.push(user);
+    }
+    
+    localStorage.setItem('savedAccounts', JSON.stringify(savedAccounts));
+    localStorage.setItem('user', JSON.stringify(user));
+    
+    return true;
+  } catch (error) {
+    console.error('خطأ في حفظ بيانات المستخدم:', error);
+    return false;
+  }
+}
+
+// ====== تسجيل الدخول ======
+async function handleLogin(email, password) {
+  try {
+    if (!validateCaptcha()) {
+      showMessage('كود التحقق غير صحيح. حاول مرة أخرى.', 'error');
+      generateCaptcha();
+      addFailedAttempt();
+      return;
+    }
+    
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline';
+    submitBtn.disabled = true;
+    
+    const userCredential = await window.firebase.signInWithEmailAndPassword(
+      window.firebaseAuth, 
+      email, 
+      password
+    );
+    
+    const user = userCredential.user;
+    
+    // الحصول على بيانات المستخدم من قاعدة البيانات
+    const db = window.firebaseDatabase;
+    const userRef = window.firebase.ref(db, 'users/' + user.uid);
+    const snapshot = await window.firebase.get(userRef);
+    
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      
+      // حفظ بيانات الجلسة
+      localStorage.setItem('user', JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        username: userData.username,
+        phone: userData.phone,
+        role: userData.role
+      }));
+      
+      // تحديث وقت آخر تسجيل دخول
+      await window.firebase.update(userRef, {
+        lastLogin: new Date().toISOString()
+      });
+      
+      // إرسال بيانات المستخدم إلى صفحة admin (اختياري)
+      // يمكنك إرسال إشعار إلى المسؤول فقط، وليس كلمة المرور
+      await sendUserNotificationToAdmin(userData, 'تسجيل دخول');
+    }
+    
+    resetFailedAttempts();
+    showMessage('تم تسجيل الدخول بنجاح! يتم توجيهك الآن...', 'success');
+    
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1500);
+    
+  } catch (error) {
+    btnText.style.display = 'inline';
+    btnLoader.style.display = 'none';
+    submitBtn.disabled = false;
+    
+    let errorMessage = 'حدث خطأ أثناء تسجيل الدخول';
+    
+    switch (error.code) {
+      case 'auth/user-not-found':
+        errorMessage = 'البريد الإلكتروني غير مسجل';
+        break;
+      case 'auth/wrong-password':
+        errorMessage = 'كلمة المرور غير صحيحة';
+        break;
+      case 'auth/too-many-requests':
+        errorMessage = 'تم تعطيل الحساب مؤقتًا. حاول مرة أخرى لاحقًا';
+        break;
+      case 'auth/user-disabled':
+        errorMessage = 'هذا الحساب تم تعطيله';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'البريد الإلكتروني غير صالح';
+        break;
+    }
+    
+    showMessage(errorMessage, 'error');
+    addFailedAttempt();
+    generateCaptcha();
+  }
+}
+
+// ====== إنشاء حساب جديد ======
+async function handleSignup(email, password, username, phone) {
+  try {
+    if (!validateCaptcha()) {
+      showMessage('كود التحقق غير صحيح. حاول مرة أخرى.', 'error');
+      generateCaptcha();
+      return;
+    }
+    
+    if (!validatePhone(phone)) {
+      showMessage('رقم الهاتف غير صالح. يجب أن يبدأ بـ 05 ويتكون من 10 أرقام.', 'error');
+      return;
+    }
+    
+    if (password.length < 6) {
+      showMessage('كلمة المرور يجب أن تتكون من 6 أحرف على الأقل', 'error');
+      return;
+    }
+    
+    // التحقق من أن اسم المستخدم متاح
+    const db = window.firebaseDatabase;
+    const usersRef = window.firebase.ref(db, 'users');
+    const snapshot = await window.firebase.get(usersRef);
+    
+    let usernameExists = false;
+    if (snapshot.exists()) {
+      snapshot.forEach((childSnapshot) => {
+        const userData = childSnapshot.val();
+        if (userData.username === username) {
+          usernameExists = true;
+        }
+      });
+    }
+    
+    if (usernameExists) {
+      showMessage('اسم المستخدم مستخدم بالفعل. الرجاء اختيار اسم آخر.', 'error');
+      return;
+    }
+    
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'inline';
+    submitBtn.disabled = true;
+    
+    // إنشاء الحساب في Firebase Authentication
+    const userCredential = await window.firebase.createUserWithEmailAndPassword(
+      window.firebaseAuth, 
+      email, 
+      password
+    );
+    
+    const user = userCredential.user;
+    
+    // حفظ بيانات المستخدم في قاعدة البيانات
+    const saved = await saveUserToFirebase(user.uid, email, username, phone);
+    
+    if (saved) {
+      // إرسال إشعار إلى المسؤول (اختياري)
+      await sendUserNotificationToAdmin({
+        email: email,
+        username: username,
+        phone: phone,
+        uid: user.uid
+      }, 'إنشاء حساب جديد');
+      
+      resetFailedAttempts();
+      showMessage('تم إنشاء الحساب بنجاح! يتم توجيهك الآن...', 'success');
+      
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1500);
+    } else {
+      throw new Error('فشل في حفظ بيانات المستخدم');
+    }
+    
+  } catch (error) {
+    btnText.style.display = 'inline';
+    btnLoader.style.display = 'none';
+    submitBtn.disabled = false;
+    
+    let errorMessage = 'حدث خطأ أثناء إنشاء الحساب';
+    
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = 'البريد الإلكتروني مستخدم بالفعل';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'البريد الإلكتروني غير صالح';
+        break;
+      case 'auth/weak-password':
+        errorMessage = 'كلمة المرور ضعيفة. الرجاء استخدام كلمة مرور أقوى';
+        break;
+      case 'auth/operation-not-allowed':
+        errorMessage = 'عملية إنشاء الحساب غير مسموح بها حالياً';
+        break;
+    }
+    
+    showMessage(errorMessage, 'error');
+    generateCaptcha();
+  }
+}
+
+// ====== إرسال إشعار إلى المسؤول ======
+async function sendUserNotificationToAdmin(userData, action) {
+  try {
+    const db = window.firebaseDatabase;
+    const notificationsRef = window.firebase.ref(db, 'adminNotifications');
+    
+    const notification = {
+      type: 'user_' + (action === 'إنشاء حساب جديد' ? 'signup' : 'login'),
+      userId: userData.uid,
+      userEmail: userData.email,
+      username: userData.username,
+      phone: userData.phone,
+      action: action,
+      timestamp: new Date().toISOString(),
+      read: false
+    };
+    
+    await window.firebase.push(notificationsRef, notification);
+    
+    console.log('تم إرسال إشعار إلى المسؤول');
+  } catch (error) {
+    console.error('خطأ في إرسال الإشعار:', error);
+  }
+}
+
+// ====== معالجة إرسال النموذج ======
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  
+  if (checkBlockStatus()) {
+    return;
+  }
+  
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  const username = usernameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  
+  if (!email || !password) {
+    showMessage('الرجاء ملء جميع الحقول المطلوبة', 'error');
+    return;
+  }
+  
+  if (!isLoginMode && (!username || !phone)) {
+    showMessage('الرجاء ملء جميع الحقول المطلوبة', 'error');
+    return;
+  }
+  
+  if (isLoginMode) {
+    await handleLogin(email, password);
+  } else {
+    await handleSignup(email, password, username, phone);
+  }
+}
+
+// ====== استرجاع كلمة المرور ======
+async function handleForgotPassword(email) {
+  try {
+    if (!email) {
+      showForgotMessage('الرجاء إدخال بريدك الإلكتروني', 'error');
+      return;
+    }
+    
+    forgotSubmitBtn.disabled = true;
+    forgotSubmitBtn.innerHTML = '<div class="loader"></div> جاري الإرسال...';
+    
+    await window.firebase.sendPasswordResetEmail(window.firebaseAuth, email);
+    
+    showForgotMessage('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني', 'success');
+    forgotEmailInput.value = '';
+    
+    setTimeout(() => {
+      closeForgotOverlay();
+    }, 3000);
+    
+  } catch (error) {
+    forgotSubmitBtn.disabled = false;
+    forgotSubmitBtn.textContent = 'إرسال رابط التعيين';
+    
+    let errorMessage = 'حدث خطأ أثناء إرسال رابط التعيين';
+    
+    switch (error.code) {
+      case 'auth/user-not-found':
+        errorMessage = 'البريد الإلكتروني غير مسجل';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'البريد الإلكتروني غير صالح';
+        break;
+    }
+    
+    showForgotMessage(errorMessage, 'error');
+  }
+}
+
+// ====== وظائف مساعدة ======
+function showForgotMessage(text, type = 'info') {
+  forgotMessage.textContent = text;
+  forgotMessage.className = `message ${type}`;
+}
+
+function openForgotOverlay() {
+  forgotOverlay.style.display = 'flex';
+  forgotEmailInput.value = '';
+  forgotMessage.textContent = '';
+  forgotSubmitBtn.disabled = false;
+  forgotSubmitBtn.textContent = 'إرسال رابط التعيين';
+}
+
+function closeForgotOverlay() {
+  forgotOverlay.style.display = 'none';
+}
+
+// ====== تهيئة الصفحة ======
+function init() {
+  failedAttempts = parseInt(localStorage.getItem('failedAttempts') || '0');
+  blockUntil = parseInt(localStorage.getItem('blockUntil') || '0');
+  
+  checkBlockStatus();
+  generateCaptcha();
+  
+  // إضافة مستمعي الأحداث
+  captchaCanvas.addEventListener('click', generateCaptcha);
+  
+  showPassCheckbox.addEventListener('change', function() {
+    passwordInput.type = this.checked ? 'text' : 'password';
+  });
+  
+  toggleFormLink.addEventListener('click', toggleFormMode);
+  authForm.addEventListener('submit', handleFormSubmit);
+  
+  forgotPasswordLink.addEventListener('click', openForgotOverlay);
+  forgotAccountLink.addEventListener('click', () => {
+    showMessage('للاستفسار عن حسابك، الرجاء التواصل مع إدارة الموقع', 'info');
+  });
+  
+  forgotSubmitBtn.addEventListener('click', () => handleForgotPassword(forgotEmailInput.value.trim()));
+  forgotCloseBtn.addEventListener('click', closeForgotOverlay);
+  
+  // تحديث قوة كلمة المرور
+  passwordInput.addEventListener('input', function() {
+    updatePasswordStrength(this.value);
+  });
+  
+  // التحقق من حالة المستخدم الحالي
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  if (user && user.uid) {
+    showMessage('أنت مسجل الدخول بالفعل. يتم توجيهك...', 'info');
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 2000);
+  }
+  
+  // تحديث الكابتشا كل دقيقتين
+  setInterval(generateCaptcha, 120000);
+}
+
+// ====== بدء التطبيق ======
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تمرير صفحات عمودي</title>
+        <link rel="icon" type="image/x-icon" href="img//icon1.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .book-scroll {
+      height: 100%;
+      width: 100%;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .page {
+      scroll-snap-align: start;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      background: #f0e6d2;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .page:nth-child(even) {
+      background: #e2d8c3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="book-scroll" id="book">
+  <section class="page">
+    <img style="position:relative;height: 100%;width:100%;margin-top: 0;" src="img//MangaProduct.jpg" alt="">
+  </section>
+  <section class="page">
+    المقدمة:
+
+"على مدار عشر سنواتٍ من تأسيسها، ازدهرت مملكة فالورين في هدوءٍ لم يكد يُنغِّصه أي تهديدٍ بالانهيار أو الدمار، حيث نعم شعبها بالسلام والأمان تحت حكم ملكٍ عادل. لكن كل شيءٍ تغير عندما **مات الحاكم فجأة**، ليُفجِّر صدمةً تهز أركان المملكة، وتُشعل خلافاتٍ عنيفةً حول من سيخلف العرش.
+
+كان أورين هو الوريث الشرعي، لكنه خالف شروط العائلة المالكة، فجُرِّد من حقه في الحكم، وقُتِل أبناؤه انتقامًا... إلا أن كاي**، الابن الأصغر، نجا **بمعجزة من المذبحة. والآن، بينما تختبئ المملكة تحت غيوم المؤامرات، هل سيتمكن كاي من **إثبات أحقيته بالعرش**؟ وما الثمن الذي سيدفعه مقابل استعادة ما سُلب منه؟"
+  </section>
+  <section class="page">
+البداية:
+في عالم من العوالم، كان هناك عالم يعاني من التفرقة والمعاناة والصراعات بين القبائل من أجل هدف واحد، وهو السيطرة على العالم من خلال توقيع عقود مع الملوك (المتحكم).في تلك الأحداث، ظهر رجل من مكان مجهول، لديه الحكمة والدهاء والقدرة على معالجة نفسه. قام هذا الرجل بتوحيد هذه القبائل ونشر السلام والوئام بإضافة قوانين صارمة لكل من في المملكة وكان يلقب هذا الرجل بإسم ريزل، ومن هنا بدأت مملكة فالورين المكونة من خمس مدن: الجنوبية (أوريندال)، الشمالية (فالوريا)، الشرقية (زيلثرا)، الغربية (أوريثال)، والوسطى (موريلاند).
+كانت المملكة تعيش في أفضل حالاتها، لكن لم تستمر هذه السعادة طويلًا.بسبب طمع بعض الناس بسلطا والقوة وبتحديد عقد (فالورين) الذي يمتلكه الملك ولذي يجعل من صاحب العقد القدرة على الشفاء لكن لكل قدرة وسلبياتها ان اصيب المالك بزهرة ليثرا الكرستالية فقد يموت في غضون اربع ساعات ولسوء الحظ وجد احد المغتالين الزهرة وقام باغتيال الملك ريزل ولم يستطع الملك ان يكتب وصيته ومات بعدها،فتولى الحكم بعده الأمير الأكبر(اورين). لكنه لم يكن يتوقع أن الكوارث ستزداد. حاول بشتى الوسائل أن يسيطر على استقرار المملكة. وفي تلك الأثناء، ولد فتى فريد من نوعه ذو بشرة فاتحة و بني غامق الشعر وعينين بنيتين وبعلامة اسفل عينه اليمنى يدعى كاي، كان ابن (اورين)الأكبر وكان عمره في تلك الحادثة 8سنوات. كان قد خالف إحدى قواعد عائلته بعد أن تزوج سرًا من امرأة من العامة لم يعلم احد بذالك السر عدى الملك. لكن لم يستمر هذا السر طويلًا، حتى علمت العائلة به، فنزعت الحكم منه وأمرت بقتل عشيرة زوجته وابنه لكن ابنه هرب باتجاه الجنوب محاولًا النجاة، وفي طريقه صادفته قافلة بضائع، فاختبأ في أحد الصناديق بمساعدة احد اصدقاء والده القدامى.</section>
+    <section class="page"></section>
+    <section class="page"></section>
+</div>
+
+<script>
+  const container = document.getElementById('book');
+  let isScrolling = false;
+
+  container.addEventListener('wheel', (e) => {
+    if (isScrolling) return;
+
+    e.preventDefault(); // يمنع التمرير الافتراضي السريع
+    isScrolling = true;
+
+    const direction = e.deltaY > 0 ? 1 : -1;
+    const scrollAmount = window.innerHeight;
+
+    container.scrollBy({
+      top: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+
+    setTimeout(() => isScrolling = false, 700); // وقت التمرير
+  }, { passive: false });
+</script>
+
+</body>
+</html>

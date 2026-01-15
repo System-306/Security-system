@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>البطاقات - محفظتي</title>
+      <link rel="icon" type="image/x-icon" href="img//icon1.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* ====== المتغيرات والألوان الأساسية ====== */
+  :root {
+    --primary-color: #ff6b35;
+    --secondary-color: #1a73e8;
+    --accent-color: #ffab00;
+    --dark-bg: #121212;
+    --darker-bg: #0d0d0d;
+    --card-bg: #1e1e1e;
+    --card-hover: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --border-color: #333333;
+    --shadow-light: rgba(255, 107, 53, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.3);
+    --gradient-primary: linear-gradient(135deg, #ff6b35, #ff8e53);
+    --gradient-secondary: linear-gradient(135deg, #1a73e8, #4285f4);
+    --gradient-accent: linear-gradient(135deg, #ffab00, #ffca28);
+    --gradient-dark: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --transition-speed: 0.3s;
+    --turq-1: #00d0c2;
+    --turq-2: #00a9b8;
+    --dark: #06363a;
+    --card-w: 300px;
+    --card-h: 170px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* ====== الجسم العام ====== */
+  body {
+    font-family: 'Cairo', 'Almarai', sans-serif;
+    background: linear-gradient(180deg, #0d1b1a, #0a1514);
+    margin: 0;
+    padding: 20px;
+    color: var(--text-primary);
+    direction: rtl;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(0, 208, 194, 0.08) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(0, 169, 184, 0.08) 0%, transparent 20%);
+  }
+
+  /* ====== الشريط العلوي ====== */
+  header {
+    background: rgba(6, 54, 58, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 25px;
+    border: 1px solid rgba(0, 208, 194, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .top-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .balance-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 18px;
+    border-radius: var(--border-radius-md);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 208, 194, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .balance-box i {
+    color: var(--turq-1);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 25px;
+  }
+
+  /* ====== عمود البطاقات ====== */
+  .cards-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(6, 54, 58, 0.7);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid rgba(0, 208, 194, 0.15);
+  }
+
+  .cards-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cards-header i {
+    color: var(--turq-1);
+  }
+
+  .cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 10px;
+  }
+
+  /* ====== بطاقات الائتمان ====== */
+  .card {
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: var(--border-radius-lg);
+    padding: 18px;
+    color: white;
+    position: relative;
+    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transform-origin: center;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--turq-1), rgba(255, 255, 255, 0.8));
+  }
+
+  .card:hover {
+    transform: translateY(-8px) scale(0.98);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .balance-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .balance-badge i {
+    font-size: 11px;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .chip {
+    width: 52px;
+    height: 38px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f5d76e, #e0ac00);
+    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .chip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .bank-logo {
+    font-weight: 700;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .bank-logo i {
+    font-size: 16px;
+  }
+
+  .card-number {
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    margin: 8px 0;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    opacity: 0.95;
+    margin: 10px 0;
+  }
+
+  .card-holder {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .brand-logo {
+    width: 48px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* ====== لوحة التحكم ====== */
+  .controls {
+    background: rgba(6, 54, 58, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+    height: fit-content;
+    border: 1px solid rgba(0, 208, 194, 0.15);
+    position: sticky;
+    top: 20px;
+  }
+
+  .controls h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 208, 194, 0.3);
+  }
+
+  .controls h3 i {
+    color: var(--turq-1);
+  }
+
+  .controls label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: block;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .controls input[type="number"],
+  .controls input[type="text"] {
+    padding: 12px 15px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(0, 208, 194, 0.3);
+    width: 100%;
+    text-align: right;
+    font-size: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
+    transition: all var(--transition-speed);
+  }
+
+  .controls input:focus {
+    outline: none;
+    border-color: var(--turq-1);
+    box-shadow: 0 0 0 3px rgba(0, 208, 194, 0.1);
+  }
+
+  .controls .row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    border-radius: var(--border-radius-md);
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    flex: 1;
+  }
+
+  .btn i {
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 208, 194, 0.3);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .btn-danger {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+  }
+
+  .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.3);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(0, 208, 194, 0.2);
+    margin: 10px 0;
+  }
+
+  .small-txt {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ====== حالة فارغة ====== */
+  .empty {
+    background: rgba(6, 54, 58, 0.7);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    border: 1px solid rgba(0, 208, 194, 0.15);
+  }
+
+  .empty i {
+    font-size: 48px;
+    color: var(--turq-1);
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  /* ====== مودال التفاصيل ====== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    padding: 20px;
+  }
+
+  .modal-box {
+    background: rgba(6, 54, 58, 0.95);
+    padding: 25px;
+    border-radius: var(--border-radius-lg);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 208, 194, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-box h4 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .modal-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 208, 194, 0.2);
+    font-size: 15px;
+  }
+
+  .modal-row:last-child {
+    border-bottom: none;
+  }
+
+  .modal-label {
+    color: var(--text-secondary);
+  }
+
+  .modal-value {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    justify-content: flex-end;
+  }
+
+  /* ====== تنبيهات ====== */
+  #toastBox {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-md);
+    z-index: 9999;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    min-width: 300px;
+    display: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation: toastSlideIn 0.3s ease-out;
+  }
+
+  @keyframes toastSlideIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -20px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .toast-success {
+    background: linear-gradient(135deg, var(--success-color), #2e7d32);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+  }
+
+  .toast-error {
+    background: linear-gradient(135deg, var(--danger-color), #c62828);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+  }
+
+  /* ====== الوسائط المتجاوبة ====== */
+  @media (max-width: 1024px) {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .controls {
+      position: static;
+    }
+    
+    .cards-grid {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+    
+    .header-content {
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+    
+    .top-info {
+      justify-content: center;
+    }
+    
+    .balance-box {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    
+    .card {
+      width: 280px;
+    }
+    
+    .controls .row {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 18px;
+    }
+    
+    .balance-box {
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    
+    .card {
+      width: 100%;
+      max-width: 280px;
+    }
+    
+    .cards-header {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <h1><i class="fas fa-wallet"></i> بطاقاتك المصرفية</h1>
+    <div class="top-info">
+      <div class="balance-box">
+        <i class="fas fa-user"></i>
+        المستخدم: <span id="userNameDisplay">—</span>
+      </div>
+      <div class="balance-box">
+        <i class="fas fa-coins"></i>
+        الرصيد: <strong id="globalBalance">0.00</strong> ريال
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- عمود البطاقات -->
+  <section class="cards-column">
+    <div class="cards-header">
+      <h3><i class="fas fa-credit-card"></i> سجل البطاقات</h3>
+      <div class="small-txt">اضغط على البطاقة لعرض التفاصيل</div>
+    </div>
+
+    <div id="cardsGrid" class="cards-grid" aria-live="polite">
+      <!-- بطاقات ستُضاف هنا -->
+    </div>
+
+    <div id="noCards" class="empty" style="display:none">
+      <i class="fas fa-credit-card-blank"></i>
+      <h3>لا توجد بطاقات بعد</h3>
+      <p>اضغط "إضافة بطاقة" على اليمين لعمل بطاقة جديدة.</p>
+    </div>
+  </section>
+
+  <!-- لوحة التحكم -->
+  <aside class="controls">
+    <h3><i class="fas fa-tools"></i> أدوات المحفظة</h3>
+
+    <label for="codeInput"><i class="fas fa-ticket-alt"></i> كود الشحن <span style="color: #ff6b6b;">(إجباري)</span></label>
+    <input id="codeInput" type="text" placeholder="أدخل كود الشحن أو باركود" />
+
+    <div class="small-txt" style="background: rgba(255, 107, 54, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 107, 54, 0.3);">
+      <i class="fas fa-info-circle"></i> المبلغ سيتم إضافته تلقائياً حسب قيمة الكود المسجلة.
+    </div>
+
+    <div class="row">
+      <button class="btn btn-primary" id="rechargeBtn">
+        <i class="fas fa-bolt"></i> شحن الآن
+      </button>
+      <button class="btn btn-danger" id="zeroBtn">
+        <i class="fas fa-trash-alt"></i> تصفير الرصيد
+      </button>
+    </div>
+
+    <hr />
+
+    <label class="small-txt"><i class="fas fa-credit-card"></i> إدارة البطاقات</label>
+    <div class="row">
+      <button id="addCardBtn" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> إضافة بطاقة
+      </button>
+      <button id="refreshBtn" class="btn btn-secondary">
+        <i class="fas fa-sync-alt"></i> تحديث
+      </button>
+    </div>
+
+    <div class="small-txt" style="margin-top: 15px;">
+      <p><i class="fas fa-info-circle"></i> كل بطاقة لها رصيد مستقل خاص بها.</p>
+      <p><i class="fas fa-exclamation-triangle"></i> المبلغ يضاف حسب قيمة الكود المسجلة.</p>
+      <p><i class="fas fa-qrcode"></i> الكود أو الباركود صالح للاستخدام مرة واحدة فقط.</p>
+    </div>
+  </aside>
+</div>
+
+<!-- مودال التفاصيل -->
+<div id="modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <h4><i class="fas fa-id-card"></i> تفاصيل البطاقة</h4>
+    <div class="modal-row">
+      <div class="modal-label">المالك</div>
+      <div class="modal-value" id="modalOwner">—</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-label">رقم البطاقة</div>
+      <div class="modal-value" id="modalNumber">—</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-label">آخر 4 أرقام</div>
+      <div class="modal-value" id="modalLast4">—</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-label">تاريخ الانتهاء</div>
+      <div class="modal-value" id="modalExpiry">—</div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-label">رصيد البطاقة</div>
+      <div class="modal-value" id="modalBalance">— ريال</div>
+    </div>
+    <div class="modal-actions">
+      <button id="closeModal" class="btn btn-secondary">
+        <i class="fas fa-times"></i> إغلاق
+      </button>
+      <button id="deleteCardBtn" class="btn btn-danger">
+        <i class="fas fa-trash"></i> حذف البطاقة
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+  // Import Firebase SDK v12.7.0
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getDatabase, ref, set, get, query, orderByChild, equalTo } 
+    from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+  // Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBlcKC2ncX9mTOPlhDOnfmyzdJ5mLinWYY",
+    authDomain: "al-fajr-digital-library.firebaseapp.com",
+    databaseURL: "https://al-fajr-digital-library-default-rtdb.firebaseio.com",
+    projectId: "al-fajr-digital-library",
+    storageBucket: "al-fajr-digital-library.firebasestorage.app",
+    messagingSenderId: "739899495618",
+    appId: "1:739899495618:web:8e60409193ec1408b4d75b",
+    measurementId: "G-FFRQP9CXYK"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const codesRef = ref(db, 'voucher_codes');
+
+  // ======== إدارة البطاقات المحلية ========
+  const loggedInUser = localStorage.getItem('loggedInUser') || null;
+  const userNameDisplay = document.getElementById('userNameDisplay');
+  const cardsGrid = document.getElementById('cardsGrid');
+  const noCards = document.getElementById('noCards');
+  const globalBalanceEl = document.getElementById('globalBalance');
+
+  // تحقق من وجود مستخدم مسجل
+  if(!loggedInUser){
+    document.body.innerHTML = `
+      <div style="padding:40px;text-align:center;font-family:Arial, sans-serif;background:#0d1b1a;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="background:rgba(0,208,194,0.1);padding:30px;border-radius:16px;border:1px solid rgba(0,208,194,0.3);max-width:500px;">
+          <h2 style="color:#00d0c2;margin-bottom:20px;"><i class="fas fa-exclamation-triangle"></i> لم يتم العثور على مستخدم مسجل</h2>
+          <p style="margin-bottom:25px;color:#b0b0b0;">الرجاء تسجيل الدخول أولاً من صفحة الدخول.</p>
+          <a href="login.html" style="background:linear-gradient(135deg, #00d0c2, #00a9b8);color:white;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-flex;align-items:center;gap:8px;">
+            <i class="fas fa-sign-in-alt"></i> اذهب إلى صفحة الدخول
+          </a>
+        </div>
+      </div>
+    `;
+    throw new Error('No logged in user');
+  }
+
+  userNameDisplay.textContent = loggedInUser;
+
+  // توليد معرف فريد للجهاز
+  function generateDeviceId() {
+    let deviceId = localStorage.getItem('deviceId');
+    if (!deviceId) {
+      deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('deviceId', deviceId);
+    }
+    return deviceId;
+  }
+
+  const deviceId = generateDeviceId();
+
+  // مفاتيح التخزين الفريدة لكل مستخدم على كل جهاز
+  const USER_DEVICE_ID = `${loggedInUser}_${deviceId}`;
+  const CARDS_KEY = `cards_${USER_DEVICE_ID}`;
+  const BALANCE_KEY = `balance_${USER_DEVICE_ID}`;
+
+  // تحميل البيانات
+  let cards = JSON.parse(localStorage.getItem(CARDS_KEY) || "[]");
+  let balance = parseFloat(localStorage.getItem(BALANCE_KEY) || "0");
+
+  // تأكد من أن كل بطاقة لها رصيدها الخاص
+  function ensureCardBalance(card) {
+    if (!card.balance) {
+      card.balance = 0;
+    }
+    return card;
+  }
+
+  // تحديث العرض
+  function render(){
+    // حساب الرصيد الإجمالي
+    const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
+    globalBalanceEl.textContent = totalBalance.toFixed(2);
+
+    // عرض البطاقات
+    cardsGrid.innerHTML = "";
+    if(cards.length === 0){
+      noCards.style.display = "block";
+    } else {
+      noCards.style.display = "none";
+      cards.forEach((c, idx) => {
+        const card = ensureCardBalance(c);
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.dataset.index = idx;
+        div.innerHTML = `
+          <div class="balance-badge">
+            <i class="fas fa-coins"></i> ${card.balance.toFixed(2)} ر.س
+          </div>
+          <div class="top-row">
+            <div class="chip" aria-hidden="true"></div>
+            <div class="bank-logo">
+              <i class="fas fa-university"></i> Digital Bank
+            </div>
+          </div>
+          <div class="card-number">${formatCardDisplay(card.number)}</div>
+          <div class="card-meta">
+            <div>
+              <div class="card-holder">${loggedInUser}</div>
+              <div style="font-size:11px;opacity:.85">مالك البطاقة</div>
+            </div>
+            <div style="text-align:left">
+              <div class="expiry">${card.expiry}</div>
+              <div style="font-size:11px;opacity:.85">تاريخ الانتهاء</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div style="font-size:11px;opacity:.9">آخر 4: ${card.last4}</div>
+            <div class="brand-logo">مدى</div>
+          </div>
+        `;
+        div.addEventListener('click', () => openModal(idx));
+        cardsGrid.appendChild(div);
+      });
+    }
+  }
+
+  // صيغة رقم البطاقة
+  function formatCardDisplay(num){
+    return num.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+  }
+
+  // توليد رقم بطاقة عشوائي
+  function generateCardNumber(existingNumbers){
+    let tries = 0;
+    while(tries < 200){
+      let parts = [];
+      for(let i=0;i<4;i++){
+        parts.push(String(Math.floor(1000 + Math.random()*9000)));
+      }
+      let num = parts.join('');
+      if(!existingNumbers.includes(num)) return num;
+      tries++;
+    }
+    return Date.now().toString().slice(0,16).padEnd(16,'7');
+  }
+
+  // تاريخ انتهاء
+  function generateExpiry(){
+    const now = new Date();
+    const year = now.getFullYear() % 100;
+    const add = Math.floor(1 + Math.random()*6);
+    const yy = year + add;
+    const mm = String(Math.floor(1 + Math.random()*12)).padStart(2,'0');
+    return `${mm}/${String(yy).padStart(2,'0')}`;
+  }
+
+  // إضافة بطاقة
+  function addCard(){
+    const existing = cards.map(c=>c.number);
+    const number = generateCardNumber(existing);
+    const last4 = number.slice(-4);
+    const expiry = generateExpiry();
+    const card = {
+      id: 'card_'+Date.now()+'_'+Math.floor(Math.random()*9999),
+      number,
+      last4,
+      expiry,
+      balance: 0,
+      createdAt: new Date().toISOString()
+    };
+    cards.unshift(card);
+    saveCards();
+    render();
+    showToast('تم إضافة بطاقة جديدة بنجاح','success');
+  }
+
+  // التحقق من كود الشحن في Firebase
+  async function validateAndUseVoucherCode(code) {
+    try {
+      // إزالة المسافات والتحويل إلى أحرف كبيرة
+      code = code.trim().toUpperCase();
+      
+      if (!code) {
+        return { valid: false, message: 'الرجاء إدخال كود الشحن' };
+      }
+
+      // البحث عن الكود في Firebase
+      const q = query(codesRef, orderByChild('code'), equalTo(code));
+      const snapshot = await get(q);
+      
+      if (!snapshot.exists()) {
+        return { valid: false, message: 'الكود غير صالح أو غير موجود' };
+      }
+      
+      let voucherData = null;
+      let voucherKey = null;
+      
+      snapshot.forEach(child => {
+        voucherData = child.val();
+        voucherKey = child.key;
+      });
+      
+      // التحقق من حالة الكود
+      if (voucherData.status === 'used') {
+        return { valid: false, message: 'هذا الكود تم استخدامه مسبقاً!' };
+      }
+      
+      // التحقق من تاريخ الصلاحية
+      const expiryDate = new Date(voucherData.expiry_date);
+      if (expiryDate < new Date()) {
+        return { valid: false, message: 'هذا الكود منتهي الصلاحية!' };
+      }
+      
+      // التحقق من القيمة المسموحة
+      const validAmounts = [25, 50, 100, 200, 300, 500, 800];
+      if (!validAmounts.includes(voucherData.amount)) {
+        return { valid: false, message: 'قيمة الكود غير صالحة!' };
+      }
+      
+      // إذا كانت جميع الشروط صحيحة، تحديث حالة الكود
+      const updateData = {
+        ...voucherData,
+        status: 'used',
+        used_by: loggedInUser,
+        used_at: new Date().toISOString(),
+        device_id: deviceId
+      };
+      
+      await set(ref(db, `voucher_codes/${voucherKey}`), updateData);
+      
+      return { 
+        valid: true, 
+        message: 'تم التحقق من الكود بنجاح', 
+        amount: voucherData.amount 
+      };
+      
+    } catch (error) {
+      console.error('Error validating voucher:', error);
+      return { valid: false, message: 'خطأ في التحقق من الكود. حاول مرة أخرى.' };
+    }
+  }
+
+  // شحن البطاقة المحددة
+  async function rechargeCurrentCard() {
+    const codeInput = document.getElementById('codeInput');
+    const code = codeInput.value.trim();
+    
+    if (!code) {
+      showToast('الرجاء إدخال كود الشحن', 'error');
+      return;
+    }
+    
+    if (currentModalIndex === null) {
+      showToast('الرجاء اختيار بطاقة أولاً', 'error');
+      return;
+    }
+    
+    showToast('جاري التحقق من الكود...', 'warning');
+    
+    try {
+      // التحقق من الكود
+      const validation = await validateAndUseVoucherCode(code);
+      
+      if (!validation.valid) {
+        showToast(validation.message, 'error');
+        return;
+      }
+      
+      // شحن البطاقة المحددة
+      const card = ensureCardBalance(cards[currentModalIndex]);
+      card.balance += validation.amount;
+      saveCards();
+      
+      // تحديث الرصيد الإجمالي
+      const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
+      balance = totalBalance;
+      saveBalance();
+      
+      // تحديث العرض
+      render();
+      
+      // إعادة تعيين حقل الإدخال
+      codeInput.value = '';
+      
+      showToast(`تم شحن ${validation.amount} ريال للبطاقة بنجاح!`, 'success');
+      
+    } catch (error) {
+      console.error('Error in recharge:', error);
+      showToast('حدث خطأ أثناء عملية الشحن', 'error');
+    }
+  }
+
+  // تصفير رصيد البطاقة المحددة
+  function zeroCardBalance(){
+    if(currentModalIndex === null) {
+      showToast('الرجاء اختيار بطاقة أولاً', 'error');
+      return;
+    }
+    
+    if(!confirm('⚠️ هل أنت متأكد من تصفير رصيد هذه البطاقة؟')) return;
+    
+    const card = ensureCardBalance(cards[currentModalIndex]);
+    card.balance = 0;
+    saveCards();
+    
+    // تحديث الرصيد الإجمالي
+    const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
+    balance = totalBalance;
+    saveBalance();
+    
+    render();
+    showToast('تم تصفير رصيد البطاقة بنجاح','success');
+  }
+
+  // الحفظ في localStorage
+  function saveCards(){ 
+    localStorage.setItem(CARDS_KEY, JSON.stringify(cards)); 
+  }
+  
+  function saveBalance(){ 
+    localStorage.setItem(BALANCE_KEY, String(balance)); 
+  }
+
+  // مودال التفاصيل
+  const modal = document.getElementById('modal');
+  const modalOwner = document.getElementById('modalOwner');
+  const modalNumber = document.getElementById('modalNumber');
+  const modalLast4 = document.getElementById('modalLast4');
+  const modalExpiry = document.getElementById('modalExpiry');
+  const modalBalance = document.getElementById('modalBalance');
+  const closeModalBtn = document.getElementById('closeModal');
+  const deleteCardBtn = document.getElementById('deleteCardBtn');
+  let currentModalIndex = null;
+
+  function openModal(index){
+    currentModalIndex = index;
+    const c = ensureCardBalance(cards[index]);
+    modalOwner.textContent = loggedInUser;
+    modalNumber.textContent = formatCardDisplay(c.number);
+    modalLast4.textContent = c.last4;
+    modalExpiry.textContent = c.expiry;
+    modalBalance.textContent = c.balance.toFixed(2) + ' ريال';
+    modal.style.display = 'flex';
+  }
+
+  function closeModal(){ 
+    modal.style.display = 'none'; 
+    currentModalIndex = null; 
+  }
+
+  closeModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ 
+    if(e.target===modal) closeModal(); 
+  });
+
+  // حذف البطاقة
+  deleteCardBtn.addEventListener('click', ()=>{
+    if(currentModalIndex===null) return;
+    if(!confirm('هل تريد حذف هذه البطاقة نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.')) return;
+    cards.splice(currentModalIndex,1);
+    saveCards();
+    closeModal();
+    render();
+    showToast('تم حذف البطاقة بنجاح','success');
+  });
+
+  // Toast Notification
+  function showToast(msg, type = 'success'){
+    let box = document.getElementById('toastBox');
+    if(!box){
+      box = document.createElement('div');
+      box.id = 'toastBox';
+      document.body.appendChild(box);
+    }
+    box.textContent = msg;
+    box.className = type === 'success' ? 'toast-success' : 'toast-error';
+    box.style.display = 'block';
+    setTimeout(()=>{ box.style.display = 'none'; }, 2500);
+  }
+
+  // ======== أحداث الأزرار ========
+  document.getElementById('addCardBtn').addEventListener('click', addCard);
+
+  document.getElementById('rechargeBtn').addEventListener('click', rechargeCurrentCard);
+
+  document.getElementById('zeroBtn').addEventListener('click', zeroCardBalance);
+
+  document.getElementById('refreshBtn').addEventListener('click', () => {
+    render();
+    showToast('تم تحديث البيانات','success');
+  });
+
+  // السماح بالضغط على Enter في حقل الكود
+  document.getElementById('codeInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      rechargeCurrentCard();
+    }
+  });
+
+  // ======== تحميل أولي ========
+  render();
+  
+  // إذا لم يكن هناك بطاقات، أضف واحدة افتراضية
+  if(cards.length === 0){ 
+    setTimeout(() => {
+      if(cards.length === 0) {
+        addCard();
+        showToast('تم إنشاء بطاقتك الأولى بنجاح!','success');
+      }
+    }, 500);
+  }
+
+  // حفظ البيانات عند الخروج
+  window.addEventListener('beforeunload', () => { 
+    saveCards(); 
+    saveBalance(); 
+  });
+
+  // مزامنة الرصيد عند التغيير في نوافذ أخرى
+  window.addEventListener('storage', (e) => {
+    if (e.key === BALANCE_KEY) {
+      balance = parseFloat(e.newValue || 0);
+      render();
+    }
+    if (e.key === CARDS_KEY) {
+      cards = JSON.parse(e.newValue || "[]");
+      render();
+    }
+  });
+
+</script>
+</body>
+</html>

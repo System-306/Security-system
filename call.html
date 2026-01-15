@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحة الاتصال بالدعم الفني</title>
+        <link rel="icon" type="image/x-icon" href="img//icon1.jpg">
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: #222627;
+      text-align: center;
+      color: white;
+      margin: 0;
+    }
+
+    .number {
+      position: absolute;
+      width: 250px;
+      height: 350px;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    #number {
+      background: #222627;
+      outline: none;
+      color: #ffab00;
+      border: 0;
+      font-size: 40px;
+      width: 350px;
+      height: 60px;
+      text-align: center;
+      margin-top: 30px;
+      margin-left: -22%;
+      pointer-events: none;
+    }
+
+    .top, .center, .bottom, .bottom0 {
+      display: flex;
+      justify-content: space-around;
+      font-size: 45px;
+      margin-top: -70px;
+    }
+
+    .top {
+      margin-top: -30px;
+    }
+
+    .fa-backspace, .fa-headphones {
+      font-size: 42px;
+      margin-top: 42px;
+      cursor: pointer;
+    }
+
+    .called_circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 60px;
+      background: #ffab00;
+      text-align: center;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .fa-phone {
+      font-size: 35px;
+      margin-top: 13px;
+      cursor: pointer;
+    }
+
+    .alert-box {
+      display: none;
+      background: #ff4444;
+      color: white;
+      padding: 10px;
+      width: 80%;
+      margin: 20px auto;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    /* ✅ طبقة تغطية عند ظهور المستطيل */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
+
+    /* ✅ المستطيل المنبثق */
+    #callOptions {
+      display: none;
+      position: fixed;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      background: linear-gradient(145deg, #2b2f30, #1e2223);
+      color: white;
+      padding: 25px 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      width: 90%;
+      max-width: 350px;
+      z-index: 999;
+      text-align: center;
+      animation: slideUp 0.4s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 70%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 50%);
+      }
+    }
+
+    @keyframes slideDownFade {
+      from {
+        opacity: 1;
+        transform: translate(-50%, 50%);
+      }
+      to {
+        opacity: 0;
+        transform: translate(-50%, 70%);
+      }
+    }
+
+    #callOptions.hide {
+      animation: slideDownFade 0.4s ease-out forwards;
+    }
+
+    #callOptions p {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    #callOptions button.option-btn {
+      margin: 10px 5px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 85%;
+      display: block;
+      margin: 10px auto;
+    }
+
+    #callOptions button.option-btn.phone {
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      color: #222;
+    }
+
+    #callOptions button.option-btn.meet {
+      background: linear-gradient(45deg, #00e676, #00c853);
+      color: white;
+    }
+
+    #callOptions button.option-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    #closeCallOptions {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* تعطيل التفاعل أثناء العرض */
+    body.modal-open *:not(#callOptions):not(#callOptions *) {
+      pointer-events: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="number">
+    <input type="number" id="number" readonly />
+
+    <div class="top">
+      <p>1</p><p>2</p><p>3</p>
+    </div>
+    <div class="center">
+      <p>4</p><p>5</p><p>6</p>
+    </div>
+    <div class="bottom">
+      <p>7</p><p>8</p><p>9</p>
+    </div>
+    <div class="bottom0">
+      <i class="fa fa-backspace delete-btn"></i>
+      <p>0</p>
+      <i class="fa fa-headphones" id="listen"></i>
+    </div>
+    <div class="called_circle">
+      <i class="fa fa-phone" id="callBtn"></i>
+    </div>
+  </div>
+
+  <!-- ✅ تنبيه -->
+  <div class="alert-box" id="alertBox">جاري الاتصال...</div>
+
+  <!-- ✅ طبقة تغطية -->
+  <div id="overlay"></div>
+
+  <!-- ✅ نافذة الاتصال -->
+  <div id="callOptions">
+    <button id="closeCallOptions">×</button>
+    <p>اختر وسيلة الاتصال:</p>
+    <button class="option-btn phone" onclick="callPhone()">📞 الاتصال عبر الهاتف</button>
+    <button class="option-btn meet" onclick="callMeet()">📹 Google Meet</button>
+  </div>
+
+  <!-- ملف الصوت المدمج -->
+  <audio id="preRecordedAudio" src="i.m4a"></audio>
+  <audio id="remoteAudio" autoplay></audio>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const numberInput = document.getElementById("number");
+      const numberButtons = document.querySelectorAll(".number p");
+      const deleteButton = document.querySelector(".delete-btn");
+      const callButton = document.getElementById("callBtn");
+      const alertBox = document.getElementById("alertBox");
+      const callOptions = document.getElementById("callOptions");
+      const closeCallOptions = document.getElementById("closeCallOptions");
+      const overlay = document.getElementById("overlay");
+
+      const preRecordedAudio = document.getElementById("preRecordedAudio");
+      const listenButton = document.getElementById("listen");
+      const textToRead = "مرحباً بك في مكتبة الفجر الرقمية للاتصال بمسؤول القسم اضغط الرقم 1 للدعم الفني اضغط الرقم 2 للاستفسارات حول الكتب والخدمات اضغط الرقم 3 للحصول على معلومات حول العروض والفعاليات اضغط الرقم 4 للتحدث إلى أحد ممثلي خدمة العملاء اضغط الرقم 0 إذا كنت ترغب في سماع هذه القائمة مرة أخرى اضغط النجمة شكراً لاتصالك بمكتبة الفجر الرقمية نتمنى لك يوماً سعيداً.";
+
+      numberButtons.forEach(button => {
+        button.addEventListener("click", function () {
+          if (numberInput.value.length < 10) {
+            numberInput.value += button.textContent;
+          }
+        });
+      });
+
+      deleteButton.addEventListener("click", function () {
+        numberInput.value = numberInput.value.slice(0, -1);
+      });
+
+      let isSpeaking = false;
+
+      listenButton.addEventListener("click", function () {
+        if (!preRecordedAudio.paused) {
+          // إذا الملف يعمل أوقفه
+          preRecordedAudio.pause();
+          preRecordedAudio.currentTime = 0;
+          return;
+        }
+
+        preRecordedAudio.play().catch(() => {
+          // إذا حدث خطأ في تشغيل الملف الصوتي
+          if (isSpeaking) {
+            window.speechSynthesis.cancel();
+          }
+          const speech = new SpeechSynthesisUtterance(textToRead);
+          speech.lang = "ar-SA";
+          window.speechSynthesis.speak(speech);
+          isSpeaking = true;
+          speech.onend = () => { isSpeaking = false; };
+        });
+      });
+
+      callButton.addEventListener("click", function () {
+        if (numberInput.value.length < 10) {
+          showAlert("الرجاء إدخال رقم الهاتف أولاً!");
+          return;
+        }
+        overlay.style.display = "block";
+        callOptions.classList.remove("hide");
+        callOptions.style.display = "block";
+        document.body.classList.add("modal-open");
+      });
+
+      closeCallOptions.addEventListener("click", function () {
+        callOptions.classList.add("hide");
+        setTimeout(() => {
+          callOptions.style.display = "none";
+          overlay.style.display = "none";
+          document.body.classList.remove("modal-open");
+        }, 400); // مدة الانيميشن
+      });
+
+      function showAlert(message) {
+        alertBox.textContent = message;
+        alertBox.style.display = "block";
+        setTimeout(() => {
+          alertBox.style.display = "none";
+        }, 3000);
+      }
+
+      window.callPhone = function () {
+        const number = numberInput.value;
+        window.location.href = `tel:${number}`;
+      };
+
+      window.callMeet = function () {
+        const meetLink = "https://meet.google.com/abc-defg-hij";
+        window.open(meetLink, "_blank");
+      };
+    });
+  </script>
+</body>
+</html>
