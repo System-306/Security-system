@@ -1805,6 +1805,128 @@
 .stars-container .fa-star:hover {
     transform: scale(1.2);
 }
+    /* ====== تحسين استجابة لوحة تفاصيل المنتج ====== */
+@media (max-width: 1024px) {
+  .product-detail-content {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+  }
+  
+  .product-detail-poster img {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-detail-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-detail-poster {
+    position: relative;
+    top: 0;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .product-detail-poster img {
+    max-height: 400px;
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .product-detail-header {
+    padding: 20px 25px 15px;
+  }
+  
+  .product-detail-title {
+    font-size: 24px;
+  }
+  
+  .product-detail-price {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail-main {
+    padding: 15px;
+  }
+  
+  .product-detail-header {
+    padding: 15px 20px 10px;
+  }
+  
+  .product-detail-title {
+    font-size: 20px;
+  }
+  
+  .product-detail-poster {
+    max-width: 100%;
+  }
+  
+  .product-detail-poster img {
+    max-height: 350px;
+  }
+  
+  .product-detail-price {
+    font-size: 22px;
+  }
+  
+  .product-detail-summary {
+    padding: 15px;
+  }
+  
+  .product-detail-description {
+    padding: 15px;
+    font-size: 16px;
+  }
+  
+  .product-detail-footer {
+    padding: 15px 20px;
+  }
+  
+  .purchase-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ====== تحسين الصور في جميع الشاشات ====== */
+.product-detail-poster img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  background: var(--darker-bg);
+  border-radius: var(--border-radius-lg);
+}
+
+/* تحسين الأداء على الأجهزة الصغيرة */
+@media (max-height: 700px) {
+  .product-detail-poster img {
+    max-height: 300px;
+  }
+  
+  .product-detail-main {
+    padding: 10px;
+  }
+}
+
+/* تحسين التمرير على الهواتف */
+.product-detail-overlay {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* منع الزوم على حقول الإدخال على الهواتف */
+@media (max-width: 768px) {
+  .comment-input {
+    font-size: 16px; /* يمنع الزوم على iOS */
+  }
+}
   </style>
 </head>
 
@@ -4952,4 +5074,5 @@
     window.cancelEdit = cancelEdit;
 </script>
 </body>
+
 </html>
