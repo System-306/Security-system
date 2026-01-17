@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طلباتي - المنتجات الورقية</title>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+:root {
+  --netflix-red: #e50914;
+  --netflix-dark: #141414;
+  --netflix-gray: #222222;
+  --netflix-light-gray: #757575;
+  --netflix-white: #ffffff;
+  --netflix-gradient: linear-gradient(to bottom, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.98) 100%);
+  --shadow-heavy: 0 8px 25px rgba(0,0,0,0.7);
+  --shadow-light: 0 4px 12px rgba(0,0,0,0.4);
+  --transition-speed: 0.3s;
+  --header-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Almarai', sans-serif;
+  background-color: var(--netflix-dark);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(229, 9, 20, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(229, 9, 20, 0.05) 0%, transparent 40%);
+  color: var(--netflix-white);
+  padding-top: var(--header-height);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== الشريط العلوي ===== */
+header {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 15px 4%;
+  background: var(--netflix-gradient);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: white; 
+  z-index: 10000;
+  box-shadow: var(--shadow-heavy);
+  height: var(--header-height);
+}
+
+header h1 { 
+  font-size: 1.5em; 
+  margin: 0; 
+  color: var(--netflix-red);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-actions { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+.header-actions a { 
+  color: white; 
+  font-size: 20px; 
+  text-decoration: none; 
+  transition: all var(--transition-speed); 
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.header-actions a:hover { 
+  color: var(--netflix-red); 
+  background: rgba(229, 9, 20, 0.2);
+  transform: translateY(-2px);
+}
+
+.balance-box { 
+  font-weight: 700; 
+  background: rgba(229, 9, 20, 0.2); 
+  padding: 6px 12px; 
+  border-radius: 20px; 
+  color: white; 
+  font-size: 0.9em;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== عنوان الصفحة ===== */
+.page-title {
+  padding: 30px 4% 20px;
+  margin-bottom: 20px;
+}
+
+.page-title h2 {
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: var(--netflix-white);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.page-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--netflix-red);
+  border-radius: 2px;
+}
+
+.page-title p {
+  color: var(--netflix-light-gray);
+  font-size: 1.1em;
+  margin: 5px 0 0 0;
+}
+
+/* ===== فلاتر الطلبات ===== */
+.orders-filters {
+  padding: 0 4% 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  background: var(--netflix-gray);
+  color: var(--netflix-light-gray);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-speed);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-btn:hover {
+  color: var(--netflix-white);
+  border-color: var(--netflix-red);
+}
+
+.filter-btn.active {
+  background: rgba(229, 9, 20, 0.2);
+  color: var(--netflix-red);
+  border-color: var(--netflix-red);
+}
+
+/* ===== إحصائيات الطلبات ===== */
+.orders-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 0 4% 30px;
+}
+
+.stat-card {
+  background: var(--netflix-gray);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all var(--transition-speed);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--netflix-red);
+  box-shadow: var(--shadow-light);
+}
+
+.stat-card i {
+  font-size: 1.8em;
+  color: var(--netflix-red);
+  margin-bottom: 10px;
+}
+
+.stat-card .value {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-card .label {
+  color: var(--netflix-light-gray);
+  font-size: 0.9em;
+}
+
+/* ===== قائمة الطلبات ===== */
+.orders-container {
+  padding: 0 4% 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ===== بطاقة الطلب ===== */
+.order-card {
+  background: var(--netflix-gray);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-speed);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--netflix-red);
+}
+
+.order-header {
+  padding: 20px;
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order-id {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--netflix-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-date {
+  color: var(--netflix-light-gray);
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.order-status {
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-processing {
+  background: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+  border: 1px solid rgba(241, 196, 15, 0.4);
+}
+
+.status-shipped {
+  background: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.4);
+}
+
+.status-delivered {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.4);
+}
+
+.order-amount {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--netflix-red);
+}
+
+/* ===== تفاصيل الطلب ===== */
+.order-details {
+  padding: 20px;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.order-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.item-image {
+  width: 80px;
+  height: 100px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--netflix-white);
+}
+
+.item-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.item-badge {
+  background: rgba(255,255,255,0.1);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.item-badge i {
+  color: var(--netflix-red);
+  font-size: 0.9em;
+}
+
+.item-price {
+  color: var(--netflix-red);
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* ===== معلومات الشحن ===== */
+.shipping-info {
+  background: rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.shipping-info h4 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: var(--netflix-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shipping-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.detail-label {
+  color: var(--netflix-light-gray);
+  font-size: 0.85em;
+}
+
+.detail-value {
+  color: var(--netflix-white);
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+/* ===== أزرار الطلب ===== */
+.order-actions {
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.order-actions button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(229, 9, 20, 0.2);
+  color: white;
+  font-size: 0.9em;
+  transition: all var(--transition-speed);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+}
+
+.order-actions button:hover {
+  background: var(--netflix-red);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+}
+
+.track-btn {
+  background: rgba(52, 152, 219, 0.2);
+  border-color: rgba(52, 152, 219, 0.4);
+}
+
+.track-btn:hover {
+  background: #3498db;
+}
+
+.support-btn {
+  background: rgba(155, 89, 182, 0.2);
+  border-color: rgba(155, 89, 182, 0.4);
+}
+
+.support-btn:hover {
+  background: #9b59b6;
+}
+
+/* ===== حالة عدم وجود طلبات ===== */
+.empty-orders {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--netflix-light-gray);
+  grid-column: 1 / -1;
+}
+
+.empty-orders i {
+  font-size: 4em;
+  color: var(--netflix-gray);
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-orders h3 {
+  font-size: 1.8em;
+  color: var(--netflix-white);
+  margin-bottom: 15px;
+}
+
+.empty-orders p {
+  font-size: 1.1em;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.empty-orders .browse-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: var(--netflix-red);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 700;
+  transition: all var(--transition-speed);
+  font-size: 1em;
+}
+
+.empty-orders .browse-btn:hover {
+  background: #f40612;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+
+/* ===== التصميم المتجاوب ===== */
+@media(max-width: 768px){
+  :root {
+    --header-height: 60px;
+  }
+  
+  body {
+    padding-top: var(--header-height);
+  }
+  
+  header {
+    padding: 10px 4%;
+  }
+  
+  header h1 {
+    font-size: 1.3em;
+  }
+  
+  .page-title h2 {
+    font-size: 1.7em;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .orders-filters {
+    justify-content: center;
+  }
+  
+  .order-item {
+    flex-direction: column;
+  }
+  
+  .item-image {
+    width: 100%;
+    height: 150px;
+  }
+  
+  .orders-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 480px){
+  .page-title h2 {
+    font-size: 1.5em;
+  }
+  
+  .order-actions {
+    flex-direction: column;
+  }
+  
+  .order-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .orders-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .shipping-details {
+    grid-template-columns: 1fr;
+  }
+  
+  header h1 {
+    font-size: 1.1em;
+  }
+}
+
+/* ===== تخصيص شريط التمرير ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--netflix-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--netflix-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f40612;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-shipping-fast"></i> طلباتي</h1>
+  <div class="header-actions">
+    <a href="index.html" title="الرئيسية"><i class="fas fa-home"></i></a>
+    <a href="cart.html" title="سلة الشراء"><i class="fas fa-shopping-cart"></i></a>
+    <a href="library.html" title="المكتبة الرقمية"><i class="fas fa-book"></i></a>
+    <div class="balance-box">
+      <i class="fas fa-wallet"></i>
+      الرصيد: <span id="globalBalance">0.00</span> ريال
+    </div>
+  </div>
+</header>
+
+<div class="page-title">
+  <h2>طلبات المنتجات الورقية</h2>
+  <p>جميع الطلبات التي قمت بتقديمها للمنتجات الورقية</p>
+</div>
+
+<!-- فلاتر الطلبات -->
+<div class="orders-filters">
+  <button class="filter-btn active" data-filter="all">
+    <i class="fas fa-th-large"></i>
+    الكل
+  </button>
+  <button class="filter-btn" data-filter="processing">
+    <i class="fas fa-cog"></i>
+    قيد التجهيز
+  </button>
+  <button class="filter-btn" data-filter="shipped">
+    <i class="fas fa-shipping-fast"></i>
+    قيد الشحن
+  </button>
+  <button class="filter-btn" data-filter="delivered">
+    <i class="fas fa-check-circle"></i>
+    تم التوصيل
+  </button>
+</div>
+
+<!-- إحصائيات الطلبات -->
+<div class="orders-stats">
+  <div class="stat-card">
+    <i class="fas fa-box"></i>
+    <div class="value" id="totalOrders">0</div>
+    <div class="label">إجمالي الطلبات</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-clock"></i>
+    <div class="value" id="processingOrders">0</div>
+    <div class="label">قيد التجهيز</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-shipping-fast"></i>
+    <div class="value" id="shippedOrders">0</div>
+    <div class="label">قيد الشحن</div>
+  </div>
+  <div class="stat-card">
+    <i class="fas fa-check-circle"></i>
+    <div class="value" id="deliveredOrders">0</div>
+    <div class="label">تم التوصيل</div>
+  </div>
+</div>
+
+<!-- قائمة الطلبات -->
+<div class="orders-container" id="ordersContainer">
+  <!-- سيتم ملؤها ديناميكياً -->
+</div>
+
+<script>
+// ====== بيانات المستخدم ======
+const user = JSON.parse(localStorage.getItem('user') || 'null');
+let loggedInUser = null;
+
+if (user && user.email) {
+  loggedInUser = user.email;
+} else {
+  setTimeout(() => {
+    window.location.href = 'login.html';
+  }, 1000);
+  document.body.innerHTML = `
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #141414; color: white; font-family: 'Almarai'; flex-direction: column; gap: 20px;">
+      <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #e50914;"></i>
+      <h2>يرجى تسجيل الدخول أولاً</h2>
+      <p>سيتم تحويلك إلى صفحة تسجيل الدخول...</p>
+    </div>
+  `;
+  throw new Error('No user logged in');
+}
+
+const ORDERS_KEY = `orders_${loggedInUser}`;
+const BALANCE_KEY = `balance_${loggedInUser}`;
+let orders = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+
+// ====== عناصر DOM ======
+const ordersContainer = document.getElementById('ordersContainer');
+const totalOrdersEl = document.getElementById('totalOrders');
+const processingOrdersEl = document.getElementById('processingOrders');
+const shippedOrdersEl = document.getElementById('shippedOrders');
+const deliveredOrdersEl = document.getElementById('deliveredOrders');
+const globalBalanceEl = document.getElementById('globalBalance');
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+// ====== تهيئة الصفحة ======
+function initializePage() {
+  const balance = parseFloat(localStorage.getItem(BALANCE_KEY)) || 0;
+  globalBalanceEl.textContent = balance.toFixed(2);
+  
+  updateOrdersStats();
+  renderOrders('all');
+  
+  // إضافة أحداث الفلاتر
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderOrders(btn.dataset.filter);
+    });
+  });
+}
+
+// ====== تحديث إحصائيات الطلبات ======
+function updateOrdersStats() {
+  if (orders.length === 0) {
+    totalOrdersEl.textContent = '0';
+    processingOrdersEl.textContent = '0';
+    shippedOrdersEl.textContent = '0';
+    deliveredOrdersEl.textContent = '0';
+    return;
+  }
+  
+  // إجمالي الطلبات
+  totalOrdersEl.textContent = orders.length;
+  
+  // الطلبات حسب الحالة
+  const processing = orders.filter(order => order.status === 'قيد التجهيز').length;
+  const shipped = orders.filter(order => order.status === 'قيد الشحن').length;
+  const delivered = orders.filter(order => order.status === 'تم التوصيل').length;
+  
+  processingOrdersEl.textContent = processing;
+  shippedOrdersEl.textContent = shipped;
+  deliveredOrdersEl.textContent = delivered;
+}
+
+// ====== عرض الطلبات ======
+function renderOrders(filter = 'all') {
+  ordersContainer.innerHTML = '';
+  
+  if (orders.length === 0) {
+    ordersContainer.innerHTML = `
+      <div class="empty-orders">
+        <i class="fas fa-shopping-bag"></i>
+        <h3>لا توجد طلبات</h3>
+        <p>لم تقم بتقديم أي طلبات للمنتجات الورقية بعد. تصفح المتجر وأضف المنتجات الورقية التي تريدها إلى سلة الشراء.</p>
+        <a href="index.html" class="browse-btn"><i class="fas fa-store"></i> تصفح المتجر</a>
+      </div>
+    `;
+    return;
+  }
+  
+  let filteredOrders = [...orders];
+  
+  // تطبيق الفلاتر
+  switch(filter) {
+    case 'processing':
+      filteredOrders = orders.filter(order => order.status === 'قيد التجهيز');
+      break;
+    case 'shipped':
+      filteredOrders = orders.filter(order => order.status === 'قيد الشحن');
+      break;
+    case 'delivered':
+      filteredOrders = orders.filter(order => order.status === 'تم التوصيل');
+      break;
+  }
+  
+  if (filteredOrders.length === 0) {
+    ordersContainer.innerHTML = `
+      <div class="empty-orders">
+        <i class="fas fa-filter"></i>
+        <h3>لا توجد طلبات في هذا القسم</h3>
+        <p>لم تقم بتقديم أي طلبات في هذه الفئة.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // ترتيب الطلبات من الأحدث إلى الأقدم
+  filteredOrders.sort((a, b) => new Date(b.orderDate || 0) - new Date(a.orderDate || 0));
+  
+  filteredOrders.forEach(order => {
+    const orderCard = document.createElement('div');
+    orderCard.className = 'order-card';
+    
+    // تحديد لون الحالة
+    let statusClass = 'status-processing';
+    let statusIcon = 'fas fa-cog';
+    
+    if (order.status === 'قيد الشحن') {
+      statusClass = 'status-shipped';
+      statusIcon = 'fas fa-shipping-fast';
+    } else if (order.status === 'تم التوصيل') {
+      statusClass = 'status-delivered';
+      statusIcon = 'fas fa-check-circle';
+    }
+    
+    orderCard.innerHTML = `
+      <div class="order-header">
+        <div class="order-info">
+          <div class="order-id">
+            <i class="fas fa-hashtag"></i>
+            طلب رقم: ${order.orderId || 'غير معروف'}
+          </div>
+          <div class="order-date">
+            <i class="far fa-calendar-alt"></i>
+            تاريخ الطلب: ${order.orderDate || 'غير معروف'}
+          </div>
+        </div>
+        
+        <div class="order-status ${statusClass}">
+          <i class="${statusIcon}"></i>
+          ${order.status || 'قيد التجهيز'}
+        </div>
+        
+        <div class="order-amount">
+          ${parseFloat(order.totalAmount || 0).toFixed(2)} ر.س
+        </div>
+      </div>
+      
+      <div class="order-details">
+        <div class="order-items">
+          ${order.products ? order.products.map(product => `
+            <div class="order-item">
+              <div class="item-image">
+                <img src="${product.image || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMyMjIyMjIiLz48dGV4dCB4PSI0MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIHRleHQtZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+bm8gaW1hZ2U8L3RleHQ+PC9zdmc+'}" alt="${product.title}" loading="lazy">
+              </div>
+              <div class="item-info">
+                <div class="item-title">${product.title || 'منتج بدون عنوان'}</div>
+                
+                <div class="item-details">
+                  <span class="item-badge">
+                    <i class="fas fa-box"></i>
+                    ${product.format || 'ورقي'}
+                  </span>
+                  <span class="item-badge">
+                    <i class="fas fa-tag"></i>
+                    ${product.category || 'عام'}
+                  </span>
+                  ${product.rating ? `
+                  <span class="item-badge">
+                    <i class="fas fa-star"></i>
+                    ${product.rating}
+                  </span>` : ''}
+                </div>
+                
+                <div class="item-price">
+                  <i class="fas fa-tag"></i>
+                  السعر: ${parseFloat(product.finalPrice || product.price || 0).toFixed(2)} ر.س
+                </div>
+              </div>
+            </div>
+          `).join('') : '<p>لا توجد منتجات في هذا الطلب</p>'}
+        </div>
+        
+        <div class="shipping-info">
+          <h4><i class="fas fa-truck"></i> معلومات الشحن</h4>
+          <div class="shipping-details">
+            <div class="detail-row">
+              <span class="detail-label">عنوان التوصيل:</span>
+              <span class="detail-value">${order.shippingAddress || 'لم يتم تحديد عنوان'}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">رقم التتبع:</span>
+              <span class="detail-value">${order.trackingNumber || 'غير متوفر'}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">طريقة الدفع:</span>
+              <span class="detail-value">${order.paymentMethod || 'غير معروفة'}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">التخفيض المطبق:</span>
+              <span class="detail-value">${order.products && order.products[0]?.discountApplied || 'لا يوجد'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="order-actions">
+        <button class="track-btn" onclick="trackOrder('${order.orderId}')">
+          <i class="fas fa-map-marker-alt"></i>
+          تتبع الشحنة
+        </button>
+        <button class="support-btn" onclick="contactSupport('${order.orderId}')">
+          <i class="fas fa-headset"></i>
+          الدعم الفني
+        </button>
+        <button onclick="viewOrderDetails('${order.orderId}')">
+          <i class="fas fa-eye"></i>
+          تفاصيل الطلب
+        </button>
+      </div>
+    `;
+    
+    ordersContainer.appendChild(orderCard);
+  });
+}
+
+// ====== تتبع الطلب ======
+function trackOrder(orderId) {
+  const order = orders.find(o => o.orderId === orderId);
+  if (!order) return;
+  
+  alert(`جاري تتبع الطلب ${orderId}...\nرقم التتبع: ${order.trackingNumber || 'غير متوفر'}`);
+  
+  // يمكن توجيه المستخدم إلى صفحة تتبع الشحنات
+  window.open(`tracking.html?tracking=${order.trackingNumber}`, '_blank');
+}
+
+// ====== الاتصال بالدعم ======
+function contactSupport(orderId) {
+  const order = orders.find(o => o.orderId === orderId);
+  if (!order) return;
+  
+  const message = `أحتاج إلى دعم بخصوص الطلب ${orderId}`;
+  alert(`جاري فتح نافذة المحادثة مع الدعم الفني...`);
+  
+  // يمكن توجيه المستخدم إلى صفحة المحادثة مع الدعم
+  window.open(`support.html?order=${orderId}&message=${encodeURIComponent(message)}`, '_blank');
+}
+
+// ====== عرض تفاصيل الطلب ======
+function viewOrderDetails(orderId) {
+  const order = orders.find(o => o.orderId === orderId);
+  if (!order) return;
+  
+  // يمكن عرض نافذة منبثقة بتفاصيل الطلب
+  const detailsWindow = window.open('', '_blank', 'width=600,height=700');
+  detailsWindow.document.write(`
+    <html>
+    <head>
+      <title>تفاصيل الطلب ${orderId}</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 20px; direction: rtl; }
+        h1 { color: #e50914; }
+        .detail { margin: 10px 0; }
+        .label { font-weight: bold; color: #666; }
+        .value { color: #333; }
+      </style>
+    </head>
+    <body>
+      <h1>تفاصيل الطلب ${orderId}</h1>
+      <div class="detail"><span class="label">تاريخ الطلب:</span> <span class="value">${order.orderDate}</span></div>
+      <div class="detail"><span class="label">الحالة:</span> <span class="value">${order.status}</span></div>
+      <div class="detail"><span class="label">المبلغ الإجمالي:</span> <span class="value">${order.totalAmount} ر.س</span></div>
+      <div class="detail"><span class="label">طريقة الدفع:</span> <span class="value">${order.paymentMethod}</span></div>
+      <div class="detail"><span class="label">عنوان التوصيل:</span> <span class="value">${order.shippingAddress}</span></div>
+      <div class="detail"><span class="label">رقم التتبع:</span> <span class="value">${order.trackingNumber}</span></div>
+      <h2>المنتجات (${order.products?.length || 0})</h2>
+      ${order.products?.map(product => `
+        <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 5px;">
+          <div class="detail"><span class="label">المنتج:</span> <span class="value">${product.title}</span></div>
+          <div class="detail"><span class="label">السعر:</span> <span class="value">${product.finalPrice || product.price} ر.س</span></div>
+          <div class="detail"><span class="label">النوع:</span> <span class="value">${product.format}</span></div>
+          <div class="detail"><span class="label">التصنيف:</span> <span class="value">${product.category}</span></div>
+        </div>
+      `).join('') || '<p>لا توجد منتجات</p>'}
+    </body>
+    </html>
+  `);
+  detailsWindow.document.close();
+}
+
+// ====== إظهار إشعار ======
+function showNotification(message, type = 'success') {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: ${type === 'success' ? '#2ecc71' : '#e50914'};
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10000;
+    animation: slideIn 0.3s ease-out;
+    max-width: 300px;
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// ====== تهيئة أنماط الرسوم المتحركة ======
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// تشغيل تهيئة الصفحة
+document.addEventListener('DOMContentLoaded', initializePage);
+
+// تحديث الطلبات عند العودة للصفحة
+window.addEventListener('pageshow', () => {
+  orders = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+  updateOrdersStats();
+  const activeFilter = document.querySelector('.filter-btn.active');
+  renderOrders(activeFilter?.dataset.filter || 'all');
+});
+</script>
+
+</body>
+</html>

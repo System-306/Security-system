@@ -3,42 +3,36 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>البطاقات - محفظتي</title>
-      <link rel="icon" type="image/x-icon" href="img//icon1.jpg">
+<title>المحفظة الرقمية - بطاقاتي</title>
+<link rel="icon" type="image/x-icon" href="img//icon1.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   /* ====== المتغيرات والألوان الأساسية ====== */
   :root {
-    --primary-color: #ff6b35;
-    --secondary-color: #1a73e8;
-    --accent-color: #ffab00;
-    --dark-bg: #121212;
-    --darker-bg: #0d0d0d;
-    --card-bg: #1e1e1e;
-    --card-hover: #2a2a2a;
+    --primary: #00d0c2;
+    --primary-dark: #00a9b8;
+    --secondary: #ff6b35;
+    --secondary-light: #ff8e53;
+    --dark-bg: #0a1514;
+    --darker-bg: #06191a;
+    --card-bg: #0d2325;
+    --card-hover: #102c2e;
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --text-muted: #888888;
-    --success-color: #4caf50;
-    --warning-color: #ff9800;
-    --danger-color: #f44336;
-    --border-color: #333333;
-    --shadow-light: rgba(255, 107, 53, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.3);
-    --gradient-primary: linear-gradient(135deg, #ff6b35, #ff8e53);
-    --gradient-secondary: linear-gradient(135deg, #1a73e8, #4285f4);
-    --gradient-accent: linear-gradient(135deg, #ffab00, #ffca28);
-    --gradient-dark: linear-gradient(135deg, #1e1e1e, #2d2d2d);
-    --border-radius-sm: 8px;
-    --border-radius-md: 12px;
-    --border-radius-lg: 16px;
-    --transition-speed: 0.3s;
-    --turq-1: #00d0c2;
-    --turq-2: #00a9b8;
-    --dark: #06363a;
-    --card-w: 300px;
-    --card-h: 170px;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --danger: #f44336;
+    --border: #1a3a3d;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --transition: 0.3s ease;
+    --card-width: 320px;
+    --card-height: 200px;
   }
 
   * {
@@ -47,46 +41,50 @@
     box-sizing: border-box;
   }
 
-  /* ====== الجسم العام ====== */
-  body {
-    font-family: 'Cairo', 'Almarai', sans-serif;
-    background: linear-gradient(180deg, #0d1b1a, #0a1514);
-    margin: 0;
-    padding: 20px;
-    color: var(--text-primary);
-    direction: rtl;
-    min-height: 100vh;
-    background-image: 
-      radial-gradient(circle at 10% 20%, rgba(0, 208, 194, 0.08) 0%, transparent 20%),
-      radial-gradient(circle at 90% 80%, rgba(0, 169, 184, 0.08) 0%, transparent 20%);
+  html {
+    font-size: 16px;
   }
 
-  /* ====== الشريط العلوي ====== */
-  header {
-    background: rgba(6, 54, 58, 0.9);
-    backdrop-filter: blur(10px);
-    padding: 15px 20px;
-    border-radius: var(--border-radius-lg);
-    margin-bottom: 25px;
-    border: 1px solid rgba(0, 208, 194, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  body {
+    font-family: 'Almarai', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* ====== التصميم العام ====== */
+  .app-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ====== الهيدر ====== */
+  .header {
+    background: var(--darker-bg);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 10px;
   }
 
   .header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: column;
+    gap: 15px;
   }
 
-  header h1 {
-    margin: 0;
-    font-size: 22px;
-    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
+  .header h1 {
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: flex;
@@ -94,146 +92,178 @@
     gap: 10px;
   }
 
-  .top-info {
+  .user-info {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     align-items: center;
   }
 
-  .balance-box {
+  .info-box {
     background: rgba(0, 0, 0, 0.3);
-    padding: 10px 18px;
-    border-radius: var(--border-radius-md);
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 208, 194, 0.15);
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid rgba(0, 208, 194, 0.2);
   }
 
-  .balance-box i {
-    color: var(--turq-1);
+  .info-box i {
+    color: var(--primary);
+    font-size: 1.2rem;
   }
 
-  .layout {
+  .info-box span {
+    font-weight: 600;
+  }
+
+  /* ====== المحتوى الرئيسي ====== */
+  .main-content {
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr;
     gap: 25px;
   }
 
-  /* ====== عمود البطاقات ====== */
-  .cards-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  @media (min-width: 992px) {
+    .main-content {
+      grid-template-columns: 2fr 1fr;
+    }
   }
 
-  .cards-header {
+  /* ====== قسم البطاقات ====== */
+  .cards-section {
+    background: var(--darker-bg);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    border: 1px solid var(--border);
+  }
+
+  .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    background: rgba(6, 54, 58, 0.7);
-    border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(0, 208, 194, 0.15);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border);
   }
 
-  .cards-header h3 {
-    margin: 0;
-    font-size: 18px;
-    color: var(--text-primary);
+  .section-header h2 {
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
 
-  .cards-header i {
-    color: var(--turq-1);
+  .section-header i {
+    color: var(--primary);
   }
 
+  /* ====== شبكة البطاقات ====== */
   .cards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
   }
 
-  /* ====== بطاقات الائتمان ====== */
-  .card {
-    width: var(--card-w);
-    height: var(--card-h);
-    border-radius: var(--border-radius-lg);
-    padding: 18px;
+  @media (max-width: 768px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ====== تصميم البطاقة ====== */
+  .card-item {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius-lg);
+    padding: 25px;
     color: white;
     position: relative;
-    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    transform-origin: center;
-    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition);
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .card::before {
+  .card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .card-item.selected {
+    border-color: var(--secondary);
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.3);
+  }
+
+  .card-item::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--turq-1), rgba(255, 255, 255, 0.8));
+    background: linear-gradient(90deg, var(--primary), rgba(255, 255, 255, 0.8));
   }
 
-  .card:hover {
-    transform: translateY(-8px) scale(0.98);
-    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .balance-badge {
+  .card-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0, 0, 0, 0.25);
-    color: #fff;
-    padding: 6px 12px;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 6px 15px;
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    backdrop-filter: blur(8px);
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
   }
 
-  .balance-badge i {
-    font-size: 11px;
+  .card-badge i {
+    font-size: 0.9rem;
   }
 
-  .top-row {
+  .selected-badge {
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    background: var(--secondary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-top: 30px;
   }
 
-  .chip {
-    width: 52px;
-    height: 38px;
+  .card-chip {
+    width: 55px;
+    height: 40px;
     border-radius: 8px;
     background: linear-gradient(135deg, #f5d76e, #e0ac00);
-    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
   }
 
-  .chip::after {
+  .card-chip::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -244,155 +274,218 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
-  .bank-logo {
+  .bank-name {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1.1rem;
     background: rgba(255, 255, 255, 0.15);
-    padding: 8px 12px;
-    border-radius: var(--border-radius-sm);
+    padding: 8px 15px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
-    gap: 6px;
-  }
-
-  .bank-logo i {
-    font-size: 16px;
+    gap: 8px;
   }
 
   .card-number {
-    letter-spacing: 2px;
-    font-size: 16px;
+    font-size: 1.4rem;
     font-weight: 600;
+    letter-spacing: 2px;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px 0;
     font-family: 'Courier New', monospace;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 6px;
-    margin: 8px 0;
+    border-radius: var(--radius-sm);
+    margin: 10px 0;
   }
 
-  .card-meta {
+  .card-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-    opacity: 0.95;
-    margin: 10px 0;
+    font-size: 0.9rem;
+    margin: 15px 0;
   }
 
   .card-holder {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1rem;
+  }
+
+  .card-expiry {
+    text-align: left;
   }
 
   .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 12px;
+    padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
   }
 
-  .brand-logo {
-    width: 48px;
-    height: 32px;
-    border-radius: 6px;
+  .card-brand {
+    width: 50px;
+    height: 35px;
     background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 0.8rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  /* ====== لوحة التحكم ====== */
-  .controls {
-    background: rgba(6, 54, 58, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: var(--border-radius-lg);
-    padding: 22px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: stretch;
+  /* ====== حالة لا توجد بطاقات ====== */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+  }
+
+  .empty-state i {
+    font-size: 4rem;
+    color: var(--border);
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  .empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+  }
+
+  /* ====== لوحة التحكم الجانبية ====== */
+  .control-panel {
+    background: var(--darker-bg);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    border: 1px solid var(--border);
     height: fit-content;
-    border: 1px solid rgba(0, 208, 194, 0.15);
     position: sticky;
     top: 20px;
   }
 
-  .controls h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
+  .control-group {
+    margin-bottom: 25px;
+  }
+
+  .control-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
     color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 208, 194, 0.3);
+    border-bottom: 1px solid var(--border);
   }
 
-  .controls h3 i {
-    color: var(--turq-1);
+  .control-group h3 i {
+    color: var(--primary);
   }
 
-  .controls label {
-    font-size: 14px;
-    margin-bottom: 8px;
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  .input-group label {
     display: block;
+    margin-bottom: 8px;
     color: var(--text-secondary);
     font-weight: 500;
+    font-size: 0.9rem;
   }
 
-  .controls input[type="number"],
-  .controls input[type="text"] {
-    padding: 12px 15px;
-    border-radius: var(--border-radius-md);
-    border: 1px solid rgba(0, 208, 194, 0.3);
+  .input-with-icons {
+    position: relative;
+  }
+
+  .input-with-icons input {
     width: 100%;
-    text-align: right;
-    font-size: 15px;
+    padding: 15px 15px 15px 50px;
     background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     color: var(--text-primary);
-    transition: all var(--transition-speed);
+    font-size: 1rem;
+    transition: var(--transition);
   }
 
-  .controls input:focus {
+  .input-with-icons input:focus {
     outline: none;
-    border-color: var(--turq-1);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(0, 208, 194, 0.1);
   }
 
-  .controls .row {
+  .input-icons {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     gap: 10px;
-    align-items: center;
-    justify-content: flex-end;
+  }
+
+  .input-icons button {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: var(--transition);
+  }
+
+  .input-icons button:hover {
+    color: var(--primary);
+  }
+
+  .info-note {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .info-note i {
+    color: var(--secondary);
+    margin-right: 8px;
+  }
+
+  /* ====== أزرار التحكم ====== */
+  .button-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
   }
 
   .btn {
-    padding: 12px 20px;
-    border-radius: var(--border-radius-md);
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
     border: none;
     font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all var(--transition-speed);
+    transition: all var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 14px;
-    flex: 1;
+    gap: 10px;
   }
 
   .btn i {
-    font-size: 16px;
+    font-size: 1.1rem;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--turq-1), var(--turq-2));
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
   }
 
@@ -413,7 +506,7 @@
   }
 
   .btn-danger {
-    background: linear-gradient(135deg, #f44336, #d32f2f);
+    background: linear-gradient(135deg, var(--danger), #c62828);
     color: white;
   }
 
@@ -422,334 +515,676 @@
     box-shadow: 0 6px 20px rgba(244, 67, 54, 0.3);
   }
 
-  hr {
-    border: none;
-    border-top: 1px solid rgba(0, 208, 194, 0.2);
-    margin: 10px 0;
+  .btn-success {
+    background: linear-gradient(135deg, var(--success), #2e7d32);
+    color: white;
   }
 
-  .small-txt {
-    font-size: 13px;
+  .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+  }
+
+  .btn-full {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .info-text {
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary);
   }
 
-  /* ====== حالة فارغة ====== */
-  .empty {
-    background: rgba(6, 54, 58, 0.7);
-    border-radius: var(--border-radius-lg);
-    padding: 40px 20px;
-    text-align: center;
-    color: var(--text-secondary);
-    border: 1px solid rgba(0, 208, 194, 0.15);
+  .info-text p {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .empty i {
-    font-size: 48px;
-    color: var(--turq-1);
-    margin-bottom: 15px;
-    display: block;
+  .info-text i {
+    color: var(--primary);
   }
 
-  /* ====== مودال التفاصيل ====== */
-  .modal {
+  /* ====== نافذة تفاصيل البطاقة (معدلة) ====== */
+  .card-modal-overlay {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
     display: none;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
     padding: 20px;
+    animation: fadeIn 0.3s ease-out;
   }
 
-  .modal-box {
-    background: rgba(6, 54, 58, 0.95);
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .card-modal {
+    background: var(--darker-bg);
+    border-radius: var(--radius-xl);
     padding: 25px;
-    border-radius: var(--border-radius-lg);
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 208, 194, 0.3);
-    animation: modalSlideIn 0.3s ease-out;
+    max-width: 500px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.4s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
-  @keyframes modalSlideIn {
+  @media (max-width: 768px) {
+    .card-modal {
+      max-width: 95%;
+      padding: 20px;
+    }
+  }
+
+  @keyframes slideUp {
     from {
+      transform: translateY(50px);
       opacity: 0;
-      transform: translateY(-20px);
     }
     to {
-      opacity: 1;
       transform: translateY(0);
+      opacity: 1;
     }
   }
 
-  .modal-box h4 {
-    margin: 0 0 20px 0;
-    font-size: 20px;
-    color: var(--text-primary);
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .modal-header h3 {
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     gap: 10px;
+    color: var(--text-primary);
   }
 
-  .modal-row {
+  .modal-header h3 i {
+    color: var(--primary);
+  }
+
+  .close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+  }
+
+  .close-modal:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary);
+  }
+
+  .modal-card-preview {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    height: 170px;
+  }
+
+  .modal-details {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .detail-row {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(0, 208, 194, 0.2);
-    font-size: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
   }
 
-  .modal-row:last-child {
+  .detail-row:last-child {
     border-bottom: none;
   }
 
-  .modal-label {
+  .detail-label {
     color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 120px;
   }
 
-  .modal-value {
+  .detail-value {
     color: var(--text-primary);
     font-weight: 600;
+    text-align: left;
+    direction: ltr;
+  }
+
+  .detail-value.balance {
+    color: var(--primary);
+    font-size: 1.1rem;
   }
 
   .modal-actions {
     display: flex;
-    gap: 12px;
-    margin-top: 25px;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  /* ====== تنبيهات ====== */
-  #toastBox {
+  /* ====== نافذة تحويل الرصيد ====== */
+  .transfer-modal {
+    max-width: 450px;
+  }
+
+  .transfer-options {
+    margin: 15px 0;
+  }
+
+  .transfer-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+  }
+
+  .transfer-card:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .transfer-card.selected {
+    border-color: var(--primary);
+    background: rgba(0, 208, 194, 0.1);
+  }
+
+  .transfer-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .transfer-card-number {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+  }
+
+  .transfer-card-balance {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .transfer-card-details {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+
+  .transfer-amount {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  .transfer-amount .label {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+
+  .transfer-amount .amount {
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  /* ====== نافذة اختيار تحويل الرصيد ====== */
+  .transfer-choice-modal {
+    max-width: 420px;
+  }
+
+  /* ====== التنبيهات ====== */
+  .toast-container {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: var(--border-radius-md);
-    z-index: 9999;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-    min-width: 300px;
-    display: none;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    animation: toastSlideIn 0.3s ease-out;
+    z-index: 1001;
+    width: 90%;
+    max-width: 400px;
   }
 
-  @keyframes toastSlideIn {
+  .toast {
+    background: var(--darker-bg);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    display: none;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
     from {
+      transform: translateY(-20px);
       opacity: 0;
-      transform: translate(-50%, -20px);
     }
     to {
+      transform: translateY(0);
       opacity: 1;
-      transform: translate(-50%, 0);
     }
   }
 
-  .toast-success {
-    background: linear-gradient(135deg, var(--success-color), #2e7d32);
-    border: 1px solid rgba(76, 175, 80, 0.3);
+  .toast.success {
+    border-left-color: var(--success);
   }
 
-  .toast-error {
-    background: linear-gradient(135deg, var(--danger-color), #c62828);
-    border: 1px solid rgba(244, 67, 54, 0.3);
+  .toast.error {
+    border-left-color: var(--danger);
   }
 
-  /* ====== الوسائط المتجاوبة ====== */
-  @media (max-width: 1024px) {
-    .layout {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    
-    .controls {
-      position: static;
-    }
-    
-    .cards-grid {
-      justify-content: center;
-    }
+  .toast.warning {
+    border-left-color: var(--warning);
   }
 
+  .toast-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .toast-header i {
+    font-size: 1.2rem;
+  }
+
+  .toast.success .toast-header i {
+    color: var(--success);
+  }
+
+  .toast.error .toast-header i {
+    color: var(--danger);
+  }
+
+  .toast.warning .toast-header i {
+    color: var(--warning);
+  }
+
+  .toast-header h4 {
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  .toast-body {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* ====== تصميم متجاوب ====== */
   @media (max-width: 768px) {
-    body {
+    .app-container {
       padding: 15px;
     }
     
-    .header-content {
-      flex-direction: column;
-      gap: 15px;
-      align-items: stretch;
+    .header {
+      padding: 15px;
     }
     
-    .top-info {
-      justify-content: center;
-    }
-    
-    .balance-box {
-      padding: 8px 12px;
-      font-size: 14px;
-    }
-    
-    .card {
-      width: 280px;
-    }
-    
-    .controls .row {
+    .user-info {
       flex-direction: column;
     }
     
-    .btn {
-      width: 100%;
+    .info-box {
+      min-width: 100%;
+    }
+    
+    .cards-section,
+    .control-panel {
+      padding: 20px;
+    }
+    
+    .card-item {
+      height: 180px;
+      padding: 20px;
+    }
+    
+    .card-number {
+      font-size: 1.2rem;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.2rem;
+    }
+    
+    .card-modal {
+      padding: 20px;
+    }
+    
+    .modal-card-preview {
+      height: 160px;
+      padding: 15px;
+    }
+    
+    .detail-row {
+      font-size: 0.9rem;
     }
   }
 
   @media (max-width: 480px) {
-    header h1 {
-      font-size: 18px;
+    html {
+      font-size: 14px;
     }
     
-    .balance-box {
-      padding: 6px 10px;
-      font-size: 13px;
+    .app-container {
+      padding: 10px;
     }
     
-    .card {
-      width: 100%;
-      max-width: 280px;
+    .cards-grid {
+      gap: 15px;
     }
     
-    .cards-header {
+    .card-item {
+      height: 170px;
+      padding: 15px;
+    }
+    
+    .card-number {
+      font-size: 1.1rem;
+    }
+    
+    .btn {
+      padding: 12px 15px;
+      font-size: 0.9rem;
+    }
+    
+    .modal-details {
+      padding: 12px;
+    }
+    
+    .detail-row {
       flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
+      gap: 5px;
     }
+    
+    .detail-label {
+      min-width: auto;
+    }
+    
+    .detail-value {
+      text-align: right;
+    }
+  }
+
+  /* ====== تأثيرات إضافية ====== */
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 208, 194, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 208, 194, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 208, 194, 0);
+    }
+  }
+
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-content">
-    <h1><i class="fas fa-wallet"></i> بطاقاتك المصرفية</h1>
-    <div class="top-info">
-      <div class="balance-box">
-        <i class="fas fa-user"></i>
-        المستخدم: <span id="userNameDisplay">—</span>
-      </div>
-      <div class="balance-box">
-        <i class="fas fa-coins"></i>
-        الرصيد: <strong id="globalBalance">0.00</strong> ريال
+<div class="app-container">
+  
+  <!-- الهيدر -->
+  <header class="header">
+    <div class="header-content">
+      <h1>
+        <i class="fas fa-wallet"></i>
+        المحفظة الرقمية
+      </h1>
+      
+      <div class="user-info">
+        <div class="info-box">
+          <i class="fas fa-user"></i>
+          <div>
+            <div style="font-size: 0.9rem; color: var(--text-secondary);">المستخدم</div>
+            <span id="userNameDisplay">جار التحميل...</span>
+          </div>
+        </div>
+        
+        <div class="info-box">
+          <i class="fas fa-coins"></i>
+          <div>
+            <div style="font-size: 0.9rem; color: var(--text-secondary);">الرصيد الإجمالي</div>
+            <span id="globalBalance">0.00</span> ر.س
+          </div>
+        </div>
       </div>
     </div>
+  </header>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="main-content">
+    
+    <!-- قسم البطاقات -->
+    <section class="cards-section">
+      <div class="section-header">
+        <h2>
+          <i class="fas fa-credit-card"></i>
+          بطاقاتي
+        </h2>
+        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+          انقر مرتين لاختيار بطاقة للشحن
+        </div>
+      </div>
+      
+      <!-- شبكة البطاقات -->
+      <div id="cardsGrid" class="cards-grid">
+        <!-- البطاقات ستظهر هنا -->
+      </div>
+      
+      <!-- حالة لا توجد بطاقات -->
+      <div id="noCards" class="empty-state" style="display: none;">
+        <i class="fas fa-credit-card-blank"></i>
+        <h3>لا توجد بطاقات بعد</h3>
+        <p>اضغط "إضافة بطاقة جديدة" لإنشاء بطاقتك الأولى</p>
+      </div>
+    </section>
+    
+    <!-- لوحة التحكم -->
+    <aside class="control-panel">
+      <div class="control-group">
+        <h3><i class="fas fa-tools"></i> أدوات المحفظة</h3>
+        
+        <div class="input-group">
+          <label for="codeInput">
+            <i class="fas fa-ticket-alt"></i> كود الشحن / باركود
+          </label>
+          <div class="input-with-icons">
+            <input type="text" id="codeInput" placeholder="أدخل الكود أو المسح باركود" />
+            <div class="input-icons">
+              <button id="scanBtn" title="مسح باركود">
+                <i class="fas fa-camera"></i>
+              </button>
+              <button id="uploadBtn" title="رفع صورة باركود">
+                <i class="fas fa-image"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="info-note">
+          <i class="fas fa-info-circle"></i>
+          المبلغ يضاف تلقائياً حسب قيمة الكود المسجلة في النظام
+        </div>
+        
+        <div class="button-group">
+          <button id="rechargeBtn" class="btn btn-primary">
+            <i class="fas fa-bolt"></i> شحن الآن
+          </button>
+          <button id="addCardBtn" class="btn btn-secondary">
+            <i class="fas fa-plus-circle"></i> بطاقة جديدة
+          </button>
+        </div>
+        
+        <div class="button-group">
+          <button id="refreshBtn" class="btn btn-secondary">
+            <i class="fas fa-sync-alt"></i> تحديث
+          </button>
+        </div>
+      </div>
+      
+      <div class="info-text">
+        <p><i class="fas fa-info-circle"></i> كل بطاقة لها رصيد مستقل خاص بها</p>
+        <p><i class="fas fa-exclamation-triangle"></i> المبلغ يضاف حسب قيمة الكود المسجلة</p>
+        <p><i class="fas fa-qrcode"></i> الكود أو الباركود صالح للاستخدام مرة واحدة فقط</p>
+        <p><i class="fas fa-mouse-pointer"></i> انقر مرتين على البطاقة لاختيارها للشحن</p>
+      </div>
+    </aside>
   </div>
-</header>
-
-<div class="layout">
-  <!-- عمود البطاقات -->
-  <section class="cards-column">
-    <div class="cards-header">
-      <h3><i class="fas fa-credit-card"></i> سجل البطاقات</h3>
-      <div class="small-txt">اضغط على البطاقة لعرض التفاصيل</div>
-    </div>
-
-    <div id="cardsGrid" class="cards-grid" aria-live="polite">
-      <!-- بطاقات ستُضاف هنا -->
-    </div>
-
-    <div id="noCards" class="empty" style="display:none">
-      <i class="fas fa-credit-card-blank"></i>
-      <h3>لا توجد بطاقات بعد</h3>
-      <p>اضغط "إضافة بطاقة" على اليمين لعمل بطاقة جديدة.</p>
-    </div>
-  </section>
-
-  <!-- لوحة التحكم -->
-  <aside class="controls">
-    <h3><i class="fas fa-tools"></i> أدوات المحفظة</h3>
-
-    <label for="codeInput"><i class="fas fa-ticket-alt"></i> كود الشحن <span style="color: #ff6b6b;">(إجباري)</span></label>
-    <input id="codeInput" type="text" placeholder="أدخل كود الشحن أو باركود" />
-
-    <div class="small-txt" style="background: rgba(255, 107, 54, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 107, 54, 0.3);">
-      <i class="fas fa-info-circle"></i> المبلغ سيتم إضافته تلقائياً حسب قيمة الكود المسجلة.
-    </div>
-
-    <div class="row">
-      <button class="btn btn-primary" id="rechargeBtn">
-        <i class="fas fa-bolt"></i> شحن الآن
-      </button>
-      <button class="btn btn-danger" id="zeroBtn">
-        <i class="fas fa-trash-alt"></i> تصفير الرصيد
-      </button>
-    </div>
-
-    <hr />
-
-    <label class="small-txt"><i class="fas fa-credit-card"></i> إدارة البطاقات</label>
-    <div class="row">
-      <button id="addCardBtn" class="btn btn-primary">
-        <i class="fas fa-plus-circle"></i> إضافة بطاقة
-      </button>
-      <button id="refreshBtn" class="btn btn-secondary">
-        <i class="fas fa-sync-alt"></i> تحديث
-      </button>
-    </div>
-
-    <div class="small-txt" style="margin-top: 15px;">
-      <p><i class="fas fa-info-circle"></i> كل بطاقة لها رصيد مستقل خاص بها.</p>
-      <p><i class="fas fa-exclamation-triangle"></i> المبلغ يضاف حسب قيمة الكود المسجلة.</p>
-      <p><i class="fas fa-qrcode"></i> الكود أو الباركود صالح للاستخدام مرة واحدة فقط.</p>
-    </div>
-  </aside>
 </div>
 
-<!-- مودال التفاصيل -->
-<div id="modal" class="modal" role="dialog" aria-modal="true">
-  <div class="modal-box">
-    <h4><i class="fas fa-id-card"></i> تفاصيل البطاقة</h4>
-    <div class="modal-row">
-      <div class="modal-label">المالك</div>
-      <div class="modal-value" id="modalOwner">—</div>
+<!-- نافذة تفاصيل البطاقة -->
+<div id="cardModal" class="card-modal-overlay">
+  <div class="card-modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-id-card"></i> تفاصيل البطاقة</h3>
+      <button class="close-modal" id="closeCardModal">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
-    <div class="modal-row">
-      <div class="modal-label">رقم البطاقة</div>
-      <div class="modal-value" id="modalNumber">—</div>
+    
+    <div id="modalCardPreview" class="modal-card-preview">
+      <!-- معاينة البطاقة -->
     </div>
-    <div class="modal-row">
-      <div class="modal-label">آخر 4 أرقام</div>
-      <div class="modal-value" id="modalLast4">—</div>
+    
+    <div class="modal-details">
+      <div class="detail-row">
+        <span class="detail-label">المالك</span>
+        <span class="detail-value" id="modalOwner">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">رقم البطاقة</span>
+        <span class="detail-value" id="modalNumber">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">آخر 4 أرقام</span>
+        <span class="detail-value" id="modalLast4">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">تاريخ الانتهاء</span>
+        <span class="detail-value" id="modalExpiry">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">تاريخ الإنشاء</span>
+        <span class="detail-value" id="modalCreated">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">رصيد البطاقة</span>
+        <span class="detail-value balance" id="modalBalance">0.00 ر.س</span>
+      </div>
     </div>
-    <div class="modal-row">
-      <div class="modal-label">تاريخ الانتهاء</div>
-      <div class="modal-value" id="modalExpiry">—</div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-label">رصيد البطاقة</div>
-      <div class="modal-value" id="modalBalance">— ريال</div>
-    </div>
+    
     <div class="modal-actions">
-      <button id="closeModal" class="btn btn-secondary">
-        <i class="fas fa-times"></i> إغلاق
+      <button id="transferBtn" class="btn btn-success btn-full" style="display: none;">
+        <i class="fas fa-exchange-alt"></i> تحويل الرصيد
       </button>
-      <button id="deleteCardBtn" class="btn btn-danger">
-        <i class="fas fa-trash"></i> حذف البطاقة
+      <button id="backBtn" class="btn btn-secondary btn-full">
+        <i class="fas fa-arrow-right"></i> رجوع
       </button>
     </div>
   </div>
 </div>
+
+<!-- نافذة تحويل الرصيد -->
+<div id="transferModal" class="card-modal-overlay">
+  <div class="card-modal transfer-modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-exchange-alt"></i> تحويل الرصيد</h3>
+      <button class="close-modal" id="closeTransferModal">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="transfer-amount">
+      <div class="label">المبلغ المراد تحويله</div>
+      <div class="amount" id="transferAmount">0.00 ر.س</div>
+    </div>
+    
+    <div class="transfer-options" id="transferCardsList">
+      <!-- قائمة البطاقات المتاحة للتحويل -->
+    </div>
+    
+    <div class="info-note" style="margin: 20px 0;">
+      <i class="fas fa-info-circle"></i>
+      اختر البطاقة التي تريد تحويل الرصيد إليها
+    </div>
+    
+    <div class="modal-actions">
+      <button id="confirmTransferBtn" class="btn btn-success btn-full" disabled>
+        <i class="fas fa-check-circle"></i> تأكيد التحويل
+      </button>
+      <button id="cancelTransferBtn" class="btn btn-secondary btn-full">
+        <i class="fas fa-times"></i> إلغاء
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- حقل رفع الصور المخفي -->
+<input type="file" id="barcodeUpload" accept="image/*" style="display: none;" />
+
+<!-- حاوية التنبيهات -->
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- Firebase SDK -->
 <script type="module">
-  // Import Firebase SDK v12.7.0
+  // Import Firebase SDK
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
   import { getDatabase, ref, set, get, query, orderByChild, equalTo } 
     from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
@@ -771,411 +1206,724 @@
   const db = getDatabase(app);
   const codesRef = ref(db, 'voucher_codes');
 
-  // ======== إدارة البطاقات المحلية ========
-  const loggedInUser = localStorage.getItem('loggedInUser') || null;
-  const userNameDisplay = document.getElementById('userNameDisplay');
-  const cardsGrid = document.getElementById('cardsGrid');
-  const noCards = document.getElementById('noCards');
-  const globalBalanceEl = document.getElementById('globalBalance');
-
-  // تحقق من وجود مستخدم مسجل
-  if(!loggedInUser){
-    document.body.innerHTML = `
-      <div style="padding:40px;text-align:center;font-family:Arial, sans-serif;background:#0d1b1a;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-        <div style="background:rgba(0,208,194,0.1);padding:30px;border-radius:16px;border:1px solid rgba(0,208,194,0.3);max-width:500px;">
-          <h2 style="color:#00d0c2;margin-bottom:20px;"><i class="fas fa-exclamation-triangle"></i> لم يتم العثور على مستخدم مسجل</h2>
-          <p style="margin-bottom:25px;color:#b0b0b0;">الرجاء تسجيل الدخول أولاً من صفحة الدخول.</p>
-          <a href="login.html" style="background:linear-gradient(135deg, #00d0c2, #00a9b8);color:white;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-flex;align-items:center;gap:8px;">
-            <i class="fas fa-sign-in-alt"></i> اذهب إلى صفحة الدخول
-          </a>
-        </div>
-      </div>
-    `;
-    throw new Error('No logged in user');
-  }
-
-  userNameDisplay.textContent = loggedInUser;
-
-  // توليد معرف فريد للجهاز
-  function generateDeviceId() {
-    let deviceId = localStorage.getItem('deviceId');
-    if (!deviceId) {
-      deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-      localStorage.setItem('deviceId', deviceId);
+  // ======== نظام إدارة المحفظة ========
+  class WalletSystem {
+    constructor() {
+      this.user = null;
+      this.loggedInUser = null;
+      this.cards = [];
+      this.balance = 0;
+      this.selectedCardIndex = null;
+      this.currentModalCardIndex = null;
+      this.transferTargetIndex = null;
+      this.usedCodes = new Set(); // استخدام Set لمنع التكرار
+      this.clickCount = 0;
+      this.clickTimer = null;
+      
+      this.init();
     }
-    return deviceId;
-  }
-
-  const deviceId = generateDeviceId();
-
-  // مفاتيح التخزين الفريدة لكل مستخدم على كل جهاز
-  const USER_DEVICE_ID = `${loggedInUser}_${deviceId}`;
-  const CARDS_KEY = `cards_${USER_DEVICE_ID}`;
-  const BALANCE_KEY = `balance_${USER_DEVICE_ID}`;
-
-  // تحميل البيانات
-  let cards = JSON.parse(localStorage.getItem(CARDS_KEY) || "[]");
-  let balance = parseFloat(localStorage.getItem(BALANCE_KEY) || "0");
-
-  // تأكد من أن كل بطاقة لها رصيدها الخاص
-  function ensureCardBalance(card) {
-    if (!card.balance) {
-      card.balance = 0;
+    
+    init() {
+      this.checkAuth();
+      this.loadData();
+      this.setupEventListeners();
+      this.initializePage();
     }
-    return card;
-  }
-
-  // تحديث العرض
-  function render(){
-    // حساب الرصيد الإجمالي
-    const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
-    globalBalanceEl.textContent = totalBalance.toFixed(2);
-
-    // عرض البطاقات
-    cardsGrid.innerHTML = "";
-    if(cards.length === 0){
-      noCards.style.display = "block";
-    } else {
-      noCards.style.display = "none";
-      cards.forEach((c, idx) => {
-        const card = ensureCardBalance(c);
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.dataset.index = idx;
-        div.innerHTML = `
-          <div class="balance-badge">
-            <i class="fas fa-coins"></i> ${card.balance.toFixed(2)} ر.س
-          </div>
-          <div class="top-row">
-            <div class="chip" aria-hidden="true"></div>
-            <div class="bank-logo">
-              <i class="fas fa-university"></i> Digital Bank
+    
+    checkAuth() {
+      try {
+        const userData = localStorage.getItem('user');
+        if (!userData) throw new Error('No user data');
+        
+        this.user = JSON.parse(userData);
+        if (!this.user || !this.user.email) throw new Error('Invalid user data');
+        
+        this.loggedInUser = this.user.email;
+        document.getElementById('userNameDisplay').textContent = 
+          this.user.username || this.user.email.split('@')[0];
+          
+      } catch (error) {
+        console.error('Auth error:', error);
+        setTimeout(() => window.location.href = 'login.html', 1000);
+        
+        document.body.innerHTML = `
+          <div style="padding:40px;text-align:center;background:#0a1514;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="background:rgba(0,208,194,0.1);padding:30px;border-radius:16px;border:1px solid rgba(0,208,194,0.3);max-width:500px;">
+              <h2 style="color:#00d0c2;margin-bottom:20px;">
+                <i class="fas fa-exclamation-triangle"></i> لم يتم العثور على مستخدم مسجل
+              </h2>
+              <p style="margin-bottom:25px;color:#b0b0b0;">
+                يرجى تسجيل الدخول أولاً من صفحة الدخول.
+              </p>
+              <a href="login.html" style="background:linear-gradient(135deg, #00d0c2, #00a9b8);color:white;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-flex;align-items:center;gap:8px;">
+                <i class="fas fa-sign-in-alt"></i> اذهب إلى صفحة الدخول
+              </a>
             </div>
-          </div>
-          <div class="card-number">${formatCardDisplay(card.number)}</div>
-          <div class="card-meta">
-            <div>
-              <div class="card-holder">${loggedInUser}</div>
-              <div style="font-size:11px;opacity:.85">مالك البطاقة</div>
-            </div>
-            <div style="text-align:left">
-              <div class="expiry">${card.expiry}</div>
-              <div style="font-size:11px;opacity:.85">تاريخ الانتهاء</div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <div style="font-size:11px;opacity:.9">آخر 4: ${card.last4}</div>
-            <div class="brand-logo">مدى</div>
           </div>
         `;
-        div.addEventListener('click', () => openModal(idx));
-        cardsGrid.appendChild(div);
-      });
+        
+        throw error;
+      }
     }
-  }
-
-  // صيغة رقم البطاقة
-  function formatCardDisplay(num){
-    return num.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
-  }
-
-  // توليد رقم بطاقة عشوائي
-  function generateCardNumber(existingNumbers){
-    let tries = 0;
-    while(tries < 200){
-      let parts = [];
-      for(let i=0;i<4;i++){
-        parts.push(String(Math.floor(1000 + Math.random()*9000)));
-      }
-      let num = parts.join('');
-      if(!existingNumbers.includes(num)) return num;
-      tries++;
+    
+    loadData() {
+      // مفاتيح التخزين
+      const CARDS_KEY = `cards_${this.loggedInUser}`;
+      const BALANCE_KEY = `balance_${this.loggedInUser}`;
+      const USED_CODES_KEY = `used_codes_${this.loggedInUser}`;
+      
+      // تحميل البيانات
+      this.cards = JSON.parse(localStorage.getItem(CARDS_KEY)) || [];
+      this.balance = parseFloat(localStorage.getItem(BALANCE_KEY)) || 0;
+      
+      // تحميل الأكواد المستخدمة
+      const usedCodes = JSON.parse(localStorage.getItem(USED_CODES_KEY)) || [];
+      this.usedCodes = new Set(usedCodes);
     }
-    return Date.now().toString().slice(0,16).padEnd(16,'7');
-  }
-
-  // تاريخ انتهاء
-  function generateExpiry(){
-    const now = new Date();
-    const year = now.getFullYear() % 100;
-    const add = Math.floor(1 + Math.random()*6);
-    const yy = year + add;
-    const mm = String(Math.floor(1 + Math.random()*12)).padStart(2,'0');
-    return `${mm}/${String(yy).padStart(2,'0')}`;
-  }
-
-  // إضافة بطاقة
-  function addCard(){
-    const existing = cards.map(c=>c.number);
-    const number = generateCardNumber(existing);
-    const last4 = number.slice(-4);
-    const expiry = generateExpiry();
-    const card = {
-      id: 'card_'+Date.now()+'_'+Math.floor(Math.random()*9999),
-      number,
-      last4,
-      expiry,
-      balance: 0,
-      createdAt: new Date().toISOString()
-    };
-    cards.unshift(card);
-    saveCards();
-    render();
-    showToast('تم إضافة بطاقة جديدة بنجاح','success');
-  }
-
-  // التحقق من كود الشحن في Firebase
-  async function validateAndUseVoucherCode(code) {
-    try {
-      // إزالة المسافات والتحويل إلى أحرف كبيرة
-      code = code.trim().toUpperCase();
+    
+    saveData() {
+      const CARDS_KEY = `cards_${this.loggedInUser}`;
+      const BALANCE_KEY = `balance_${this.loggedInUser}`;
+      const USED_CODES_KEY = `used_codes_${this.loggedInUser}`;
       
-      if (!code) {
-        return { valid: false, message: 'الرجاء إدخال كود الشحن' };
-      }
-
-      // البحث عن الكود في Firebase
-      const q = query(codesRef, orderByChild('code'), equalTo(code));
-      const snapshot = await get(q);
+      localStorage.setItem(CARDS_KEY, JSON.stringify(this.cards));
+      localStorage.setItem(BALANCE_KEY, this.balance.toString());
+      localStorage.setItem(USED_CODES_KEY, JSON.stringify(Array.from(this.usedCodes)));
       
-      if (!snapshot.exists()) {
-        return { valid: false, message: 'الكود غير صالح أو غير موجود' };
-      }
+      // تحديث الصفحات الأخرى
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: BALANCE_KEY,
+        newValue: this.balance.toString()
+      }));
+    }
+    
+    setupEventListeners() {
+      // أزرار التحكم
+      document.getElementById('addCardBtn').addEventListener('click', () => this.addCard());
+      document.getElementById('rechargeBtn').addEventListener('click', () => this.rechargeCard());
+      document.getElementById('refreshBtn').addEventListener('click', () => this.refreshData());
       
-      let voucherData = null;
-      let voucherKey = null;
+      // أزرار المسح الضوئي
+      document.getElementById('scanBtn').addEventListener('click', () => this.showToast('ميزة المسح الضوئي قيد التطوير', 'warning'));
+      document.getElementById('uploadBtn').addEventListener('click', () => document.getElementById('barcodeUpload').click());
+      document.getElementById('barcodeUpload').addEventListener('change', (e) => this.handleBarcodeUpload(e));
       
-      snapshot.forEach(child => {
-        voucherData = child.val();
-        voucherKey = child.key;
+      // إدخال الكود
+      document.getElementById('codeInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') this.rechargeCard();
       });
       
-      // التحقق من حالة الكود
-      if (voucherData.status === 'used') {
-        return { valid: false, message: 'هذا الكود تم استخدامه مسبقاً!' };
+      // نافذة تفاصيل البطاقة
+      document.getElementById('closeCardModal').addEventListener('click', () => this.closeCardModal());
+      document.getElementById('backBtn').addEventListener('click', () => this.closeCardModal());
+      document.getElementById('transferBtn').addEventListener('click', () => this.showTransferModal());
+      
+      // نافذة تحويل الرصيد
+      document.getElementById('closeTransferModal').addEventListener('click', () => this.closeTransferModal());
+      document.getElementById('cancelTransferBtn').addEventListener('click', () => this.closeTransferModal());
+      document.getElementById('confirmTransferBtn').addEventListener('click', () => this.confirmTransfer());
+      
+      // النقر خارج النوافذ
+      document.getElementById('cardModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) this.closeCardModal();
+      });
+      
+      document.getElementById('transferModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) this.closeTransferModal();
+      });
+    }
+    
+    initializePage() {
+      this.renderCards();
+      this.updateGlobalBalance();
+      
+      // إضافة بطاقة افتراضية إذا لم يكن هناك بطاقات
+      if (this.cards.length === 0) {
+        this.addDefaultCard();
       }
       
-      // التحقق من تاريخ الصلاحية
-      const expiryDate = new Date(voucherData.expiry_date);
-      if (expiryDate < new Date()) {
-        return { valid: false, message: 'هذا الكود منتهي الصلاحية!' };
-      }
-      
-      // التحقق من القيمة المسموحة
-      const validAmounts = [25, 50, 100, 200, 300, 500, 800];
-      if (!validAmounts.includes(voucherData.amount)) {
-        return { valid: false, message: 'قيمة الكود غير صالحة!' };
-      }
-      
-      // إذا كانت جميع الشروط صحيحة، تحديث حالة الكود
-      const updateData = {
-        ...voucherData,
-        status: 'used',
-        used_by: loggedInUser,
-        used_at: new Date().toISOString(),
-        device_id: deviceId
+      this.showToast('مرحباً بك في المحفظة الرقمية', 'success');
+    }
+    
+    // ======== إدارة البطاقات ========
+    addDefaultCard() {
+      const defaultCard = {
+        id: 'default_' + Date.now(),
+        number: this.generateCardNumber([]),
+        last4: Date.now().toString().slice(-4),
+        expiry: this.generateExpiry(),
+        balance: 100,
+        createdAt: new Date().toISOString(),
+        name: this.user.username || this.loggedInUser
       };
       
-      await set(ref(db, `voucher_codes/${voucherKey}`), updateData);
-      
-      return { 
-        valid: true, 
-        message: 'تم التحقق من الكود بنجاح', 
-        amount: voucherData.amount 
+      this.cards.push(defaultCard);
+      this.selectedCardIndex = 0;
+      this.saveData();
+      this.renderCards();
+    }
+    
+    addCard() {
+      const existingNumbers = this.cards.map(card => card.number);
+      const newCard = {
+        id: 'card_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        number: this.generateCardNumber(existingNumbers),
+        last4: '',
+        expiry: this.generateExpiry(),
+        balance: 0,
+        createdAt: new Date().toISOString(),
+        name: this.user.username || this.loggedInUser
       };
       
-    } catch (error) {
-      console.error('Error validating voucher:', error);
-      return { valid: false, message: 'خطأ في التحقق من الكود. حاول مرة أخرى.' };
-    }
-  }
-
-  // شحن البطاقة المحددة
-  async function rechargeCurrentCard() {
-    const codeInput = document.getElementById('codeInput');
-    const code = codeInput.value.trim();
-    
-    if (!code) {
-      showToast('الرجاء إدخال كود الشحن', 'error');
-      return;
-    }
-    
-    if (currentModalIndex === null) {
-      showToast('الرجاء اختيار بطاقة أولاً', 'error');
-      return;
-    }
-    
-    showToast('جاري التحقق من الكود...', 'warning');
-    
-    try {
-      // التحقق من الكود
-      const validation = await validateAndUseVoucherCode(code);
+      newCard.last4 = newCard.number.slice(-4);
       
-      if (!validation.valid) {
-        showToast(validation.message, 'error');
+      this.cards.unshift(newCard);
+      this.selectedCardIndex = 0;
+      this.saveData();
+      this.renderCards();
+      this.showToast('تم إضافة بطاقة جديدة بنجاح', 'success');
+    }
+    
+    generateCardNumber(existing) {
+      let tries = 0;
+      while (tries < 100) {
+        let parts = [];
+        for (let i = 0; i < 4; i++) {
+          parts.push(String(Math.floor(1000 + Math.random() * 9000)));
+        }
+        let num = parts.join('');
+        if (!existing.includes(num)) return num;
+        tries++;
+      }
+      return '4' + Date.now().toString().slice(0, 15);
+    }
+    
+    generateExpiry() {
+      const now = new Date();
+      const year = (now.getFullYear() + 3) % 100;
+      const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+      return `${month}/${year}`;
+    }
+    
+    formatCardNumber(num) {
+      return num.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+    }
+    
+    // ======== معالجة النقر المزدوج ========
+    handleCardDoubleClick(index) {
+      const card = this.cards[index];
+      
+      // تخزين البطاقة المحددة للشحن
+      this.selectedCardIndex = index;
+      this.renderCards();
+      
+      // إذا كان البطاقة تحتوي على رصيد، عرض خيار تحويل الرصيد
+      if (card.balance > 0 && this.cards.length > 1) {
+        this.showTransferChoiceModal(index);
+      } else {
+        this.showToast(`تم اختيار البطاقة ${card.last4 || card.number.slice(-4)} للشحن`, 'success');
+      }
+    }
+    
+    // ======== نافذة اختيار تحويل الرصيد ========
+    showTransferChoiceModal(cardIndex) {
+      const card = this.cards[cardIndex];
+      
+      // إنشاء نافذة اختيار
+      const modalHTML = `
+        <div id="transferChoiceModal" class="card-modal-overlay" style="display: flex;">
+          <div class="card-modal transfer-choice-modal">
+            <div class="modal-header">
+              <h3><i class="fas fa-exchange-alt"></i> البطاقة تحتوي على رصيد</h3>
+              <button class="close-modal" id="closeTransferChoice">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            
+            <div class="info-note" style="margin: 20px 0; text-align: center;">
+              <i class="fas fa-info-circle"></i>
+              <div style="margin-top: 10px; font-size: 1.1rem; font-weight: bold; color: var(--text-primary);">
+                رصيد البطاقة: ${card.balance.toFixed(2)} ر.س
+              </div>
+              <div style="margin-top: 5px; color: var(--text-secondary);">
+                هل تريد تحويل الرصيد إلى بطاقة أخرى قبل الشحن؟
+              </div>
+            </div>
+            
+            <div class="modal-actions" style="gap: 10px;">
+              <button id="proceedToTransferBtn" class="btn btn-success btn-full">
+                <i class="fas fa-exchange-alt"></i> نعم، أريد تحويل الرصيد
+              </button>
+              <button id="keepForRechargeBtn" class="btn btn-primary btn-full">
+                <i class="fas fa-bolt"></i> لا، أريد شحن هذه البطاقة
+              </button>
+              <button id="backChoiceBtn" class="btn btn-secondary btn-full">
+                <i class="fas fa-arrow-right"></i> رجوع
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // إضافة النافذة للصفحة
+      const modalContainer = document.createElement('div');
+      modalContainer.innerHTML = modalHTML;
+      document.body.appendChild(modalContainer.firstElementChild);
+      
+      // إضافة مستمعات الأحداث
+      const closeModal = () => {
+        const modal = document.getElementById('transferChoiceModal');
+        if (modal) modal.remove();
+        this.selectedCardIndex = null;
+        this.renderCards();
+      };
+      
+      document.getElementById('closeTransferChoice').addEventListener('click', closeModal);
+      document.getElementById('backChoiceBtn').addEventListener('click', closeModal);
+      
+      document.getElementById('keepForRechargeBtn').addEventListener('click', () => {
+        document.getElementById('transferChoiceModal').remove();
+        this.showToast(`تم اختيار البطاقة ${card.last4 || card.number.slice(-4)} للشحن`, 'success');
+      });
+      
+      document.getElementById('proceedToTransferBtn').addEventListener('click', () => {
+        document.getElementById('transferChoiceModal').remove();
+        this.currentModalCardIndex = cardIndex;
+        this.showTransferModal();
+      });
+      
+      // النقر خارج النافذة
+      document.getElementById('transferChoiceModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+          closeModal();
+        }
+      });
+    }
+    
+    // ======== نافذة تفاصيل البطاقة ========
+    showCardDetails(index) {
+      this.currentModalCardIndex = index;
+      const card = this.cards[index];
+      
+      // تحديث معاينة البطاقة
+      document.getElementById('modalCardPreview').innerHTML = `
+        <div class="card-badge">
+          <i class="fas fa-coins"></i> ${card.balance.toFixed(2)} ر.س
+        </div>
+        <div class="card-top">
+          <div class="card-chip"></div>
+          <div class="bank-name">
+            <i class="fas fa-university"></i> Digital Bank
+          </div>
+        </div>
+        <div class="card-number">${this.formatCardNumber(card.number)}</div>
+        <div class="card-details">
+          <div>
+            <div class="card-holder">${card.name}</div>
+            <div style="font-size:0.8rem;opacity:0.9">مالك البطاقة</div>
+          </div>
+          <div class="card-expiry">
+            <div>${card.expiry}</div>
+            <div style="font-size:0.8rem;opacity:0.9">انتهاء الصلاحية</div>
+          </div>
+        </div>
+      `;
+      
+      // تحديث التفاصيل
+      document.getElementById('modalOwner').textContent = card.name;
+      document.getElementById('modalNumber').textContent = this.formatCardNumber(card.number);
+      document.getElementById('modalLast4').textContent = card.last4 || card.number.slice(-4);
+      document.getElementById('modalExpiry').textContent = card.expiry;
+      document.getElementById('modalCreated').textContent = new Date(card.createdAt).toLocaleDateString('ar-SA');
+      document.getElementById('modalBalance').textContent = `${card.balance.toFixed(2)} ر.س`;
+      
+      // إظهار زر التحويل إذا كان هناك رصيد وأكثر من بطاقة
+      const transferBtn = document.getElementById('transferBtn');
+      if (card.balance > 0 && this.cards.length > 1) {
+        transferBtn.style.display = 'block';
+        transferBtn.innerHTML = `<i class="fas fa-exchange-alt"></i> تحويل الرصيد`;
+      } else {
+        transferBtn.style.display = 'none';
+      }
+      
+      // إظهار النافذة
+      document.getElementById('cardModal').style.display = 'flex';
+    }
+    
+    closeCardModal() {
+      document.getElementById('cardModal').style.display = 'none';
+      this.currentModalCardIndex = null;
+    }
+    
+    // ======== تحويل الرصيد ========
+    showTransferModal() {
+      if (this.currentModalCardIndex === null) return;
+      
+      const sourceCard = this.cards[this.currentModalCardIndex];
+      this.transferTargetIndex = null;
+      
+      // تحديث المبلغ
+      document.getElementById('transferAmount').textContent = `${sourceCard.balance.toFixed(2)} ر.س`;
+      
+      // إنشاء قائمة البطاقات المتاحة
+      const cardsList = document.getElementById('transferCardsList');
+      cardsList.innerHTML = '';
+      
+      this.cards.forEach((card, index) => {
+        if (index === this.currentModalCardIndex) return;
+        
+        const cardElement = document.createElement('div');
+        cardElement.className = 'transfer-card';
+        cardElement.dataset.index = index;
+        
+        cardElement.innerHTML = `
+          <div class="transfer-card-header">
+            <div class="transfer-card-number">${this.formatCardNumber(card.number)}</div>
+            <div class="transfer-card-balance">${card.balance.toFixed(2)} ر.س</div>
+          </div>
+          <div class="transfer-card-details">
+            <div>${card.name}</div>
+            <div>${card.expiry}</div>
+          </div>
+        `;
+        
+        cardElement.addEventListener('click', () => {
+          // إزالة التحديد من جميع البطاقات
+          document.querySelectorAll('.transfer-card').forEach(c => {
+            c.classList.remove('selected');
+          });
+          
+          // تحديد البطاقة المختارة
+          cardElement.classList.add('selected');
+          this.transferTargetIndex = index;
+          document.getElementById('confirmTransferBtn').disabled = false;
+        });
+        
+        cardsList.appendChild(cardElement);
+      });
+      
+      // تعطيل زر التأكيد
+      document.getElementById('confirmTransferBtn').disabled = true;
+      
+      // إظهار النافذة
+      document.getElementById('transferModal').style.display = 'flex';
+    }
+    
+    closeTransferModal() {
+      document.getElementById('transferModal').style.display = 'none';
+      this.transferTargetIndex = null;
+    }
+    
+    confirmTransfer() {
+      if (this.currentModalCardIndex === null || this.transferTargetIndex === null) {
+        this.showToast('الرجاء اختيار بطاقة الوجهة', 'error');
         return;
       }
       
-      // شحن البطاقة المحددة
-      const card = ensureCardBalance(cards[currentModalIndex]);
-      card.balance += validation.amount;
-      saveCards();
+      const sourceCard = this.cards[this.currentModalCardIndex];
+      const targetCard = this.cards[this.transferTargetIndex];
+      const amount = sourceCard.balance;
       
-      // تحديث الرصيد الإجمالي
-      const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
-      balance = totalBalance;
-      saveBalance();
-      
-      // تحديث العرض
-      render();
-      
-      // إعادة تعيين حقل الإدخال
-      codeInput.value = '';
-      
-      showToast(`تم شحن ${validation.amount} ريال للبطاقة بنجاح!`, 'success');
-      
-    } catch (error) {
-      console.error('Error in recharge:', error);
-      showToast('حدث خطأ أثناء عملية الشحن', 'error');
-    }
-  }
-
-  // تصفير رصيد البطاقة المحددة
-  function zeroCardBalance(){
-    if(currentModalIndex === null) {
-      showToast('الرجاء اختيار بطاقة أولاً', 'error');
-      return;
-    }
-    
-    if(!confirm('⚠️ هل أنت متأكد من تصفير رصيد هذه البطاقة؟')) return;
-    
-    const card = ensureCardBalance(cards[currentModalIndex]);
-    card.balance = 0;
-    saveCards();
-    
-    // تحديث الرصيد الإجمالي
-    const totalBalance = cards.reduce((sum, card) => sum + (ensureCardBalance(card).balance || 0), 0);
-    balance = totalBalance;
-    saveBalance();
-    
-    render();
-    showToast('تم تصفير رصيد البطاقة بنجاح','success');
-  }
-
-  // الحفظ في localStorage
-  function saveCards(){ 
-    localStorage.setItem(CARDS_KEY, JSON.stringify(cards)); 
-  }
-  
-  function saveBalance(){ 
-    localStorage.setItem(BALANCE_KEY, String(balance)); 
-  }
-
-  // مودال التفاصيل
-  const modal = document.getElementById('modal');
-  const modalOwner = document.getElementById('modalOwner');
-  const modalNumber = document.getElementById('modalNumber');
-  const modalLast4 = document.getElementById('modalLast4');
-  const modalExpiry = document.getElementById('modalExpiry');
-  const modalBalance = document.getElementById('modalBalance');
-  const closeModalBtn = document.getElementById('closeModal');
-  const deleteCardBtn = document.getElementById('deleteCardBtn');
-  let currentModalIndex = null;
-
-  function openModal(index){
-    currentModalIndex = index;
-    const c = ensureCardBalance(cards[index]);
-    modalOwner.textContent = loggedInUser;
-    modalNumber.textContent = formatCardDisplay(c.number);
-    modalLast4.textContent = c.last4;
-    modalExpiry.textContent = c.expiry;
-    modalBalance.textContent = c.balance.toFixed(2) + ' ريال';
-    modal.style.display = 'flex';
-  }
-
-  function closeModal(){ 
-    modal.style.display = 'none'; 
-    currentModalIndex = null; 
-  }
-
-  closeModalBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e)=>{ 
-    if(e.target===modal) closeModal(); 
-  });
-
-  // حذف البطاقة
-  deleteCardBtn.addEventListener('click', ()=>{
-    if(currentModalIndex===null) return;
-    if(!confirm('هل تريد حذف هذه البطاقة نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.')) return;
-    cards.splice(currentModalIndex,1);
-    saveCards();
-    closeModal();
-    render();
-    showToast('تم حذف البطاقة بنجاح','success');
-  });
-
-  // Toast Notification
-  function showToast(msg, type = 'success'){
-    let box = document.getElementById('toastBox');
-    if(!box){
-      box = document.createElement('div');
-      box.id = 'toastBox';
-      document.body.appendChild(box);
-    }
-    box.textContent = msg;
-    box.className = type === 'success' ? 'toast-success' : 'toast-error';
-    box.style.display = 'block';
-    setTimeout(()=>{ box.style.display = 'none'; }, 2500);
-  }
-
-  // ======== أحداث الأزرار ========
-  document.getElementById('addCardBtn').addEventListener('click', addCard);
-
-  document.getElementById('rechargeBtn').addEventListener('click', rechargeCurrentCard);
-
-  document.getElementById('zeroBtn').addEventListener('click', zeroCardBalance);
-
-  document.getElementById('refreshBtn').addEventListener('click', () => {
-    render();
-    showToast('تم تحديث البيانات','success');
-  });
-
-  // السماح بالضغط على Enter في حقل الكود
-  document.getElementById('codeInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      rechargeCurrentCard();
-    }
-  });
-
-  // ======== تحميل أولي ========
-  render();
-  
-  // إذا لم يكن هناك بطاقات، أضف واحدة افتراضية
-  if(cards.length === 0){ 
-    setTimeout(() => {
-      if(cards.length === 0) {
-        addCard();
-        showToast('تم إنشاء بطاقتك الأولى بنجاح!','success');
+      if (amount <= 0) {
+        this.showToast('لا يوجد رصيد للتحويل', 'error');
+        return;
       }
-    }, 500);
+      
+      const sourceLast4 = sourceCard.last4 || sourceCard.number.slice(-4);
+      const targetLast4 = targetCard.last4 || targetCard.number.slice(-4);
+      
+      if (!confirm(`هل تريد تحويل ${amount.toFixed(2)} ريال من البطاقة ${sourceLast4} إلى البطاقة ${targetLast4}؟`)) {
+        return;
+      }
+      
+      // تنفيذ التحويل
+      targetCard.balance += amount;
+      sourceCard.balance = 0;
+      
+      this.saveData();
+      this.renderCards();
+      this.updateGlobalBalance();
+      
+      this.closeTransferModal();
+      this.closeCardModal();
+      
+      this.showToast(`تم تحويل ${amount.toFixed(2)} ريال بنجاح من ${sourceLast4} إلى ${targetLast4}`, 'success');
+    }
+    
+    // ======== شحن البطاقات ========
+    async rechargeCard() {
+      const codeInput = document.getElementById('codeInput');
+      const code = codeInput.value.trim();
+      
+      if (!code) {
+        this.showToast('الرجاء إدخال كود الشحن', 'error');
+        return;
+      }
+      
+      if (this.selectedCardIndex === null) {
+        this.showToast('الرجاء اختيار بطاقة أولاً (انقر نقرتين على البطاقة)', 'error');
+        return;
+      }
+      
+      this.showToast('جاري التحقق من الكود...', 'warning');
+      
+      try {
+        // التحقق من الكود في Firebase
+        const validation = await this.validateVoucherCode(code);
+        
+        if (!validation.valid) {
+          this.showToast(validation.message, 'error');
+          return;
+        }
+        
+        // شحن البطاقة
+        const card = this.cards[this.selectedCardIndex];
+        const oldBalance = card.balance;
+        card.balance += validation.amount;
+        
+        this.saveData();
+        this.renderCards();
+        this.updateGlobalBalance();
+        
+        // مسح حقل الإدخال
+        codeInput.value = '';
+        
+        const last4 = card.last4 || card.number.slice(-4);
+        this.showToast(`✅ تم شحن ${validation.amount} ريال للبطاقة ${last4} بنجاح! الرصيد الجديد: ${card.balance.toFixed(2)} ريال`, 'success');
+        
+      } catch (error) {
+        console.error('Error recharging:', error);
+        this.showToast('حدث خطأ أثناء عملية الشحن', 'error');
+      }
+    }
+    
+    async validateVoucherCode(code) {
+      try {
+        code = code.trim().toUpperCase();
+        
+        if (!code) {
+          return { valid: false, message: 'الرجاء إدخال كود الشحن' };
+        }
+        
+        // التحقق المحلي - منع استخدام الكود المكرر
+        if (this.usedCodes.has(code)) {
+          return { valid: false, message: '⚠️ هذا الكود تم استخدامه مسبقاً في هذه المحفظة!' };
+        }
+        
+        // البحث في Firebase
+        const snapshot = await get(codesRef);
+        
+        if (!snapshot.exists()) {
+          return { valid: false, message: 'قاعدة البيانات فارغة' };
+        }
+        
+        const codesData = snapshot.val();
+        let voucherData = null;
+        let voucherKey = null;
+        
+        // البحث عن الكود
+        for (const key in codesData) {
+          const item = codesData[key];
+          if (item.code && item.code.toUpperCase() === code) {
+            voucherData = item;
+            voucherKey = key;
+            break;
+          }
+        }
+        
+        if (!voucherData) {
+          return { valid: false, message: '❌ الكود غير صالح أو غير موجود' };
+        }
+        
+        // التحقق من الحالة
+        if (voucherData.status === 'used') {
+          return { valid: false, message: '⚠️ هذا الكود تم استخدامه مسبقاً في النظام!' };
+        }
+        
+        // التحقق من القيمة
+        const amount = parseFloat(voucherData.amount);
+        if (isNaN(amount) || amount <= 0) {
+          return { valid: false, message: '❌ قيمة الكود غير صالحة' };
+        }
+        
+        // تحديث حالة الكود في Firebase
+        const updateData = {
+          ...voucherData,
+          status: 'used',
+          used_by: this.loggedInUser,
+          used_at: new Date().toISOString(),
+          wallet_user: this.user.username || this.loggedInUser
+        };
+        
+        await set(ref(db, `voucher_codes/${voucherKey}`), updateData);
+        
+        // حفظ الكود محلياً لمنع إعادة الاستخدام
+        this.usedCodes.add(code);
+        this.saveData();
+        
+        return {
+          valid: true,
+          message: '✅ تم التحقق من الكود بنجاح',
+          amount: amount
+        };
+        
+      } catch (error) {
+        console.error('Validation error:', error);
+        return { valid: false, message: '❌ خطأ في التحقق من الكود' };
+      }
+    }
+    
+    // ======== عرض البطاقات ========
+    renderCards() {
+      const cardsGrid = document.getElementById('cardsGrid');
+      const noCards = document.getElementById('noCards');
+      
+      if (!cardsGrid) return;
+      
+      cardsGrid.innerHTML = '';
+      
+      if (this.cards.length === 0) {
+        noCards.style.display = 'block';
+        return;
+      }
+      
+      noCards.style.display = 'none';
+      
+      this.cards.forEach((card, index) => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card-item';
+        
+        if (this.selectedCardIndex === index) {
+          cardElement.classList.add('selected');
+        }
+        
+        const last4 = card.last4 || card.number.slice(-4);
+        
+        cardElement.innerHTML = `
+          <div class="card-badge">
+            <i class="fas fa-coins"></i> ${card.balance.toFixed(2)} ر.س
+          </div>
+          ${this.selectedCardIndex === index ? `
+          <div class="selected-badge">
+            <i class="fas fa-check"></i> مختارة للشحن
+          </div>` : ''}
+          <div class="card-top">
+            <div class="card-chip"></div>
+            <div class="bank-name">
+              <i class="fas fa-university"></i> Digital Bank
+            </div>
+          </div>
+          <div class="card-number">${this.formatCardNumber(card.number)}</div>
+          <div class="card-details">
+            <div>
+              <div class="card-holder">${card.name}</div>
+              <div style="font-size:0.8rem;opacity:0.9">مالك البطاقة</div>
+            </div>
+            <div class="card-expiry">
+              <div>${card.expiry}</div>
+              <div style="font-size:0.8rem;opacity:0.9">انتهاء الصلاحية</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div style="font-size:0.8rem;opacity:0.9">آخر 4: ${last4}</div>
+            <div class="card-brand">مدى</div>
+          </div>
+        `;
+        
+        // إعداد النقر المفرد والمزدوج
+        cardElement.addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          
+          this.clickCount++;
+          
+          if (this.clickCount === 1) {
+            this.clickTimer = setTimeout(() => {
+              // نقر مفرد - عرض التفاصيل
+              this.showCardDetails(index);
+              this.clickCount = 0;
+            }, 300);
+          } else if (this.clickCount === 2) {
+            // نقر مزدوج - تحديد للشحن
+            clearTimeout(this.clickTimer);
+            this.handleCardDoubleClick(index);
+            this.clickCount = 0;
+          }
+        });
+        
+        cardsGrid.appendChild(cardElement);
+      });
+    }
+    
+    updateGlobalBalance() {
+      const totalBalance = this.cards.reduce((sum, card) => sum + (card.balance || 0), 0);
+      this.balance = totalBalance;
+      document.getElementById('globalBalance').textContent = totalBalance.toFixed(2);
+    }
+    
+    // ======== أدوات مساعدة ========
+    refreshData() {
+      this.loadData();
+      this.renderCards();
+      this.updateGlobalBalance();
+      this.showToast('تم تحديث البيانات بنجاح', 'success');
+    }
+    
+    handleBarcodeUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      this.showToast('جاري قراءة الباركود...', 'warning');
+      
+      // محاكاة قراءة الباركود
+      setTimeout(() => {
+        // في التطبيق الحقيقي، استخدم مكتبة مثل jsQR هنا
+        const fakeBarcode = 'VOUCHER' + Date.now().toString().slice(-8);
+        document.getElementById('codeInput').value = fakeBarcode;
+        this.showToast('تم قراءة الباركود بنجاح', 'success');
+      }, 1500);
+      
+      // إعادة تعيين حقل الرفع
+      event.target.value = '';
+    }
+    
+    showToast(message, type = 'success') {
+      const toastContainer = document.getElementById('toastContainer');
+      
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icon = type === 'success' ? 'fa-check-circle' : 
+                   type === 'error' ? 'fa-exclamation-circle' : 
+                   'fa-info-circle';
+      
+      toast.innerHTML = `
+        <div class="toast-header">
+          <i class="fas ${icon}"></i>
+          <h4>${type === 'success' ? 'نجاح' : type === 'error' ? 'خطأ' : 'تنبيه'}</h4>
+        </div>
+        <div class="toast-body">${message}</div>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // إظهار التنبيه
+      setTimeout(() => {
+        toast.style.display = 'block';
+      }, 10);
+      
+      // إخفاء التنبيه بعد 4 ثوان
+      setTimeout(() => {
+        toast.style.animation = 'slideDown 0.3s ease-out reverse';
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+    }
   }
 
-  // حفظ البيانات عند الخروج
-  window.addEventListener('beforeunload', () => { 
-    saveCards(); 
-    saveBalance(); 
-  });
-
-  // مزامنة الرصيد عند التغيير في نوافذ أخرى
-  window.addEventListener('storage', (e) => {
-    if (e.key === BALANCE_KEY) {
-      balance = parseFloat(e.newValue || 0);
-      render();
-    }
-    if (e.key === CARDS_KEY) {
-      cards = JSON.parse(e.newValue || "[]");
-      render();
-    }
+  // ======== تشغيل النظام ========
+  document.addEventListener('DOMContentLoaded', () => {
+    window.walletSystem = new WalletSystem();
   });
 
 </script>

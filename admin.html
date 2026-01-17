@@ -460,7 +460,404 @@
             border-color: var(--primary-color);
         }
         
-        /* تبويبات المعرض */
+        /* ===== قسم الملفات المرفوعة ===== */
+        .files-section {
+            background: var(--darker-bg);
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .files-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .file-upload-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upload-option-btn {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .upload-option-btn:hover {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .upload-option-btn i {
+            font-size: 18px;
+        }
+
+        .uploaded-files {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .file-icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+            word-break: break-all;
+        }
+
+        .file-size {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .remove-file-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .remove-file-btn:hover {
+            background: var(--error-color);
+            transform: scale(1.1);
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .file-upload-area i {
+            font-size: 48px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .file-upload-area p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .file-upload-area span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .file-types-info {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .file-type-badge {
+            background: rgba(66, 133, 244, 0.1);
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .file-type-badge i {
+            font-size: 14px;
+        }
+
+        /* ===== نافذة إدارة الملفات ===== */
+        .file-manager-modal {
+            max-width: 700px;
+        }
+
+        .files-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--darker-bg);
+            padding: 10px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .files-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            color: var(--text-secondary);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .files-tab:hover {
+            background: rgba(66, 133, 244, 0.1);
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .files-tab.active {
+            background: var(--gradient-secondary);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: var(--darker-bg);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .file-manager-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .file-manager-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-manager-item.selected {
+            border-color: var(--success-color);
+            box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.3);
+        }
+
+        .file-manager-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--darker-bg), var(--card-bg));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .file-manager-icon i {
+            font-size: 48px;
+            color: var(--text-secondary);
+        }
+
+        .file-manager-info {
+            padding: 12px;
+        }
+
+        .file-manager-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-manager-type {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--darker-bg);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .file-manager-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .file-manager-item:hover .file-manager-overlay {
+            opacity: 1;
+        }
+
+        .select-file-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== مؤشر التحميل ===== */
+        .upload-progress {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--darker-bg);
+            border-radius: var(--border-radius-sm);
+            display: none;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* ===== معاينة الملفات ===== */
+        .preview-container {
+            margin-top: 15px;
+            padding: 20px;
+            background: var(--darker-bg);
+            border-radius: var(--border-radius-sm);
+            display: none;
+        }
+
+        .preview-title {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .preview-content {
+            max-height: 300px;
+            overflow: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: 15px;
+            background: var(--card-bg);
+        }
+
+        .pdf-preview {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        .text-preview {
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== تبويبات المعرض ===== */
         .gallery-tabs {
             display: flex;
             gap: 10px;
@@ -525,7 +922,7 @@
         .gallery-item:hover {
             transform: translateY(-5px);
             border-color: var(--primary-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         
         .gallery-item.selected {
@@ -578,7 +975,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0,0,0,0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -713,6 +1110,14 @@
             .gallery-item-video {
                 height: 120px;
             }
+            
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .file-upload-options {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 480px) {
@@ -723,6 +1128,21 @@
             .gallery-item-image,
             .gallery-item-video {
                 height: 100px;
+            }
+            
+            .files-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .file-actions {
+                width: 100%;
+                justify-content: flex-end;
             }
         }
     </style>
@@ -771,6 +1191,10 @@
                         <div class="stat-label">فيديوهات</div>
                         <div id="videos-count" class="stat-value">0</div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-label">الملفات المرفوعة</div>
+                        <div id="files-count" class="stat-value">0</div>
+                    </div>
                 </div>
             </div>
             
@@ -809,6 +1233,7 @@
                                 <th>السعر</th>
                                 <th>التقييم</th>
                                 <th>التصنيف العمري</th>
+                                <th>الملفات</th>
                                 <th>الإجراءات</th>
                             </tr>
                         </thead>
@@ -1014,6 +1439,75 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <!-- قسم ملفات المنتج -->
+                    <div id="files-section" class="form-group full-width" style="display: block;">
+                        <div class="files-section">
+                            <h3><i class="fas fa-file-alt"></i> ملفات المنتج</h3>
+                            
+                            <div class="file-upload-container">
+                                <div class="file-upload-options">
+                                    <button type="button" class="upload-option-btn" onclick="openFileManager()">
+                                        <i class="fas fa-folder-open"></i>
+                                        مدير الملفات
+                                    </button>
+                                    <button type="button" class="upload-option-btn" onclick="uploadFromDevice()">
+                                        <i class="fas fa-upload"></i>
+                                        رفع من الجهاز
+                                    </button>
+                                    <button type="button" class="upload-option-btn" onclick="addExternalFile()">
+                                        <i class="fas fa-link"></i>
+                                        رابط خارجي
+                                    </button>
+                                </div>
+                                
+                                <div class="file-types-info">
+                                    <div class="file-type-badge">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </div>
+                                    <div class="file-type-badge">
+                                        <i class="fas fa-file-archive"></i> ZIP/RAR
+                                    </div>
+                                    <div class="file-type-badge">
+                                        <i class="fas fa-file-word"></i> DOC/DOCX
+                                    </div>
+                                    <div class="file-type-badge">
+                                        <i class="fas fa-file-image"></i> صور
+                                    </div>
+                                    <div class="file-type-badge">
+                                        <i class="fas fa-file-code"></i> EPUB/MOBI
+                                    </div>
+                                </div>
+                                
+                                <div class="uploaded-files" id="uploaded-files">
+                                    <!-- سيتم ملؤها بـ JavaScript -->
+                                </div>
+                                
+                                <div id="upload-progress" class="upload-progress">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <span class="loading"></span>
+                                        <span id="progress-text">جاري الرفع...</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progress-fill"></div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <span id="uploaded-size">0 MB</span>
+                                        <span id="total-size">0 MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="preview-container" class="preview-container">
+                        <div class="preview-title">
+                            <i class="fas fa-eye"></i> معاينة الملف
+                        </div>
+                        <div class="preview-content" id="preview-content">
+                            <!-- سيتم ملؤها بـ JavaScript -->
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="modal-actions">
@@ -1101,6 +1595,68 @@
             </div>
         </div>
     </div>
+    
+    <!-- نافذة مدير الملفات -->
+    <div id="file-manager-modal" class="modal-overlay">
+        <div class="modal-content file-manager-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-alt"></i> مدير الملفات</h2>
+                <button class="close-modal" onclick="closeFileManager()">&times;</button>
+            </div>
+            
+            <div class="files-tabs">
+                <button id="file-tab-uploaded" class="files-tab active" onclick="switchFileTab('uploaded')">
+                    <i class="fas fa-cloud-upload-alt"></i> الملفات المرفوعة
+                </button>
+                <button id="file-tab-library" class="files-tab" onclick="switchFileTab('library')">
+                    <i class="fas fa-folder"></i> المكتبة
+                </button>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div id="file-manager-upload-section" style="display: block;">
+                    <button type="button" class="action-btn" onclick="document.getElementById('file-manager-upload').click()"
+                            style="background: var(--gradient-primary); margin-bottom: 10px;">
+                        <i class="fas fa-plus"></i> رفع ملف جديد
+                    </button>
+                    <input type="file" id="file-manager-upload" multiple 
+                           style="display: none;" onchange="uploadToFileManager(event)">
+                    <div style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">
+                        <i class="fas fa-info-circle"></i> يمكنك رفع ملفات PDF, ZIP, DOC, EPUB (الحد الأقصى: 100MB)
+                    </div>
+                </div>
+                <div id="file-manager-status" style="margin-top: 10px;"></div>
+            </div>
+            
+            <div id="files-container">
+                <div id="uploaded-files-grid" style="display: block;">
+                    <h3 style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px;">
+                        <i class="fas fa-file-alt"></i> الملفات المتاحة
+                    </h3>
+                    <div id="files-grid" class="files-grid">
+                        <!-- سيتم ملؤها بـ JavaScript -->
+                    </div>
+                </div>
+                
+                <div id="library-files-grid" style="display: none;">
+                    <h3 style="color: var(--text-secondary); margin-bottom: 15px; font-size: 16px;">
+                        <i class="fas fa-folder-open"></i> مكتبة الملفات
+                    </h3>
+                    <div id="library-files" class="files-grid">
+                        <!-- سيتم ملؤها بـ JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="cancel-btn" onclick="closeFileManager()">إلغاء</button>
+                <button type="button" class="save-btn" onclick="selectFromFileManager()">
+                    <i class="fas fa-check"></i>
+                    تحديد الملفات
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="module">
@@ -1121,6 +1677,12 @@
     let galleryVideos = [];
     let currentGalleryTab = 'images';
     
+    // متغيرات الملفات
+    let uploadedFiles = [];
+    let galleryFiles = [];
+    let selectedFiles = [];
+    let currentFileTab = 'uploaded';
+    
     // فئات المنتجات الفرعية
     const subcategories = {
         'قصص': ['ضحك، تفاهة', 'مغامرة، خيال', 'غموض، إثارة', 'خيال علمي', 'رومانسية', 'دراما'],
@@ -1130,6 +1692,25 @@
     };
     
     const chapters = []; // لتخزين فصول الفيديو
+    
+    // أنواع الملفات المسموحة
+    const allowedFileTypes = {
+        'application/pdf': 'pdf',
+        'application/zip': 'zip',
+        'application/x-rar-compressed': 'rar',
+        'application/x-zip-compressed': 'zip',
+        'application/msword': 'doc',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+        'application/epub+zip': 'epub',
+        'application/x-mobipocket-ebook': 'mobi',
+        'text/plain': 'txt',
+        'application/vnd.ms-excel': 'xls',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/gif': 'gif',
+        'image/webp': 'webp'
+    };
     
     // ====== تهيئة Firebase ======
     async function initializeFirebase() {
@@ -1197,6 +1778,565 @@
             showNotification('خطأ في تحميل المنتجات', 'error');
             return false;
         }
+    }
+    
+    // ====== الحصول على أيقونة الملف ======
+    function getFileIcon(fileType) {
+        const icons = {
+            'pdf': 'file-pdf',
+            'zip': 'file-archive',
+            'rar': 'file-archive',
+            'doc': 'file-word',
+            'docx': 'file-word',
+            'epub': 'book',
+            'mobi': 'book',
+            'txt': 'file-alt',
+            'xls': 'file-excel',
+            'xlsx': 'file-excel',
+            'jpg': 'file-image',
+            'png': 'file-image',
+            'gif': 'file-image',
+            'webp': 'file-image',
+            'default': 'file'
+        };
+        
+        const extension = fileType.toLowerCase();
+        for (const [key, icon] of Object.entries(icons)) {
+            if (extension.includes(key)) {
+                return icon;
+            }
+        }
+        return icons.default;
+    }
+    
+    // ====== تنسيق حجم الملف ======
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // ====== فتح مدير الملفات ======
+    function openFileManager() {
+        currentFileTab = 'uploaded';
+        document.getElementById('file-tab-uploaded').classList.add('active');
+        document.getElementById('file-tab-library').classList.remove('active');
+        document.getElementById('uploaded-files-grid').style.display = 'block';
+        document.getElementById('library-files-grid').style.display = 'none';
+        document.getElementById('file-manager-upload-section').style.display = 'block';
+        
+        loadGalleryFiles();
+        document.getElementById('file-manager-modal').style.display = 'flex';
+    }
+    
+    // ====== إغلاق مدير الملفات ======
+    function closeFileManager() {
+        document.getElementById('file-manager-modal').style.display = 'none';
+        selectedFiles = [];
+    }
+    
+    // ====== تبديل تبويبات الملفات ======
+    function switchFileTab(tab) {
+        currentFileTab = tab;
+        
+        document.getElementById('file-tab-uploaded').classList.remove('active');
+        document.getElementById('file-tab-library').classList.remove('active');
+        
+        if (tab === 'uploaded') {
+            document.getElementById('file-tab-uploaded').classList.add('active');
+            document.getElementById('uploaded-files-grid').style.display = 'block';
+            document.getElementById('library-files-grid').style.display = 'none';
+            document.getElementById('file-manager-upload-section').style.display = 'block';
+            
+            if (galleryFiles.length === 0) {
+                loadGalleryFiles();
+            } else {
+                renderGalleryFiles();
+            }
+        } else {
+            document.getElementById('file-tab-library').classList.add('active');
+            document.getElementById('uploaded-files-grid').style.display = 'none';
+            document.getElementById('library-files-grid').style.display = 'block';
+            document.getElementById('file-manager-upload-section').style.display = 'none';
+            
+            // تحميل الملفات من مكتبة المنتجات
+            loadProductLibraryFiles();
+        }
+    }
+    
+    // ====== تحميل الملفات من المعرض ======
+    async function loadGalleryFiles() {
+        try {
+            const galleryRef = storageRef(firebaseStorage, 'gallery/files');
+            const listResult = await listAll(galleryRef);
+            
+            galleryFiles = [];
+            
+            for (const itemRef of listResult.items) {
+                try {
+                    const url = await getDownloadURL(itemRef);
+                    const metadata = await itemRef.getMetadata();
+                    
+                    galleryFiles.push({
+                        name: itemRef.name,
+                        url: url,
+                        type: allowedFileTypes[metadata.contentType] || 'file',
+                        size: metadata.size,
+                        contentType: metadata.contentType,
+                        fullPath: itemRef.fullPath
+                    });
+                } catch (error) {
+                    console.error(`Error loading file ${itemRef.name}:`, error);
+                }
+            }
+            
+            renderGalleryFiles();
+            
+        } catch (error) {
+            console.error("Error loading gallery files:", error);
+            galleryFiles = [];
+            renderGalleryFiles();
+        }
+    }
+    
+    // ====== تحميل الملفات من مكتبة المنتجات ======
+    async function loadProductLibraryFiles() {
+        try {
+            const products = allProducts.filter(p => p.files && Array.isArray(p.files));
+            const libraryFiles = [];
+            
+            products.forEach(product => {
+                product.files.forEach(file => {
+                    libraryFiles.push({
+                        name: file.name || `ملف_${product.title}`,
+                        url: file.url,
+                        type: file.type || 'file',
+                        size: file.size || 0,
+                        productName: product.title,
+                        productId: product.id
+                    });
+                });
+            });
+            
+            renderLibraryFiles(libraryFiles);
+            
+        } catch (error) {
+            console.error("Error loading library files:", error);
+            renderLibraryFiles([]);
+        }
+    }
+    
+    // ====== عرض الملفات في المعرض ======
+    function renderGalleryFiles() {
+        const container = document.getElementById('files-grid');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (galleryFiles.length === 0) {
+            container.innerHTML = `
+                <div class="empty-gallery">
+                    <i class="fas fa-file-alt"></i>
+                    <div style="margin-top: 10px;">لا توجد ملفات في المعرض</div>
+                </div>
+            `;
+            return;
+        }
+        
+        galleryFiles.forEach((file, index) => {
+            const isSelected = selectedFiles.some(f => f.url === file.url);
+            const item = document.createElement('div');
+            item.className = `file-manager-item ${isSelected ? 'selected' : ''}`;
+            item.onclick = () => toggleSelectFile(file);
+            
+            const icon = getFileIcon(file.type);
+            
+            item.innerHTML = `
+                <div class="file-manager-icon">
+                    <i class="fas fa-${icon}"></i>
+                </div>
+                <div class="file-manager-info">
+                    <div class="file-manager-name">${file.name}</div>
+                    <span class="file-manager-type">${file.type.toUpperCase()}</span>
+                </div>
+                <div class="file-manager-overlay">
+                    <button class="select-file-btn" onclick="event.stopPropagation(); toggleSelectFile(${JSON.stringify(file)})">
+                        <i class="fas fa-${isSelected ? 'times' : 'check'}"></i>
+                        ${isSelected ? 'إلغاء' : 'اختيار'}
+                    </button>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+    
+    // ====== عرض الملفات في المكتبة ======
+    function renderLibraryFiles(files) {
+        const container = document.getElementById('library-files');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (files.length === 0) {
+            container.innerHTML = `
+                <div class="empty-gallery">
+                    <i class="fas fa-folder-open"></i>
+                    <div style="margin-top: 10px;">لا توجد ملفات في المكتبة</div>
+                </div>
+            `;
+            return;
+        }
+        
+        files.forEach((file, index) => {
+            const isSelected = selectedFiles.some(f => f.url === file.url);
+            const item = document.createElement('div');
+            item.className = `file-manager-item ${isSelected ? 'selected' : ''}`;
+            item.onclick = () => toggleSelectFile(file);
+            
+            const icon = getFileIcon(file.type);
+            
+            item.innerHTML = `
+                <div class="file-manager-icon">
+                    <i class="fas fa-${icon}"></i>
+                </div>
+                <div class="file-manager-info">
+                    <div class="file-manager-name">${file.name}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 5px;">
+                        من: ${file.productName || 'غير معروف'}
+                    </div>
+                    <span class="file-manager-type">${file.type.toUpperCase()}</span>
+                </div>
+                <div class="file-manager-overlay">
+                    <button class="select-file-btn" onclick="event.stopPropagation(); toggleSelectFile(${JSON.stringify(file)})">
+                        <i class="fas fa-${isSelected ? 'times' : 'check'}"></i>
+                        ${isSelected ? 'إلغاء' : 'اختيار'}
+                    </button>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+    
+    // ====== التبديل في اختيار الملف ======
+    function toggleSelectFile(file) {
+        const index = selectedFiles.findIndex(f => f.url === file.url);
+        if (index === -1) {
+            selectedFiles.push(file);
+        } else {
+            selectedFiles.splice(index, 1);
+        }
+        
+        // تحديث العرض
+        if (currentFileTab === 'uploaded') {
+            renderGalleryFiles();
+        } else {
+            loadProductLibraryFiles();
+        }
+    }
+    
+    // ====== اختيار الملفات من المدير ======
+    function selectFromFileManager() {
+        try {
+            // إضافة الملفات المختارة إلى المنتج
+            selectedFiles.forEach(file => {
+                if (!uploadedFiles.some(f => f.url === file.url)) {
+                    uploadedFiles.push({
+                        name: file.name,
+                        url: file.url,
+                        type: file.type,
+                        size: file.size,
+                        contentType: file.contentType || 'application/octet-stream'
+                    });
+                }
+            });
+            
+            // تحديث عرض الملفات المرفوعة
+            renderUploadedFiles();
+            
+            // إغلاق مدير الملفات
+            closeFileManager();
+            
+            showNotification(`تم إضافة ${selectedFiles.length} ملف(ات)`, 'success');
+            selectedFiles = [];
+            
+        } catch (error) {
+            console.error('Error selecting files:', error);
+            showNotification('خطأ في إضافة الملفات', 'error');
+        }
+    }
+    
+    // ====== رفع ملف من الجهاز ======
+    function uploadFromDevice() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = Object.keys(allowedFileTypes).join(',');
+        
+        input.onchange = async (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+            
+            for (const file of files) {
+                await uploadSingleFile(file);
+            }
+        };
+        
+        input.click();
+    }
+    
+    // ====== رفع ملف واحد ======
+    async function uploadSingleFile(file) {
+        // التحقق من نوع الملف
+        if (!allowedFileTypes[file.type]) {
+            showNotification(`نوع الملف ${file.name} غير مدعوم`, 'error');
+            return;
+        }
+        
+        // التحقق من حجم الملف (100MB كحد أقصى)
+        if (file.size > 100 * 1024 * 1024) {
+            showNotification(`حجم الملف ${file.name} كبير جداً (الحد الأقصى 100MB)`, 'error');
+            return;
+        }
+        
+        try {
+            // عرض مؤشر التحميل
+            const progressDiv = document.getElementById('upload-progress');
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const uploadedSize = document.getElementById('uploaded-size');
+            const totalSize = document.getElementById('total-size');
+            
+            progressDiv.style.display = 'block';
+            progressText.textContent = `جاري رفع ${file.name}...`;
+            totalSize.textContent = formatFileSize(file.size);
+            
+            // إنشاء اسم فريد للملف
+            const timestamp = Date.now();
+            const randomString = Math.random().toString(36).substring(2, 15);
+            const fileExtension = file.name.split('.').pop();
+            const fileName = `${timestamp}_${randomString}.${fileExtension}`;
+            
+            // رفع الملف إلى Firebase Storage
+            const storageReference = storageRef(firebaseStorage, `gallery/files/${fileName}`);
+            
+            // تتبع تقدم الرفع
+            const uploadTask = uploadBytes(storageReference, file);
+            
+            // انتظار الانتهاء من الرفع
+            await uploadTask;
+            
+            // الحصول على رابط التنزيل
+            const downloadURL = await getDownloadURL(storageReference);
+            
+            // إضافة الملف إلى المصفوفة
+            const uploadedFile = {
+                name: file.name,
+                url: downloadURL,
+                type: allowedFileTypes[file.type],
+                size: file.size,
+                contentType: file.type,
+                storagePath: storageReference.fullPath
+            };
+            
+            uploadedFiles.push(uploadedFile);
+            
+            // تحديث العرض
+            renderUploadedFiles();
+            
+            // إخفاء مؤشر التحميل
+            progressDiv.style.display = 'none';
+            progressFill.style.width = '0%';
+            
+            showNotification(`تم رفع ${file.name} بنجاح`, 'success');
+            
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            showNotification(`خطأ في رفع ${file.name}`, 'error');
+            
+            // إخفاء مؤشر التحميل في حالة الخطأ
+            document.getElementById('upload-progress').style.display = 'none';
+        }
+    }
+    
+    // ====== رفع ملفات إلى مدير الملفات ======
+    async function uploadToFileManager(event) {
+        const files = Array.from(event.target.files);
+        const statusDiv = document.getElementById('file-manager-status');
+        
+        if (files.length === 0) return;
+        
+        statusDiv.innerHTML = '<span class="loading"></span> جاري الرفع...';
+        statusDiv.style.color = 'var(--accent-color)';
+        
+        try {
+            for (const file of files) {
+                await uploadSingleFile(file);
+            }
+            
+            // تحديث المعرض
+            loadGalleryFiles();
+            
+            statusDiv.innerHTML = '<span style="color: var(--success-color);"><i class="fas fa-check"></i> تم الرفع بنجاح</span>';
+            
+        } catch (error) {
+            console.error('Error uploading to file manager:', error);
+            statusDiv.innerHTML = '<span style="color: var(--error-color);"><i class="fas fa-times"></i> خطأ في الرفع</span>';
+        }
+    }
+    
+    // ====== إضافة رابط خارجي ======
+    function addExternalFile() {
+        const url = prompt('أدخل رابط الملف الخارجي:');
+        if (!url) return;
+        
+        const name = prompt('أدخل اسم الملف:', 'ملف خارجي');
+        if (!name) return;
+        
+        // محاولة تحديد نوع الملف من الامتداد
+        const extension = url.split('.').pop().toLowerCase().split('?')[0];
+        const fileTypes = {
+            'pdf': 'pdf',
+            'zip': 'zip',
+            'rar': 'rar',
+            'doc': 'doc',
+            'docx': 'docx',
+            'epub': 'epub',
+            'mobi': 'mobi',
+            'txt': 'txt',
+            'jpg': 'jpg',
+            'jpeg': 'jpg',
+            'png': 'png',
+            'gif': 'gif'
+        };
+        
+        const type = fileTypes[extension] || 'file';
+        
+        uploadedFiles.push({
+            name: name,
+            url: url,
+            type: type,
+            size: 0,
+            contentType: 'external',
+            isExternal: true
+        });
+        
+        renderUploadedFiles();
+        showNotification('تم إضافة الرابط الخارجي', 'success');
+    }
+    
+    // ====== عرض الملفات المرفوعة ======
+    function renderUploadedFiles() {
+        const container = document.getElementById('uploaded-files');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (uploadedFiles.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: var(--text-muted);">
+                    <i class="fas fa-file-upload" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <div>لم يتم إرفاق أي ملفات بعد</div>
+                </div>
+            `;
+            return;
+        }
+        
+        uploadedFiles.forEach((file, index) => {
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            
+            const icon = getFileIcon(file.type);
+            const sizeText = file.size > 0 ? formatFileSize(file.size) : 'غير معروف';
+            
+            item.innerHTML = `
+                <div class="file-info">
+                    <div class="file-icon">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="file-details">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${sizeText} • ${file.type.toUpperCase()}</div>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    ${file.isExternal ? `
+                    <button class="remove-file-btn" onclick="removeFile(${index})" title="إزالة الرابط">
+                        <i class="fas fa-unlink"></i>
+                    </button>
+                    ` : `
+                    <button class="remove-file-btn" onclick="removeFile(${index})" title="حذف الملف">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    `}
+                    <button class="action-btn" onclick="previewFile(${index})" 
+                            style="background: var(--gradient-secondary); padding: 8px 12px;">
+                        <i class="fas fa-eye"></i>
+                        معاينة
+                    </button>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+    
+    // ====== إزالة ملف ======
+    function removeFile(index) {
+        if (confirm('هل أنت متأكد من إزالة هذا الملف؟')) {
+            uploadedFiles.splice(index, 1);
+            renderUploadedFiles();
+            showNotification('تم إزالة الملف', 'warning');
+        }
+    }
+    
+    // ====== معاينة الملف ======
+    function previewFile(index) {
+        const file = uploadedFiles[index];
+        const previewContainer = document.getElementById('preview-container');
+        const previewContent = document.getElementById('preview-content');
+        
+        if (!file || !previewContainer || !previewContent) return;
+        
+        previewContent.innerHTML = '';
+        
+        if (file.type === 'pdf') {
+            previewContent.innerHTML = `
+                <iframe src="${file.url}" class="pdf-preview"></iframe>
+            `;
+        } else if (file.type === 'txt') {
+            // محاولة قراءة الملف النصي
+            fetch(file.url)
+                .then(response => response.text())
+                .then(text => {
+                    previewContent.innerHTML = `
+                        <div class="text-preview">${text.substring(0, 5000)}${text.length > 5000 ? '...' : ''}</div>
+                    `;
+                })
+                .catch(error => {
+                    previewContent.innerHTML = `
+                        <div style="color: var(--text-muted); text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div style="margin-top: 10px;">لا يمكن معاينة هذا الملف</div>
+                        </div>
+                    `;
+                });
+        } else {
+            previewContent.innerHTML = `
+                <div style="color: var(--text-muted); text-align: center; padding: 40px;">
+                    <i class="fas fa-${getFileIcon(file.type)}" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <div style="font-weight: 600; margin-bottom: 10px;">${file.name}</div>
+                    <div style="margin-bottom: 10px;">النوع: ${file.type.toUpperCase()}</div>
+                    <div style="margin-bottom: 20px;">الحجم: ${file.size > 0 ? formatFileSize(file.size) : 'غير معروف'}</div>
+                    <a href="${file.url}" target="_blank" class="action-btn" 
+                       style="background: var(--gradient-primary); color: white; padding: 10px 20px; text-decoration: none;">
+                        <i class="fas fa-download"></i> تحميل الملف
+                    </a>
+                </div>
+            `;
+        }
+        
+        previewContainer.style.display = 'block';
     }
     
     // ====== تبديل تبويبات المعرض ======
@@ -1724,7 +2864,7 @@
         if (filteredProducts.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="7" class="no-data">
+                    <td colspan="8" class="no-data">
                         <i class="fas fa-box-open"></i>
                         <div style="margin-top: 10px;">لا توجد منتجات لعرضها</div>
                     </td>
@@ -1743,6 +2883,9 @@
             } else if (product.imageUrl) {
                 imageSrc = product.imageUrl;
             }
+            
+            // حساب عدد الملفات
+            const fileCount = product.files ? product.files.length : 0;
             
             row.innerHTML = `
                 <td class="product-image-cell">
@@ -1769,6 +2912,12 @@
                           padding: 4px 8px; border-radius: 4px; font-size: 12px;">
                         ${(product.ratingCategory === 'all' || !product.ratingCategory) ? 'جميع الأعمار' : product.ratingCategory + '+'}
                     </span>
+                </td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-file-alt" style="color: var(--secondary-color);"></i>
+                        <span>${fileCount}</span>
+                    </div>
                 </td>
                 <td>
                     <div class="product-actions">
@@ -1805,6 +2954,12 @@
         document.getElementById('novels-count').textContent = novels;
         document.getElementById('videos-count').textContent = videos;
         document.getElementById('active-products').textContent = allProducts.length;
+        
+        // حساب عدد الملفات
+        const totalFiles = allProducts.reduce((sum, product) => {
+            return sum + (product.files ? product.files.length : 0);
+        }, 0);
+        document.getElementById('files-count').textContent = totalFiles;
     }
     
     // ====== فتح نموذج إضافة منتج ======
@@ -1833,15 +2988,14 @@
         document.getElementById('video-status').style.color = '';
         document.getElementById('video-source').textContent = '-';
         
-        document.getElementById('product-modal').style.display = 'flex';
+        // إعادة تعيين الملفات
+        uploadedFiles = [];
+        renderUploadedFiles();
+        document.getElementById('files-section').style.display = 'block';
+        document.getElementById('preview-container').style.display = 'none';
+        document.getElementById('upload-progress').style.display = 'none';
         
-        // إضافة حدث لمنع إغلاق النافذة
-        const modalContent = document.querySelector('#product-modal .modal-content');
-        if (modalContent) {
-            modalContent.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        }
+        document.getElementById('product-modal').style.display = 'flex';
     }
     
     // ====== تعديل منتج ======
@@ -1896,6 +3050,17 @@
                 document.getElementById('video-status').style.color = 'var(--success-color)';
                 document.getElementById('video-source').textContent = product.videoUrl ? 'رابط خارجي' : 'مخزن محلي';
             }
+            
+            // تحميل الملفات
+            if (product.files && Array.isArray(product.files)) {
+                uploadedFiles = product.files;
+            } else {
+                uploadedFiles = [];
+            }
+            renderUploadedFiles();
+            
+            // إظهار قسم الملفات
+            document.getElementById('files-section').style.display = 'block';
             
             // عرض/إخفاء قسم الفصول والفيديو
             const chaptersSection = document.getElementById('chapters-section');
@@ -2107,12 +3272,27 @@
                 productData.chapters = [];
             }
             
-            // 7. التحقق من اتصال Firebase
+            // 7. إضافة بيانات الملفات
+            if (uploadedFiles.length > 0) {
+                productData.files = uploadedFiles.map(file => ({
+                    name: file.name,
+                    url: file.url,
+                    type: file.type,
+                    size: file.size,
+                    contentType: file.contentType || 'application/octet-stream',
+                    isExternal: file.isExternal || false
+                }));
+                console.log(`تم إضافة ${uploadedFiles.length} ملف(ات) للمنتج`);
+            } else {
+                productData.files = [];
+            }
+            
+            // 8. التحقق من اتصال Firebase
             if (!firebaseDatabase) {
                 throw new Error('لا يوجد اتصال بقاعدة البيانات');
             }
             
-            // 8. حفظ المنتج في Firebase
+            // 9. حفظ المنتج في Firebase
             let productRef;
             if (editingProductId) {
                 productRef = ref(firebaseDatabase, `products/${editingProductId}`);
@@ -2245,6 +3425,8 @@
         document.getElementById('product-modal').style.display = 'none';
         editingProductId = null;
         chapters.length = 0;
+        uploadedFiles = [];
+        document.getElementById('preview-container').style.display = 'none';
         removeImage();
         removeVideo();
     }
@@ -2400,6 +3582,14 @@
             });
         }
         
+        // لمنع إغلاق نافذة مدير الملفات عند النقر على المحتوى
+        const fileManagerModalContent = document.querySelector('#file-manager-modal .modal-content');
+        if (fileManagerModalContent) {
+            fileManagerModalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
         // لمنع إغلاق النوافذ عند رفع الملفات
         const fileInputs = document.querySelectorAll('input[type="file"]');
         fileInputs.forEach(input => {
@@ -2439,6 +3629,16 @@
     window.switchGalleryTab = switchGalleryTab;
     window.uploadToGallery = uploadToGallery;
     window.uploadVideoToGallery = uploadVideoToGallery;
+    window.uploadFromDevice = uploadFromDevice;
+    window.addExternalFile = addExternalFile;
+    window.openFileManager = openFileManager;
+    window.closeFileManager = closeFileManager;
+    window.switchFileTab = switchFileTab;
+    window.selectFromFileManager = selectFromFileManager;
+    window.toggleSelectFile = toggleSelectFile;
+    window.uploadToFileManager = uploadToFileManager;
+    window.removeFile = removeFile;
+    window.previewFile = previewFile;
     
     // تشغيل تهيئة الصفحة
     document.addEventListener('DOMContentLoaded', initializePage);
@@ -2452,6 +3652,9 @@
             if (document.getElementById('gallery-modal').style.display === 'flex') {
                 closeGallery();
             }
+            if (document.getElementById('file-manager-modal').style.display === 'flex') {
+                closeFileManager();
+            }
         }
     });
     
@@ -2462,6 +3665,10 @@
     
     document.getElementById('gallery-modal')?.addEventListener('click', function(e) {
         if (e.target === this) closeGallery();
+    });
+    
+    document.getElementById('file-manager-modal')?.addEventListener('click', function(e) {
+        if (e.target === this) closeFileManager();
     });
 </script>
 </html>

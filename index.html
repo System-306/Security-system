@@ -1754,737 +1754,809 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    /* أنماط نظام التقييم */
+.product-rating-section, .ratings-section {
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.rating-form, .user-rating-display {
+    padding: 20px;
+    background: var(--darker-bg);
+    border-radius: var(--border-radius-sm);
+}
+
+.stars-display {
+    display: flex;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+.stars-display .fa-star {
+    color: #FFD700;
+    font-size: 18px;
+}
+
+.stars-display .fa-star-half-alt {
+    color: #FFD700;
+    font-size: 18px;
+}
+
+.rating-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.stars-container {
+    display: flex;
+    gap: 10px;
+    font-size: 32px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.stars-container .fa-star {
+    transition: all 0.2s ease;
+}
+
+.stars-container .fa-star:hover {
+    transform: scale(1.2);
+}
   </style>
 </head>
 
 <body>
   <!-- الخلفية -->
-  <img id="img1" src="img//Alk.jpg" alt="خلفية">
+<img id="img1" src="img//Alk.jpg" alt="خلفية">
 
-  <!-- الشريط العلوي -->
-  <div class="top">
-    <img id="icon" src="img//icon1.jpg" alt="شعار المتجر">
-    
-    <div class="top-icons">
-      <div class="icon-wrapper" onclick="openSearch()">
-        <i class="fas fa-search"></i>
-      </div>
-      
-      <a href="basket.html"><div class="icon-wrapper" onclick="goToCart()">
-        <i class="fas fa-shopping-cart"></i>
-        <span id="cart-badge">0</span>
-      </div></a>
-      
-      <div class="icon-wrapper" onclick="toggleSettings()">
-        <i class="fas fa-cog"></i>
-      </div>
-    </div>
-  </div>
-
-  <!-- قسم الترحيب -->
-  <div class="top2">
-    <div class="welcome-banner">
-      <div class="welcome-icon">
-        <i class="fas fa-book-open" style="color: white; font-size: 24px;"></i>
-      </div>
-      <div>
-        <h1 class="welcome-text rtl-text">مكتبة الفجر ترحب بكم</h1>
-        <h1 class="welcome-text ltr-text" style="display: none;">Fajr Library Welcomes You</h1>
-        <p style="color: var(--text-secondary); text-align: center;" class="rtl-text">اكتشف عالمًا من القصص والكتب المتنوعة</p>
-        <p style="color: var(--text-secondary); text-align: center;" class="ltr-text" style="display: none;">Discover a world of diverse stories and books</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- المحتوى الرئيسي -->
-  <div class="main-content">
-    <!-- أحدث القصص -->
-    <div class="section">
-      <div class="section-title">
-        <i class="fas fa-star"></i>
-        <span class="rtl-text">أحدث القصص</span>
-        <span class="ltr-text" style="display: none;">Latest Stories</span>
-        <a href="javascript:void(0)" class="show-all" onclick="openSearch()" style="margin-right: auto; font-size: 14px; color: var(--primary-color); text-decoration: none;">
-          <span class="rtl-text">إظهار الكل <i class="fas fa-arrow-left"></i></span>
-          <span class="ltr-text" style="display: none;">Show All <i class="fas fa-arrow-right"></i></span>
-        </a>
-      </div>
-      <p class="section-subtitle rtl-text">اكتشف أحدث الإصدارات من القصص المتنوعة</p>
-      <p class="section-subtitle ltr-text" style="display: none;">Discover the latest releases of diverse stories</p>
-      
-      <div class="products-grid" id="stories-container">
-        <!-- سيتم ملؤها ديناميكياً -->
-      </div>
-    </div>
-
-    <!-- المانجا -->
-    <div class="section">
-      <div class="section-title">
-        <i class="fas fa-paint-brush"></i>
-        <span class="rtl-text">مانجا</span>
-        <span class="ltr-text" style="display: none;">Manga</span>
-      </div>
-      <p class="section-subtitle rtl-text">الفانتازيا (الخيال السحري)</p>
-      <p class="section-subtitle ltr-text" style="display: none;">Fantasy (Magic Fantasy)</p>
-      
-      <div class="scroll-section">
-        <div class="scroll-container" id="manga-container">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        
-        <!-- أزرار التنقل للقسم المانجا -->
-        <div class="manga-navigation">
-          <button class="nav-button" id="prev-manga" onclick="scrollManga('prev')">
-            <i class="fas fa-arrow-left"></i>
-          </button>
-          
-          <div class="manga-counter">
-            <span id="current-manga">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="total-manga">1</span>
-          </div>
-          
-          <div class="page-dots" id="manga-dots">
-            <!-- سيتم إنشاء النقاط ديناميكيًا -->
-          </div>
-          
-          <button class="nav-button" id="next-manga" onclick="scrollManga('next')">
-            <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- قسم الفيديوهات مع تبويبات -->
-    <div class="video-section">
-      <div class="section-title">
-        <i class="fas fa-video"></i>
-        <span class="rtl-text">فيديوهات</span>
-        <span class="ltr-text" style="display: none;">Videos</span>
-      </div>
-      
-      <!-- تبويبات الفيديوهات -->
-      <div class="video-tabs">
-        <div class="video-tab active" onclick="switchVideoTab(0)">
-          <span class="rtl-text">الخيال السحري</span>
-          <span class="ltr-text" style="display: none;">Magic Fantasy</span>
-        </div>
-        <div class="video-tab" onclick="switchVideoTab(1)">
-          <span class="rtl-text">الرعب</span>
-          <span class="ltr-text" style="display: none;">Horror</span>
-        </div>
-        <div class="video-tab" onclick="switchVideoTab(2)">
-          <span class="rtl-text">الغموض</span>
-          <span class="ltr-text" style="display: none;">Mystery</span>
-        </div>
-        <div class="video-tab" onclick="switchVideoTab(3)">
-          <span class="rtl-text">السخرية</span>
-          <span class="ltr-text" style="display: none;">Comedy</span>
-        </div>
-        <div class="video-tab" onclick="switchVideoTab(4)">
-          <span class="rtl-text">المغامرة</span>
-          <span class="ltr-text" style="display: none;">Adventure</span>
-        </div>
-      </div>
-      
-      <!-- محتوى تبويب الخيال السحري -->
-      <div class="video-tab-content active" id="video-tab-0">
-        <div class="video-grid" id="fantasy-videos">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للفيديوهات -->
-        <div class="content-navigation" id="fantasy-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevVideoPage('fantasy')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="fantasy-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="fantasy-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextVideoPage('fantasy')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <!-- محتوى تبويب الرعب -->
-      <div class="video-tab-content" id="video-tab-1">
-        <div class="video-grid" id="horror-videos">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للفيديوهات -->
-        <div class="content-navigation" id="horror-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevVideoPage('horror')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="horror-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="horror-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextVideoPage('horror')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <!-- محتوى تبويب الغموض -->
-      <div class="video-tab-content" id="video-tab-2">
-        <div class="video-grid" id="mystery-videos">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للفيديوهات -->
-        <div class="content-navigation" id="mystery-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevVideoPage('mystery')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="mystery-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="mystery-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextVideoPage('mystery')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <!-- محتوى تبويب السخرية -->
-      <div class="video-tab-content" id="video-tab-3">
-        <div class="video-grid" id="comedy-videos">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للفيديوهات -->
-        <div class="content-navigation" id="comedy-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevVideoPage('comedy')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="comedy-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="comedy-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextVideoPage('comedy')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <!-- محتوى تبويب المغامرة -->
-      <div class="video-tab-content" id="video-tab-4">
-        <div class="video-grid" id="adventure-videos">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للفيديوهات -->
-        <div class="content-navigation" id="adventure-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevVideoPage('adventure')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="adventure-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="adventure-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextVideoPage('adventure')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- الروايات -->
-    <div class="section">
-      <div class="section-title">
-        <i class="fas fa-book"></i>
-        <span class="rtl-text">روايات</span>
-        <span class="ltr-text" style="display: none;">Novels</span>
-      </div>
-      
-      <!-- تبويبات التصنيف -->
-      <div class="tabs">
-        <div class="tab active" onclick="switchNovelTab(0)">
-          <span class="rtl-text">التصنيف 16+</span>
-          <span class="ltr-text" style="display: none;">Rating 16+</span>
-        </div>
-        <div class="tab" onclick="switchNovelTab(1)">
-          <span class="rtl-text">التصنيف 18+</span>
-          <span class="ltr-text" style="display: none;">Rating 18+</span>
-        </div>
-        <div class="tab" onclick="switchNovelTab(2)">
-          <span class="rtl-text">جميع الأعمار</span>
-          <span class="ltr-text" style="display: none;">All Ages</span>
-        </div>
-      </div>
-      
-      <!-- محتوى التبويبات -->
-      <div class="tab-content active" id="novel-tab-0">
-        <div class="products-grid" id="novels-16">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للروايات -->
-        <div class="content-navigation" id="novels-16-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevNovelPage('16')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="novels-16-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="novels-16-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextNovelPage('16')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <div class="tab-content" id="novel-tab-1">
-        <div class="products-grid" id="novels-18">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للروايات -->
-        <div class="content-navigation" id="novels-18-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevNovelPage('18')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="novels-18-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="novels-18-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextNovelPage('18')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-      
-      <div class="tab-content" id="novel-tab-2">
-        <div class="products-grid" id="novels-all">
-          <!-- سيتم ملؤها ديناميكياً -->
-        </div>
-        <!-- أزرار التنقل للروايات -->
-        <div class="content-navigation" id="novels-all-navigation" style="display: none;">
-          <button class="content-nav-button" onclick="prevNovelPage('all')">
-            <i class="fas fa-arrow-right"></i>
-            <span class="rtl-text">السابق</span>
-            <span class="ltr-text" style="display: none;">Previous</span>
-          </button>
-          
-          <div class="content-nav-info">
-            <span id="novels-all-current-page">1</span>
-            <span class="rtl-text">من</span>
-            <span class="ltr-text" style="display: none;">of</span>
-            <span id="novels-all-total-pages">1</span>
-          </div>
-          
-          <button class="content-nav-button" onclick="nextNovelPage('all')">
-            <span class="rtl-text">التالي</span>
-            <span class="ltr-text" style="display: none;">Next</span>
-            <i class="fas fa-arrow-left"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- لوحة تفاصيل المنتج المحسنة -->
-  <div class="product-detail-overlay" id="product-detail-overlay">
-    <div class="product-detail-container">
-      <div class="product-detail-header">
-        <button class="close-product-detail" onclick="closeProductDetail()">
-          <i class="fas fa-times"></i>
-        </button>
-        <h2 class="product-detail-title rtl-text" id="product-detail-title">اسم المنتج</h2>
-        <h2 class="product-detail-title ltr-text" style="display: none;" id="product-detail-title-en">Product Name</h2>
-      </div>
-      
-      <div class="product-detail-main">
-        <div class="product-detail-content">
-          <div class="product-detail-poster">
-            <img id="product-detail-poster" src="" alt="صورة المنتج">
-          </div>
-          
-          <div class="product-detail-info">
-            <div class="product-detail-meta">
-              <span class="product-detail-category rtl-text" id="product-detail-category">الفئة</span>
-              <span class="product-detail-category ltr-text" style="display: none;" id="product-detail-category-en">Category</span>
-              <span class="product-detail-price" id="product-detail-price">$0.00</span>
-              <div class="product-detail-rating">
-                <div class="stars" id="product-detail-stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-                </div>
-                <span class="rating-value" id="product-detail-rating">4.5/5</span>
-              </div>
-            </div>
-            
-            <!-- قسم معلومات المنتج الجديد -->
-            <div id="product-summary-section"></div>
-            
-            <p class="product-detail-description rtl-text" id="product-detail-description">
-              وصف المنتج سيظهر هنا...
-            </p>
-            <p class="product-detail-description ltr-text" style="display: none;" id="product-detail-description-en">
-              Product description will appear here...
-            </p>
-            
-            <div class="product-detail-sections">
-              <!-- الأجزاء (للفيديوهات) -->
-              <div class="product-detail-section" id="chapters-section" style="display: none;">
-                <h3 class="section-label">
-                  <i class="fas fa-list-ol"></i>
-                  <span class="rtl-text">الأجزاء</span>
-                  <span class="ltr-text" style="display: none;">Chapters</span>
-                </h3>
-                <div class="chapters-list" id="product-chapters">
-                  <!-- سيتم ملؤها ديناميكياً -->
-                </div>
-              </div>
-              
-              <!-- التعليقات -->
-              <div class="product-detail-section">
-                <h3 class="section-label">
-                  <i class="fas fa-comments"></i>
-                  <span class="rtl-text">التعليقات</span>
-                  <span class="ltr-text" style="display: none;">Comments</span>
-                </h3>
-
-                <div class="comments-section" id="product-comments">
-                  <!-- سيتم ملؤها ديناميكياً -->
-                </div>
-                <div class="add-comment">
-                  <textarea class="comment-input" placeholder="اكتب تعليقك هنا..." id="product-comment-input"></textarea>
-                  <button class="submit-comment" onclick="addProductComment()">
-                    <i class="fas fa-paper-plane"></i>
-                    <span class="rtl-text">إضافة تعليق</span>
-                    <span class="ltr-text" style="display: none;">Add Comment</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="product-detail-footer">
-        <div>
-          <h3 class="rtl-text" id="product-detail-name">اسم المنتج</h3>
-          <h3 class="ltr-text" style="display: none;" id="product-detail-name-en">Product Name</h3>
-          <p class="rtl-text" style="color: var(--text-secondary); margin-top: 5px;" id="product-detail-type">النوع - الفئة</p>
-          <p class="ltr-text" style="color: var(--text-secondary); margin-top: 5px; display: none;" id="product-detail-type-en">Type - Category</p>
-        </div>
-        
-        <button class="purchase-button" onclick="purchaseProduct()">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="rtl-text">شراء الآن</span>
-          <span class="ltr-text" style="display: none;">Buy Now</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- لوحة البحث مع المنتجات الصغيرة المحسنة -->
-  <div class="search-overlay" id="search-overlay">
-    <div class="search-container">
-      <div class="search-header">
-        <button class="close-search" onclick="closeSearch()">
-          <i class="fas fa-times"></i>
-        </button>
-        <h2 class="search-title rtl-text">البحث عن المنتجات</h2>
-        <h2 class="search-title ltr-text" style="display: none;">Search Products</h2>
-        
-        <div class="search-input-container">
-          <input type="text" class="search-input" id="search-input" 
-                 placeholder="ابحث عن كتب، قصص، فيديوهات..." 
-                 onkeyup="searchProducts()">
-          <i class="fas fa-search search-icon"></i>
-        </div>
-      </div>
-      
-      <div class="search-main" id="search-results">
-        <!-- سيتم ملؤها ديناميكياً -->
-      </div>
-      
-      <div class="search-footer">
-        <p class="rtl-text" id="search-count">تم العثور على 0 منتج</p>
-        <p class="ltr-text" style="display: none;" id="search-count-en">0 products found</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- لوحة الإعدادات مع إضافة خيار ترتيب المنتجات -->
-  <div id="panel">
-    <div class="settings-header">
-      <button class="close-settings" onclick="toggleSettings()">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="user-avatar">
-        <i class="fas fa-user"></i>
-      </div>
-      <h2 class="settings-title rtl-text">الإعدادات</h2>
-      <h2 class="settings-title ltr-text" style="display: none;">Settings</h2>
-      <p class="settings-subtitle rtl-text">تخصيص تجربتك في المتجر</p>
-      <p class="settings-subtitle ltr-text" style="display: none;">Customize your store experience</p>
+<!-- الشريط العلوي -->
+<div class="top">
+  <img id="icon" src="img//icon1.jpg" alt="شعار المتجر">
+  
+  <div class="top-icons">
+    <div class="icon-wrapper" onclick="openSearch()">
+      <i class="fas fa-search"></i>
     </div>
     
-    <div class="settings-menu">
-      <!-- اللغة -->
-      <div class="settings-item" onclick="toggleLanguage()">
-        <i class="fas fa-language"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">اللغة</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Language</div>
-          <div class="settings-item-desc rtl-text">اختر لغة العرض المفضلة</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Choose your preferred display language</div>
-        </div>
-        <span class="settings-value" id="language-value">العربية</span>
-      </div>
-      
-      <!-- المظهر -->
-      <div class="settings-item" onclick="toggleTheme()">
-        <i class="fas fa-palette"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">المظهر</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Theme</div>
-          <div class="settings-item-desc rtl-text">داكن، فاتح، أو تلقائي</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Dark, Light, or Auto</div>
-        </div>
-        <span class="settings-value" id="theme-value">داكن</span>
-      </div>
-      
-      <!-- ترتيب المنتجات -->
-      <div class="settings-item" onclick="toggleDisplayMode()">
-        <i class="fas fa-sort-amount-down"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">ترتيب المنتجات</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Product Order</div>
-          <div class="settings-item-desc rtl-text">عشوائي، الأعلى تقييماً، أو الأحدث</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Random, Highest Rated, or Newest</div>
-        </div>
-        <span class="settings-value" id="display-mode-value">عشوائي</span>
-      </div>
-      
-      <!-- حجم النص -->
-      <div class="settings-item">
-        <i class="fas fa-text-height"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">حجم النص</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Text Size</div>
-          <div class="settings-item-desc rtl-text">تكبير أو تصغير حجم الخط</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Increase or decrease font size</div>
-        </div>
-        <div class="settings-control">
-          <input type="range" class="range-slider" id="textSizeSlider" 
-                 min="0" max="200" value="100" 
-                 onchange="updateTextSize(this.value)">
-          <span id="textSizePercent">100%</span>
-        </div>
-      </div>
-      
-      <!-- الإشعارات -->
-      <div class="settings-item">
-        <i class="fas fa-bell"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">الإشعارات</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Notifications</div>
-          <div class="settings-item-desc rtl-text">إدارة التنبيهات والإشعارات</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Manage alerts and notifications</div>
-        </div>
-        <label class="toggle-switch">
-          <input type="checkbox" id="notifications-toggle" checked>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-      
-      <!-- الخصوصية -->
-      <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" onclick="openPrivacy()">
-        <i class="fas fa-shield-alt"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">الخصوصية</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Privacy</div>
-          <div class="settings-item-desc rtl-text">إعدادات الأمان والخصوصية</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Security and privacy settings</div>
-        </div>
-        <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
-      </div></a>
-      
-      <!-- سجل الطلبات -->
-      <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" >
-        <i class="fas fa-history"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">سجل الطلبات</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Order History</div>
-          <div class="settings-item-desc rtl-text">عرض جميع طلباتك السابقة</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">View all your previous orders</div>
-        </div>
-        <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
-      </div></a>
-      
-      <!-- الحساب -->
-      <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" onclick="openAccount()">
-        <i class="fas fa-user-cog"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">الحساب والبيانات</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Account & Data</div>
-          <div class="settings-item-desc rtl-text">إدارة حسابك ومعلوماتك</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Manage your account and information</div>
-        </div>
-        <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
-      </div></a>
-      
-      <!-- الرأي العام -->
-      <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" >
-        <i class="fas fa-comments"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">الرأي العام</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Public Opinion</div>
-          <div class="settings-item-desc rtl-text">تقييمات وآراء المستخدمين</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">User ratings and opinions</div>
-        </div>
-        <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
-      </div></a>
-      
-      <!-- سياسة الاستخدام -->
-      <a style="text-decoration: none; color: white;" href="Terms of Use.html"><div class="settings-item" >
-        <i class="fas fa-file-contract"></i>
-        <div class="settings-item-content">
-          <div class="settings-item-title rtl-text">سياسة الاستخدام</div>
-          <div class="settings-item-title ltr-text" style="display: none;">Usage Policy</div>
-          <div class="settings-item-desc rtl-text">الشروط والأحكام</div>
-          <div class="settings-item-desc ltr-text" style="display: none;">Terms and Conditions</div>
-        </div>
-        <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
-      </div>
+    <a href="basket.html"><div class="icon-wrapper" onclick="goToCart()">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="cart-badge">0</span>
     </div></a>
     
-<div class="settings-item" onclick="logout()">
-  <i class="fas fa-sign-out-alt"></i>
-  <div class="settings-item-content">
-    <div class="settings-item-title rtl-text">تسجيل الخروج</div>
-    <div class="settings-item-title ltr-text" style="display: none;">Logout</div>
-    <div class="settings-item-desc rtl-text">إنهاء الجلسة الحالية</div>
-    <div class="settings-item-desc ltr-text" style="display: none;">End current session</div>
+    <div class="icon-wrapper" onclick="toggleSettings()">
+      <i class="fas fa-cog"></i>
+    </div>
   </div>
-  <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
 </div>
+
+<!-- قسم الترحيب -->
+<div class="top2">
+  <div class="welcome-banner">
+    <div class="welcome-icon">
+      <i class="fas fa-book-open" style="color: white; font-size: 24px;"></i>
+    </div>
+    <div>
+      <h1 class="welcome-text rtl-text">مكتبة الفجر ترحب بكم</h1>
+      <h1 class="welcome-text ltr-text" style="display: none;">Fajr Library Welcomes You</h1>
+      <p style="color: var(--text-secondary); text-align: center;" class="rtl-text">اكتشف عالمًا من القصص والكتب المتنوعة</p>
+      <p style="color: var(--text-secondary); text-align: center;" class="ltr-text" style="display: none;">Discover a world of diverse stories and books</p>
+    </div>
+  </div>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+  <!-- أحدث القصص -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-star"></i>
+      <span class="rtl-text">أحدث القصص</span>
+      <span class="ltr-text" style="display: none;">Latest Stories</span>
+      <a href="javascript:void(0)" class="show-all" onclick="openSearch()" style="margin-right: auto; font-size: 14px; color: var(--primary-color); text-decoration: none;">
+        <span class="rtl-text">إظهار الكل <i class="fas fa-arrow-left"></i></span>
+        <span class="ltr-text" style="display: none;">Show All <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+    <p class="section-subtitle rtl-text">اكتشف أحدث الإصدارات من القصص المتنوعة</p>
+    <p class="section-subtitle ltr-text" style="display: none;">Discover the latest releases of diverse stories</p>
+    
+    <div class="products-grid" id="stories-container">
+      <!-- سيتم ملؤها ديناميكياً -->
+    </div>
   </div>
 
-  <!-- التذييل -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3><i class="fas fa-store"></i> <span class="rtl-text">مكتبة الفجر</span><span class="ltr-text" style="display: none;">Fajr Library</span></h3>
-        <p style="color: var(--text-secondary); line-height: 1.6;" class="rtl-text">
-          وجهتك الأولى للحصول على أفضل القصص والكتب والوسائط التعليمية باللغة العربية
-        </p>
-        <p style="color: var(--text-secondary); line-height: 1.6;" class="ltr-text" style="display: none;">
-          Your first destination for the best stories, books, and educational media in Arabic
-        </p>
+  <!-- المانجا -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-paint-brush"></i>
+      <span class="rtl-text">مانجا</span>
+      <span class="ltr-text" style="display: none;">Manga</span>
+    </div>
+    <p class="section-subtitle rtl-text">الفانتازيا (الخيال السحري)</p>
+    <p class="section-subtitle ltr-text" style="display: none;">Fantasy (Magic Fantasy)</p>
+    
+    <div class="scroll-section">
+      <div class="scroll-container" id="manga-container">
+        <!-- سيتم ملؤها ديناميكياً -->
       </div>
       
-      <div class="footer-section">
-        <h3><i class="fas fa-link"></i> <span class="rtl-text">روابط سريعة</span><span class="ltr-text" style="display: none;">Quick Links</span></h3>
-        <ul class="footer-links">
-          <li><a href="index.html" onclick="scrollToTop()"><i class="fas fa-home"></i> <span class="rtl-text">الرئيسية</span><span class="ltr-text" style="display: none;">Home</span></a></li>
-          <li><a href="javascript:void(0)" onclick="openSearch()"><i class="fas fa-book"></i> <span class="rtl-text">المكتبة</span><span class="ltr-text" style="display: none;">Library</span></a></li>
-          <li><a href="basket.html" onclick="goToCart()"><i class="fas fa-shopping-cart"></i> <span class="rtl-text">عربة التسوق</span><span class="ltr-text" style="display: none;">Shopping Cart</span></a></li>
-          <li><a href="Rt-chat.html" ><i class="fas fa-user"></i> <span class="rtl-text">المساعد الذكي</span><span class="ltr-text" style="display: none;">My Account</span></a></li>
-        </ul>
+      <!-- أزرار التنقل للقسم المانجا -->
+      <div class="manga-navigation">
+        <button class="nav-button" id="prev-manga" onclick="scrollManga('prev')">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        
+        <div class="manga-counter">
+          <span id="current-manga">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="total-manga">1</span>
+        </div>
+        
+        <div class="page-dots" id="manga-dots">
+          <!-- سيتم إنشاء النقاط ديناميكيًا -->
+        </div>
+        
+        <button class="nav-button" id="next-manga" onclick="scrollManga('next')">
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
-      
-      <div class="footer-section">
-        <h3><i class="fas fa-headset"></i> <span class="rtl-text">الدعم</span><span class="ltr-text" style="display: none;">Support</span></h3>
-        <ul class="footer-links">
-          <li><a href="javascript:void(0)" onclick="openFAQ()"><i class="fas fa-question-circle"></i> <span class="rtl-text">الأسئلة الشائعة</span><span class="ltr-text" style="display: none;">FAQ</span></a></li>
-          <li><a href="call.html" ><i class="fas fa-phone"></i> <span class="rtl-text">الاتصال بنا</span><span class="ltr-text" style="display: none;">Contact Us</span></a></li>
-          <li><a href="call.html" ><i class="fas fa-exclamation-circle"></i> <span class="rtl-text">الإبلاغ عن مشكلة</span><span class="ltr-text" style="display: none;">Report Issue</span></a></li>
-          <li><a href="call.html" ><i class="fas fa-lightbulb"></i> <span class="rtl-text">مقترحات</span><span class="ltr-text" style="display: none;">Suggestions</span></a></li>
-        </ul>
+    </div>
+  </div>
+
+  <!-- قسم الفيديوهات مع تبويبات -->
+  <div class="video-section">
+    <div class="section-title">
+      <i class="fas fa-video"></i>
+      <span class="rtl-text">فيديوهات</span>
+      <span class="ltr-text" style="display: none;">Videos</span>
+    </div>
+    
+    <!-- تبويبات الفيديوهات -->
+    <div class="video-tabs">
+      <div class="video-tab active" onclick="switchVideoTab(0)">
+        <span class="rtl-text">الخيال السحري</span>
+        <span class="ltr-text" style="display: none;">Magic Fantasy</span>
       </div>
-      
-      <div class="footer-section">
-        <h3><i class="fas fa-share-alt"></i> <span class="rtl-text">تواصل معنا</span><span class="ltr-text" style="display: none;">Connect With Us</span></h3>
-        <div style="display: flex; gap: 15px; margin-top: 20px;">
-          <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
-            <i class="fab fa-whatsapp"></i>
-          </a>
+      <div class="video-tab" onclick="switchVideoTab(1)">
+        <span class="rtl-text">الرعب</span>
+        <span class="ltr-text" style="display: none;">Horror</span>
+      </div>
+      <div class="video-tab" onclick="switchVideoTab(2)">
+        <span class="rtl-text">الغموض</span>
+        <span class="ltr-text" style="display: none;">Mystery</span>
+      </div>
+      <div class="video-tab" onclick="switchVideoTab(3)">
+        <span class="rtl-text">السخرية</span>
+        <span class="ltr-text" style="display: none;">Comedy</span>
+      </div>
+      <div class="video-tab" onclick="switchVideoTab(4)">
+        <span class="rtl-text">المغامرة</span>
+        <span class="ltr-text" style="display: none;">Adventure</span>
+      </div>
+    </div>
+    
+    <!-- محتوى تبويب الخيال السحري -->
+    <div class="video-tab-content active" id="video-tab-0">
+      <div class="video-grid" id="fantasy-videos">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للفيديوهات -->
+      <div class="content-navigation" id="fantasy-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevVideoPage('fantasy')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="fantasy-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="fantasy-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextVideoPage('fantasy')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- محتوى تبويب الرعب -->
+    <div class="video-tab-content" id="video-tab-1">
+      <div class="video-grid" id="horror-videos">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للفيديوهات -->
+      <div class="content-navigation" id="horror-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevVideoPage('horror')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="horror-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="horror-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextVideoPage('horror')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- محتوى تبويب الغموض -->
+    <div class="video-tab-content" id="video-tab-2">
+      <div class="video-grid" id="mystery-videos">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للفيديوهات -->
+      <div class="content-navigation" id="mystery-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevVideoPage('mystery')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="mystery-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="mystery-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextVideoPage('mystery')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- محتوى تبويب السخرية -->
+    <div class="video-tab-content" id="video-tab-3">
+      <div class="video-grid" id="comedy-videos">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للفيديوهات -->
+      <div class="content-navigation" id="comedy-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevVideoPage('comedy')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="comedy-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="comedy-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextVideoPage('comedy')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- محتوى تبويب المغامرة -->
+    <div class="video-tab-content" id="video-tab-4">
+      <div class="video-grid" id="adventure-videos">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للفيديوهات -->
+      <div class="content-navigation" id="adventure-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevVideoPage('adventure')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="adventure-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="adventure-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextVideoPage('adventure')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- الروايات -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-book"></i>
+      <span class="rtl-text">روايات</span>
+      <span class="ltr-text" style="display: none;">Novels</span>
+    </div>
+    
+    <!-- تبويبات التصنيف -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchNovelTab(0)">
+        <span class="rtl-text">التصنيف 16+</span>
+        <span class="ltr-text" style="display: none;">Rating 16+</span>
+      </div>
+      <div class="tab" onclick="switchNovelTab(1)">
+        <span class="rtl-text">التصنيف 18+</span>
+        <span class="ltr-text" style="display: none;">Rating 18+</span>
+      </div>
+      <div class="tab" onclick="switchNovelTab(2)">
+        <span class="rtl-text">جميع الأعمار</span>
+        <span class="ltr-text" style="display: none;">All Ages</span>
+      </div>
+    </div>
+    
+    <!-- محتوى التبويبات -->
+    <div class="tab-content active" id="novel-tab-0">
+      <div class="products-grid" id="novels-16">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للروايات -->
+      <div class="content-navigation" id="novels-16-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevNovelPage('16')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="novels-16-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="novels-16-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextNovelPage('16')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="novel-tab-1">
+      <div class="products-grid" id="novels-18">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للروايات -->
+      <div class="content-navigation" id="novels-18-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevNovelPage('18')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="novels-18-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="novels-18-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextNovelPage('18')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="novel-tab-2">
+      <div class="products-grid" id="novels-all">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <!-- أزرار التنقل للروايات -->
+      <div class="content-navigation" id="novels-all-navigation" style="display: none;">
+        <button class="content-nav-button" onclick="prevNovelPage('all')">
+          <i class="fas fa-arrow-right"></i>
+          <span class="rtl-text">السابق</span>
+          <span class="ltr-text" style="display: none;">Previous</span>
+        </button>
+        
+        <div class="content-nav-info">
+          <span id="novels-all-current-page">1</span>
+          <span class="rtl-text">من</span>
+          <span class="ltr-text" style="display: none;">of</span>
+          <span id="novels-all-total-pages">1</span>
+        </div>
+        
+        <button class="content-nav-button" onclick="nextNovelPage('all')">
+          <span class="rtl-text">التالي</span>
+          <span class="ltr-text" style="display: none;">Next</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- لوحة تفاصيل المنتج المحسنة -->
+<div class="product-detail-overlay" id="product-detail-overlay">
+  <div class="product-detail-container">
+    <div class="product-detail-header">
+      <button class="close-product-detail" onclick="closeProductDetail()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="product-detail-title rtl-text" id="product-detail-title">اسم المنتج</h2>
+      <h2 class="product-detail-title ltr-text" style="display: none;" id="product-detail-title-en">Product Name</h2>
+    </div>
+    
+    <div class="product-detail-main">
+      <div class="product-detail-content">
+        <div class="product-detail-poster">
+          <img id="product-detail-poster" src="" alt="صورة المنتج">
+        </div>
+        
+        <div class="product-detail-info">
+          <div class="product-detail-meta">
+            <span class="product-detail-category rtl-text" id="product-detail-category">الفئة</span>
+            <span class="product-detail-category ltr-text" style="display: none;" id="product-detail-category-en">Category</span>
+            <span class="product-detail-price" id="product-detail-price">$0.00</span>
+            
+            <!-- النجوم والتقييم المعدل -->
+            <div class="product-detail-rating">
+              <div class="stars" id="product-detail-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="rating-value" id="product-detail-rating-text">0/5 (0 تقييمات)</span>
+            </div>
+          </div>
+          
+          <!-- قسم معلومات المنتج -->
+          <div id="product-summary-section"></div>
+          
+          <p class="product-detail-description rtl-text" id="product-detail-description">
+            وصف المنتج سيظهر هنا...
+          </p>
+          <p class="product-detail-description ltr-text" style="display: none;" id="product-detail-description-en">
+            Product description will appear here...
+          </p>
+          
+          <!-- قسم التقييمات -->
+          <div class="product-detail-section" id="product-rating-section">
+            <!-- سيتم إنشاء واجهة التقييم هنا ديناميكياً -->
+          </div>
+          
+          <!-- قائمة التقييمات -->
+          <div class="product-detail-section">
+            <div class="section-header">
+              <h3 class="section-label">
+                <i class="fas fa-star"></i>
+                <span class="rtl-text">تقييمات المستخدمين</span>
+                <span class="ltr-text" style="display: none;">User Ratings</span>
+              </h3>
+            </div>
+            <div id="product-ratings-list" class="ratings-list">
+              <!-- التقييمات سيتم تحميلها هنا -->
+            </div>
+          </div>
+          
+          <div class="product-detail-sections">
+            <!-- الأجزاء (للفيديوهات) -->
+            <div class="product-detail-section" id="chapters-section" style="display: none;">
+              <h3 class="section-label">
+                <i class="fas fa-list-ol"></i>
+                <span class="rtl-text">الأجزاء</span>
+                <span class="ltr-text" style="display: none;">Chapters</span>
+              </h3>
+              <div class="chapters-list" id="product-chapters">
+                <!-- سيتم ملؤها ديناميكياً -->
+              </div>
+            </div>
+            
+            <!-- التعليقات -->
+            <div class="product-detail-section">
+              <h3 class="section-label">
+                <i class="fas fa-comments"></i>
+                <span class="rtl-text">التعليقات</span>
+                <span class="ltr-text" style="display: none;">Comments</span>
+              </h3>
+
+              <div class="comments-section" id="product-comments">
+                <!-- سيتم ملؤها ديناميكياً -->
+              </div>
+              <div class="add-comment">
+                <textarea class="comment-input" placeholder="اكتب تعليقك هنا..." id="product-comment-input"></textarea>
+                <button class="submit-comment" onclick="addProductComment()">
+                  <i class="fas fa-paper-plane"></i>
+                  <span class="rtl-text">إضافة تعليق</span>
+                  <span class="ltr-text" style="display: none;">Add Comment</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     
-    <div class="copyright">
-      <span class="rtl-text">© 2026 مكتبة الفجر. جميع الحقوق محفوظة.</span>
-      <span class="ltr-text" style="display: none;">© 2026 Fajr Library. All rights reserved.</span>
+    <div class="product-detail-footer">
+      <div>
+        <h3 class="rtl-text" id="product-detail-name">اسم المنتج</h3>
+        <h3 class="ltr-text" style="display: none;" id="product-detail-name-en">Product Name</h3>
+        <p class="rtl-text" style="color: var(--text-secondary); margin-top: 5px;" id="product-detail-type">النوع - الفئة</p>
+        <p class="ltr-text" style="color: var(--text-secondary); margin-top: 5px; display: none;" id="product-detail-type-en">Type - Category</p>
+      </div>
+      
+      <button class="purchase-button" onclick="purchaseProduct()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="rtl-text">شراء الآن</span>
+        <span class="ltr-text" style="display: none;">Buy Now</span>
+      </button>
     </div>
-  </footer>
+  </div>
+</div>
+
+<!-- لوحة البحث مع المنتجات الصغيرة المحسنة -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-container">
+    <div class="search-header">
+      <button class="close-search" onclick="closeSearch()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="search-title rtl-text">البحث عن المنتجات</h2>
+      <h2 class="search-title ltr-text" style="display: none;">Search Products</h2>
+      
+      <div class="search-input-container">
+        <input type="text" class="search-input" id="search-input" 
+               placeholder="ابحث عن كتب، قصص، فيديوهات..." 
+               onkeyup="searchProducts()">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+    
+    <div class="search-main" id="search-results">
+      <!-- سيتم ملؤها ديناميكياً -->
+    </div>
+    
+    <div class="search-footer">
+      <p class="rtl-text" id="search-count">تم العثور على 0 منتج</p>
+      <p class="ltr-text" style="display: none;" id="search-count-en">0 products found</p>
+    </div>
+  </div>
+</div>
+
+<!-- لوحة الإعدادات مع إضافة خيار ترتيب المنتجات -->
+<div id="panel">
+  <div class="settings-header">
+    <button class="close-settings" onclick="toggleSettings()">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="user-avatar">
+      <i class="fas fa-user"></i>
+    </div>
+    <h2 class="settings-title rtl-text">الإعدادات</h2>
+    <h2 class="settings-title ltr-text" style="display: none;">Settings</h2>
+    <p class="settings-subtitle rtl-text">تخصيص تجربتك في المتجر</p>
+    <p class="settings-subtitle ltr-text" style="display: none;">Customize your store experience</p>
+  </div>
+  
+  <div class="settings-menu">
+    <!-- اللغة -->
+    <div class="settings-item" onclick="toggleLanguage()">
+      <i class="fas fa-language"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">اللغة</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Language</div>
+        <div class="settings-item-desc rtl-text">اختر لغة العرض المفضلة</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Choose your preferred display language</div>
+      </div>
+      <span class="settings-value" id="language-value">العربية</span>
+    </div>
+    
+    <!-- المظهر -->
+    <div class="settings-item" onclick="toggleTheme()">
+      <i class="fas fa-palette"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">المظهر</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Theme</div>
+        <div class="settings-item-desc rtl-text">داكن، فاتح، أو تلقائي</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Dark, Light, or Auto</div>
+      </div>
+      <span class="settings-value" id="theme-value">داكن</span>
+    </div>
+    
+    <!-- ترتيب المنتجات -->
+    <div class="settings-item" onclick="toggleDisplayMode()">
+      <i class="fas fa-sort-amount-down"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">ترتيب المنتجات</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Product Order</div>
+        <div class="settings-item-desc rtl-text">عشوائي، الأعلى تقييماً، أو الأحدث</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Random, Highest Rated, or Newest</div>
+      </div>
+      <span class="settings-value" id="display-mode-value">عشوائي</span>
+    </div>
+    
+    <!-- حجم النص -->
+    <div class="settings-item">
+      <i class="fas fa-text-height"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">حجم النص</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Text Size</div>
+        <div class="settings-item-desc rtl-text">تكبير أو تصغير حجم الخط</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Increase or decrease font size</div>
+      </div>
+      <div class="settings-control">
+        <input type="range" class="range-slider" id="textSizeSlider" 
+               min="0" max="200" value="100" 
+               onchange="updateTextSize(this.value)">
+        <span id="textSizePercent">100%</span>
+      </div>
+    </div>
+    
+    <!-- الإشعارات -->
+    <div class="settings-item">
+      <i class="fas fa-bell"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">الإشعارات</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Notifications</div>
+        <div class="settings-item-desc rtl-text">إدارة التنبيهات والإشعارات</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Manage alerts and notifications</div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="notifications-toggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    
+    <!-- الخصوصية -->
+    <a style="text-decoration: none; color: white;" href="Rt-chat.html"><div class="settings-item" >
+      <i class="fas fa-shield-alt"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">المساعد الذكي</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Privacy</div>
+        <div class="settings-item-desc rtl-text">تحدث مع المساعد الذكي</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Security and privacy settings</div>
+      </div>
+      <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+    </div></a>
+    
+    <!-- سجل الطلبات -->
+    <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" >
+      <i class="fas fa-history"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">سجل الطلبات</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Order History</div>
+        <div class="settings-item-desc rtl-text">عرض جميع طلباتك السابقة</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">View all your previous orders</div>
+      </div>
+      <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+    </div></a>
+    
+    <!-- الحساب -->
+    <a style="text-decoration: none; color: white;" href="Account and Data.html"><div class="settings-item" >
+      <i class="fas fa-user-cog"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">الحساب والبيانات</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Account & Data</div>
+        <div class="settings-item-desc rtl-text">إدارة حسابك ومعلوماتك</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Manage your account and information</div>
+      </div>
+      <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+    </div></a>
+    
+    <!-- الرأي العام -->
+    <a style="text-decoration: none; color: white;" href="Alr-comment.html"><div class="settings-item" >
+      <i class="fas fa-comments"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">الرأي العام</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Public Opinion</div>
+        <div class="settings-item-desc rtl-text">تقييمات وآراء المستخدمين</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">User ratings and opinions</div>
+      </div>
+      <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+    </div></a>
+    
+    <!-- سياسة الاستخدام -->
+    <a style="text-decoration: none; color: white;" href="Terms of Use.html"><div class="settings-item" >
+      <i class="fas fa-file-contract"></i>
+      <div class="settings-item-content">
+        <div class="settings-item-title rtl-text">سياسة الاستخدام</div>
+        <div class="settings-item-title ltr-text" style="display: none;">Usage Policy</div>
+        <div class="settings-item-desc rtl-text">الشروط والأحكام</div>
+        <div class="settings-item-desc ltr-text" style="display: none;">Terms and Conditions</div>
+      </div>
+      <i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+    </div>
+  </div></a>
+  
+<div class="settings-item" onclick="logout()">
+<i class="fas fa-sign-out-alt"></i>
+<div class="settings-item-content">
+  <div class="settings-item-title rtl-text">تسجيل الخروج</div>
+  <div class="settings-item-title ltr-text" style="display: none;">Logout</div>
+  <div class="settings-item-desc rtl-text">إنهاء الجلسة الحالية</div>
+  <div class="settings-item-desc ltr-text" style="display: none;">End current session</div>
+</div>
+<i class="fas fa-chevron-left" style="color: var(--text-secondary);"></i>
+</div>
+</div>
+
+<!-- التذييل -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3><i class="fas fa-store"></i> <span class="rtl-text">مكتبة الفجر</span><span class="ltr-text" style="display: none;">Fajr Library</span></h3>
+      <p style="color: var(--text-secondary); line-height: 1.6;" class="rtl-text">
+        وجهتك الأولى للحصول على أفضل القصص والكتب والوسائط التعليمية باللغة العربية
+      </p>
+      <p style="color: var(--text-secondary); line-height: 1.6;" class="ltr-text" style="display: none;">
+        Your first destination for the best stories, books, and educational media in Arabic
+      </p>
+    </div>
+    
+    <div class="footer-section">
+      <h3><i class="fas fa-link"></i> <span class="rtl-text">روابط سريعة</span><span class="ltr-text" style="display: none;">Quick Links</span></h3>
+      <ul class="footer-links">
+        <li><a href="index.html" onclick="scrollToTop()"><i class="fas fa-home"></i> <span class="rtl-text">الرئيسية</span><span class="ltr-text" style="display: none;">Home</span></a></li>
+        <li><a href="javascript:void(0)" onclick="openSearch()"><i class="fas fa-book"></i> <span class="rtl-text">المكتبة</span><span class="ltr-text" style="display: none;">Library</span></a></li>
+        <li><a href="basket.html" onclick="goToCart()"><i class="fas fa-shopping-cart"></i> <span class="rtl-text">عربة التسوق</span><span class="ltr-text" style="display: none;">Shopping Cart</span></a></li>
+        <li><a href="Rt-chat.html" ><i class="fas fa-user"></i> <span class="rtl-text">المساعد الذكي</span><span class="ltr-text" style="display: none;">My Account</span></a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3><i class="fas fa-headset"></i> <span class="rtl-text">الدعم</span><span class="ltr-text" style="display: none;">Support</span></h3>
+      <ul class="footer-links">
+        <li><a href="javascript:void(0)" onclick="openFAQ()"><i class="fas fa-question-circle"></i> <span class="rtl-text">الأسئلة الشائعة</span><span class="ltr-text" style="display: none;">FAQ</span></a></li>
+        <li><a href="call.html" ><i class="fas fa-phone"></i> <span class="rtl-text">الاتصال بنا</span><span class="ltr-text" style="display: none;">Contact Us</span></a></li>
+        <li><a href="call.html" ><i class="fas fa-exclamation-circle"></i> <span class="rtl-text">الإبلاغ عن مشكلة</span><span class="ltr-text" style="display: none;">Report Issue</span></a></li>
+        <li><a href="call.html" ><i class="fas fa-lightbulb"></i> <span class="rtl-text">مقترحات</span><span class="ltr-text" style="display: none;">Suggestions</span></a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3><i class="fas fa-share-alt"></i> <span class="rtl-text">تواصل معنا</span><span class="ltr-text" style="display: none;">Connect With Us</span></h3>
+      <div style="display: flex; gap: 15px; margin-top: 20px;">
+        <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="icon-wrapper" style="width: 40px; height: 40px;">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <span class="rtl-text">© 2026 مكتبة الفجر. جميع الحقوق محفوظة.</span>
+    <span class="ltr-text" style="display: none;">© 2026 Fajr Library. All rights reserved.</span>
+  </div>
+</footer>
 
 <script type="module">
     // ====== استيراد Firebase ======
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
     import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-    import { getDatabase, ref, get, set, push, onValue, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+    import { getDatabase, ref, get, set, push, onValue, query, orderByChild, equalTo, remove } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
 
     // ====== تهيئة Firebase ======
     const firebaseConfig = {
@@ -2531,6 +2603,11 @@
 
     // جميع المنتجات
     let allProducts = [];
+    
+    // بيانات التقييم
+    let userRatingForCurrentProduct = null;
+    let selectedRating = 0;
+    let hoveredRating = 0;
 
     // ====== دالة مساعدة للحصول على الصورة ======
     function getProductImage(product) {
@@ -2670,11 +2747,6 @@
                     if (document.getElementById('search-overlay').style.display === 'block') {
                         searchProducts();
                     }
-                    
-                    // إذا كانت نافذة عرض الكل للقصص مفتوحة، تحديثها
-                    if (document.getElementById('all-stories-modal').style.display === 'block') {
-                        displayAllStories();
-                    }
                 }
             });
             
@@ -2719,7 +2791,7 @@
                 price: '$12.99',
                 description: 'مغامرات مثيرة في أعماق الغابات السحرية.',
                 descriptionEn: 'Exciting adventures in the depths of magical forests.',
-                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI400IiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzQyODVGNCIvPgogICAgPHRleHQgeD0iMjAwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRpcmVjdGlvbj0icnRsIj4g2LPZiNin2KjYp9ix2YIg2YrZhNin2YYg2YfYs9io2YIKPC90ZXh0Pgo8L3N2Zz4=',
+                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNDI4NUY0Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZGlyZWN0aW9uPSJydGwiPiDZhdi52LHYp9inINin2YTZitmE2YrYpzwvdGV4dD4KPC9zdmc+',
                 rating: 4.5,
                 type: 'قصة',
                 typeEn: 'Story',
@@ -2728,99 +2800,11 @@
                 ratingCategory: 'all',
                 chapters: [],
                 comments: []
-            },
-            {
-                id: 'manga1',
-                title: 'مانجا الفانتازيا 1',
-                titleEn: 'Fantasy Manga 1',
-                category: 'مانجا',
-                categoryEn: 'Manga',
-                subcategory: 'خيال سحري',
-                subcategoryEn: 'Magic Fantasy',
-                price: '$8.99',
-                description: 'مانجا فانتازيا سحرية مليئة بالمغامرات.',
-                descriptionEn: 'Magical fantasy manga full of adventures.',
-                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjM1Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZGlyZWN0aW9uPSJydGwiPiDYs9mI2KfYqNinINin2YXYudin2KggMQo8L3RleHQ+Cjwvc3ZnPg==',
-                rating: 4.3,
-                type: 'مانجا',
-                typeEn: 'Manga',
-                format: 'رقمي',
-                formatEn: 'Digital',
-                ratingCategory: 'all',
-                chapters: [],
-                comments: []
-            },
-            {
-                id: 'fantasy1',
-                title: 'أساطير السحر القديم',
-                titleEn: 'Legends of Ancient Magic',
-                category: 'فيديوهات',
-                categoryEn: 'Videos',
-                subcategory: 'الخيال السحري',
-                subcategoryEn: 'Magic Fantasy',
-                price: '$24.99',
-                description: 'رحلة سحرية إلى عالم الأساطير القديمة.',
-                descriptionEn: 'A magical journey to the world of ancient legends.',
-                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjM1Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZGlyZWN0aW9uPSJydGwiPiDYqNmH2YjYryDZh9mI2KfYryDYqdin2KjZhiA8L3RleHQ+Cjwvc3ZnPg==',
-                rating: 4.5,
-                type: 'فيديو',
-                typeEn: 'Video',
-                format: 'رقمي',
-                formatEn: 'Digital',
-                ratingCategory: 'all',
-                chapters: [
-                    { title: 'الفصل الأول: البداية', duration: '25:45', id: 'ch1' },
-                    { title: 'الفصل الثاني: الاكتشاف', duration: '28:30', id: 'ch2' }
-                ],
-                comments: []
-            },
-            {
-                id: 'novel16-1',
-                title: 'الهدف السري',
-                titleEn: 'The Secret Target',
-                category: 'روايات',
-                categoryEn: 'Novels',
-                subcategory: 'تشويق، إثارة',
-                subcategoryEn: 'Suspense, Thriller',
-                price: '$19.99',
-                description: 'رواية تشويقية مليئة بالأحداث المثيرة.',
-                descriptionEn: 'A suspenseful novel full of exciting events.',
-                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjM1Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZGlyZWN0aW9uPSJydGwiPiDZhdi52LHYp9inINin2YTZitmE2YrYpzwvdGV4dD4KPC9zdmc+',
-                rating: 4.6,
-                type: 'رواية',
-                typeEn: 'Novel',
-                format: 'ورقي',
-                formatEn: 'Paperback',
-                ratingCategory: '16',
-                chapters: [],
-                comments: []
-            },
-            {
-                id: 'novel18-1',
-                title: 'الظلام القاتم',
-                titleEn: 'The Deep Darkness',
-                category: 'روايات',
-                categoryEn: 'Novels',
-                subcategory: 'رعب، نفسي',
-                subcategoryEn: 'Horror, Psychological',
-                price: '$24.99',
-                description: 'رواية رعب نفسي عن مواجهة المخاوف الداخلية.',
-                descriptionEn: 'A psychological horror novel about facing inner fears.',
-                image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjM1Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZGlyZWN0aW9uPSJydGwiPiDZhdiv2LXYudin2Kcg2KfZgtmI2LHYpzwvdGV4dD4KPC9zdmc+',
-                rating: 4.9,
-                type: 'رواية',
-                typeEn: 'Novel',
-                format: 'ورقي',
-                formatEn: 'Paperback',
-                ratingCategory: '18',
-                chapters: [],
-                comments: []
             }
         ];
     }
 
-    // ====== الوظائف الأساسية ======
-    // تحديث عداد السلة
+    // ====== تحديث عداد السلة ======
     function updateCartBadge() {
         try {
             const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -3473,7 +3457,527 @@
         }
     }
 
-    // ====== لوحة تفاصيل المنتج ======
+    // ====== التحقق من شراء المنتج ======
+    async function checkProductPurchase(productId) {
+        try {
+            const user = checkAuth();
+            if (!user) return { purchased: false };
+            
+            const userId = user.uid;
+            
+            // البحث في المشتريات الرقمية (library)
+            const digitalPurchasesRef = ref(database, `users/${userId}/digitalLibrary`);
+            const digitalSnapshot = await get(digitalPurchasesRef);
+            
+            if (digitalSnapshot.exists()) {
+                const digitalLibrary = digitalSnapshot.val();
+                if (digitalLibrary[productId]) {
+                    return {
+                        purchased: true,
+                        type: 'digital',
+                        purchaseDate: digitalLibrary[productId].purchaseDate
+                    };
+                }
+            }
+            
+            // البحث في المشتريات الورقية (orders)
+            const physicalPurchasesRef = query(
+                ref(database, 'orders'),
+                orderByChild('userId'),
+                equalTo(userId)
+            );
+            const physicalSnapshot = await get(physicalPurchasesRef);
+            
+            if (physicalSnapshot.exists()) {
+                const orders = physicalSnapshot.val();
+                for (const orderId in orders) {
+                    const order = orders[orderId];
+                    if (order.items && Array.isArray(order.items)) {
+                        const hasProduct = order.items.some(item => item.id === productId);
+                        if (hasProduct && order.status === 'completed') {
+                            return {
+                                purchased: true,
+                                type: 'physical',
+                                purchaseDate: order.orderDate
+                            };
+                        }
+                    }
+                }
+            }
+            
+            return { purchased: false };
+        } catch (error) {
+            console.error('Error checking purchase:', error);
+            return { purchased: false };
+        }
+    }
+
+    // ====== الحصول على تقييم المستخدم للمنتج ======
+    async function getUserRatingForProduct(productId, userId) {
+        try {
+            const userRatingRef = query(
+                ref(database, `ratings/${productId}`),
+                orderByChild('userId'),
+                equalTo(userId)
+            );
+            
+            const snapshot = await get(userRatingRef);
+            
+            if (snapshot.exists()) {
+                const ratings = snapshot.val();
+                // العثور على تقييم المستخدم
+                for (const ratingId in ratings) {
+                    if (ratings[ratingId].userId === userId) {
+                        return {
+                            id: ratingId,
+                            ...ratings[ratingId]
+                        };
+                    }
+                }
+            }
+            
+            return null;
+        } catch (error) {
+            console.error('Error getting user rating:', error);
+            return null;
+        }
+    }
+
+    // ====== تحميل تقييمات المنتج ======
+    async function loadProductRatings(productId) {
+        try {
+            const ratingsRef = ref(database, `ratings/${productId}`);
+            const snapshot = await get(ratingsRef);
+            
+            let totalRating = 0;
+            let ratingCount = 0;
+            
+            if (snapshot.exists()) {
+                const ratingsData = snapshot.val();
+                
+                Object.keys(ratingsData).forEach(ratingId => {
+                    const rating = ratingsData[ratingId];
+                    totalRating += parseFloat(rating.rating);
+                    ratingCount++;
+                });
+            }
+            
+            // حساب متوسط التقييم
+            const averageRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(1) : 0;
+            
+            // تحديث تقييم المنتج في الواجهة
+            updateProductRatingDisplay(averageRating, ratingCount);
+            
+        } catch (error) {
+            console.error('Error loading ratings:', error);
+            updateProductRatingDisplay(0, 0);
+        }
+    }
+
+    // ====== تحديث عرض تقييم المنتج ======
+    function updateProductRatingDisplay(averageRating, ratingCount) {
+        // تحديث النجوم في أعلى الصفحة
+        const starsContainer = document.getElementById('product-detail-stars');
+        if (starsContainer) {
+            starsContainer.innerHTML = '';
+            
+            const fullStars = Math.floor(averageRating);
+            const hasHalfStar = averageRating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                const star = document.createElement('i');
+                star.className = 'fas fa-star';
+                starsContainer.appendChild(star);
+            }
+            
+            if (hasHalfStar) {
+                const halfStar = document.createElement('i');
+                halfStar.className = 'fas fa-star-half-alt';
+                starsContainer.appendChild(halfStar);
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                const emptyStar = document.createElement('i');
+                emptyStar.className = 'far fa-star';
+                starsContainer.appendChild(emptyStar);
+            }
+        }
+        
+        // تحديث نص التقييم
+        const ratingText = document.getElementById('product-detail-rating-text');
+        if (ratingText) {
+            if (currentLanguage === 'ar') {
+                ratingText.textContent = `${averageRating}/5 (${ratingCount} ${ratingCount === 1 ? 'تقييم' : 'تقييمات'})`;
+            } else {
+                ratingText.textContent = `${averageRating}/5 (${ratingCount} ${ratingCount === 1 ? 'rating' : 'ratings'})`;
+            }
+        }
+    }
+
+    // ====== إنشاء واجهة التقييم في قسم معلومات المنتج ======
+    function createRatingInProductInfo(hasPurchased, userRating = null) {
+        const summaryGrid = document.querySelector('.product-detail-summary-grid');
+        if (!summaryGrid) return;
+        
+        // البحث عن عنصر التقييم الموجود
+        let ratingItem = document.querySelector('.summary-item:has(i.fa-star)');
+        
+        if (!ratingItem) {
+            // إنشاء عنصر التقييم إذا لم يكن موجوداً
+            ratingItem = document.createElement('div');
+            ratingItem.className = 'summary-item';
+            ratingItem.innerHTML = `
+                <i class="fas fa-star"></i>
+                <div>
+                    <div class="summary-label rtl-text">التقييم</div>
+                    <div class="summary-label ltr-text" style="display: none;">Rating</div>
+                    <div class="summary-value" id="product-rating-display">
+                        <!-- سيتم تعبئته ديناميكياً -->
+                    </div>
+                </div>
+            `;
+            
+            // إضافة عنصر التقييم إلى الشبكة
+            const existingItems = summaryGrid.querySelectorAll('.summary-item');
+            if (existingItems.length > 0) {
+                // إضافة بعد عنصر السعر
+                const priceItem = Array.from(existingItems).find(item => 
+                    item.querySelector('i.fa-dollar-sign') || 
+                    item.querySelector('i.fa-tag')
+                );
+                if (priceItem) {
+                    summaryGrid.insertBefore(ratingItem, priceItem.nextSibling);
+                } else {
+                    summaryGrid.appendChild(ratingItem);
+                }
+            } else {
+                summaryGrid.appendChild(ratingItem);
+            }
+        }
+        
+        // تعبئة محتوى التقييم
+        const ratingDisplay = document.getElementById('product-rating-display');
+        if (!ratingDisplay) return;
+        
+        ratingDisplay.innerHTML = '';
+        
+        if (hasPurchased) {
+            if (userRating) {
+                // المستخدم قام بالتقييم بالفعل
+                ratingDisplay.innerHTML = `
+                    <div class="user-rating-display" style="display: flex; align-items: center; gap: 10px;">
+                        <div class="rating-stars-small">
+                            ${[1, 2, 3, 4, 5].map(star => `
+                                <i class="${star <= userRating.rating ? 'fas' : 'far'} fa-star" 
+                                   style="color: ${star <= userRating.rating ? '#FFD700' : '#666'}; 
+                                          font-size: 16px;
+                                          cursor: pointer;"
+                                   data-rating="${star}"
+                                   onmouseover="hoverStar(${star})"
+                                   onmouseout="resetStars()"
+                                   onclick="selectStar(${star})"></i>
+                            `).join('')}
+                        </div>
+                        <span style="color: var(--text-secondary); font-size: 14px;">
+                            (${userRating.rating}/5)
+                        </span>
+                        <button onclick="editRating()" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 12px;">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                // المستخدم لم يقم بالتقييم بعد
+                ratingDisplay.innerHTML = `
+                    <div class="rating-input-inline" style="display: flex; align-items: center; gap: 10px;">
+                        <div class="stars-container-small">
+                            ${[1, 2, 3, 4, 5].map(star => `
+                                <i class="far fa-star" 
+                                   style="color: #666; 
+                                          font-size: 16px;
+                                          cursor: pointer;"
+                                   data-rating="${star}"
+                                   onmouseover="hoverStar(${star})"
+                                   onmouseout="resetStars()"
+                                   onclick="selectStar(${star})"></i>
+                            `).join('')}
+                        </div>
+                        <button onclick="submitRating()" style="padding: 5px 15px; background: var(--gradient-primary); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            <i class="fas fa-check"></i>
+                            <span class="rtl-text">تقييم</span>
+                            <span class="ltr-text" style="display: none;">Rate</span>
+                        </button>
+                    </div>
+                `;
+            }
+        } else {
+            // المستخدم لم يشتري المنتج
+            ratingDisplay.innerHTML = `
+                <div style="color: var(--text-secondary); font-size: 14px;">
+                    <i class="fas fa-shopping-cart" style="margin-left: 5px;"></i>
+                    <span class="rtl-text">شراء مطلوب للتقييم</span>
+                    <span class="ltr-text" style="display: none;">Purchase required for rating</span>
+                </div>
+            `;
+        }
+        
+        // إذا كان المستخدم قد اختار تقييمًا، تحديث العرض
+        if (selectedRating > 0) {
+            updateStarsDisplay();
+        }
+    }
+
+    // ====== دوال النجوم ======
+    function hoverStar(rating) {
+        hoveredRating = rating;
+        updateStarsDisplay();
+    }
+
+    function resetStars() {
+        hoveredRating = 0;
+        updateStarsDisplay();
+    }
+
+    function selectStar(rating) {
+        selectedRating = rating;
+        updateStarsDisplay();
+        
+        // إظهار رسالة مؤقتة
+        const ratingTexts = {
+            1: { ar: 'سيء جداً', en: 'Very Bad' },
+            2: { ar: 'سيء', en: 'Bad' },
+            3: { ar: 'متوسط', en: 'Average' },
+            4: { ar: 'جيد', en: 'Good' },
+            5: { ar: 'ممتاز', en: 'Excellent' }
+        };
+        
+        if (currentLanguage === 'ar') {
+            showNotification(`اخترت: ${ratingTexts[rating]?.ar || 'تقييم'}`);
+        } else {
+            showNotification(`Selected: ${ratingTexts[rating]?.en || 'Rating'}`);
+        }
+    }
+
+    function updateStarsDisplay() {
+        const starsContainers = document.querySelectorAll('.stars-container-small .fa-star, .rating-stars-small .fa-star');
+        const ratingToShow = hoveredRating || selectedRating;
+        
+        starsContainers.forEach((star, index) => {
+            const starNumber = index + 1;
+            
+            if (starNumber <= ratingToShow) {
+                star.classList.remove('far');
+                star.classList.add('fas');
+                star.style.color = '#FFD700';
+            } else {
+                star.classList.remove('fas');
+                star.classList.add('far');
+                star.style.color = '#666';
+            }
+        });
+    }
+
+    // ====== إرسال التقييم ======
+    async function submitRating() {
+        if (selectedRating === 0) {
+            showNotification(currentLanguage === 'ar' ? 
+                'الرجاء اختيار تقييم' : 
+                'Please select a rating');
+            return;
+        }
+        
+        const user = checkAuth();
+        if (!user) return;
+        
+        if (!currentProductId) {
+            showNotification(currentLanguage === 'ar' ? 
+                'لم يتم تحديد منتج' : 
+                'No product selected');
+            return;
+        }
+        
+        try {
+            // التحقق من الشراء مرة أخرى
+            const purchaseStatus = await checkProductPurchase(currentProductId);
+            if (!purchaseStatus.purchased) {
+                showNotification(currentLanguage === 'ar' ? 
+                    'يجب أن تشتري المنتج أولاً لتقيمه' : 
+                    'You must purchase the product first to rate it');
+                return;
+            }
+            
+            // إرسال التقييم إلى Firebase
+            const ratingsRef = ref(database, `ratings/${currentProductId}`);
+            const newRatingRef = push(ratingsRef);
+            
+            const ratingData = {
+                userId: user.uid,
+                author: user.username || user.email.split('@')[0],
+                rating: selectedRating,
+                date: new Date().toISOString(),
+                verifiedPurchase: true,
+                purchaseType: purchaseStatus.type,
+                purchaseDate: purchaseStatus.purchaseDate
+            };
+            
+            await set(newRatingRef, ratingData);
+            
+            // تحديث تقييم المنتج في قاعدة البيانات
+            await updateProductAverageRating(currentProductId);
+            
+            // إعادة تحميل التقييمات
+            await loadProductRatings(currentProductId);
+            
+            // تحديث واجهة التقييم
+            userRatingForCurrentProduct = await getUserRatingForProduct(currentProductId, user.uid);
+            createRatingInProductInfo(true, userRatingForCurrentProduct);
+            
+            showNotification(currentLanguage === 'ar' ? 
+                'تم إرسال تقييمك بنجاح!' : 
+                'Your rating has been submitted successfully!');
+            
+        } catch (error) {
+            console.error('Error submitting rating:', error);
+            showNotification(currentLanguage === 'ar' ? 
+                'حدث خطأ أثناء إرسال التقييم' : 
+                'Error submitting rating');
+        }
+    }
+
+    // ====== تحديث متوسط تقييم المنتج ======
+    async function updateProductAverageRating(productId) {
+        try {
+            const ratingsRef = ref(database, `ratings/${productId}`);
+            const snapshot = await get(ratingsRef);
+            
+            if (snapshot.exists()) {
+                const ratings = snapshot.val();
+                let totalRating = 0;
+                let ratingCount = 0;
+                
+                Object.keys(ratings).forEach(ratingId => {
+                    totalRating += parseFloat(ratings[ratingId].rating);
+                    ratingCount++;
+                });
+                
+                const averageRating = ratingCount > 0 ? (totalRating / ratingCount).toFixed(1) : 0;
+                
+                // تحديث تقييم المنتج في جدول المنتجات
+                const productRef = ref(database, `products/${productId}`);
+                const productSnapshot = await get(productRef);
+                
+                if (productSnapshot.exists()) {
+                    const productData = productSnapshot.val();
+                    await set(productRef, {
+                        ...productData,
+                        rating: parseFloat(averageRating)
+                    });
+                    
+                    // تحديث المنتج في المصفوفة المحلية
+                    const productIndex = allProducts.findIndex(p => p.id === productId);
+                    if (productIndex !== -1) {
+                        allProducts[productIndex].rating = parseFloat(averageRating);
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error updating product average rating:', error);
+        }
+    }
+
+    // ====== تعديل التقييم ======
+    async function editRating() {
+        if (!currentProductId || !userRatingForCurrentProduct) return;
+        
+        // إعادة تعيين التقييم المحدد إلى تقييم المستخدم الحالي
+        selectedRating = userRatingForCurrentProduct.rating;
+        
+        // تحديث الواجهة لتعرض نجوم قابلة للتعديل
+        const ratingDisplay = document.getElementById('product-rating-display');
+        if (ratingDisplay) {
+            ratingDisplay.innerHTML = `
+                <div class="rating-input-inline" style="display: flex; align-items: center; gap: 10px;">
+                    <div class="stars-container-small">
+                        ${[1, 2, 3, 4, 5].map(star => `
+                            <i class="${star <= selectedRating ? 'fas' : 'far'} fa-star" 
+                               style="color: ${star <= selectedRating ? '#FFD700' : '#666'}; 
+                                      font-size: 16px;
+                                      cursor: pointer;"
+                               data-rating="${star}"
+                               onmouseover="hoverStar(${star})"
+                               onmouseout="resetStars()"
+                               onclick="selectStar(${star})"></i>
+                        `).join('')}
+                    </div>
+                    <button onclick="updateRating()" style="padding: 5px 15px; background: var(--gradient-secondary); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fas fa-save"></i>
+                        <span class="rtl-text">حفظ</span>
+                        <span class="ltr-text" style="display: none;">Save</span>
+                    </button>
+                    <button onclick="cancelEdit()" style="padding: 5px 10px; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        }
+        
+        // تحديث النجوم
+        updateStarsDisplay();
+    }
+
+    // ====== تحديث التقييم ======
+    async function updateRating() {
+        if (selectedRating === 0) {
+            showNotification(currentLanguage === 'ar' ? 
+                'الرجاء اختيار تقييم' : 
+                'Please select a rating');
+            return;
+        }
+        
+        if (!currentProductId || !userRatingForCurrentProduct) return;
+        
+        try {
+            // تحديث التقييم في Firebase
+            const ratingRef = ref(database, `ratings/${currentProductId}/${userRatingForCurrentProduct.id}`);
+            await set(ratingRef, {
+                ...userRatingForCurrentProduct,
+                rating: selectedRating,
+                date: new Date().toISOString()
+            });
+            
+            // تحديث متوسط التقييم
+            await updateProductAverageRating(currentProductId);
+            
+            // إعادة تحميل التقييمات
+            await loadProductRatings(currentProductId);
+            
+            // تحديث بيانات التقييم المحلية
+            userRatingForCurrentProduct = await getUserRatingForProduct(currentProductId, userRatingForCurrentProduct.userId);
+            createRatingInProductInfo(true, userRatingForCurrentProduct);
+            
+            showNotification(currentLanguage === 'ar' ? 
+                'تم تحديث تقييمك بنجاح!' : 
+                'Your rating has been updated successfully!');
+            
+        } catch (error) {
+            console.error('Error updating rating:', error);
+            showNotification(currentLanguage === 'ar' ? 
+                'حدث خطأ أثناء تحديث التقييم' : 
+                'Error updating rating');
+        }
+    }
+
+    // ====== إلغاء التعديل ======
+    function cancelEdit() {
+        if (userRatingForCurrentProduct) {
+            createRatingInProductInfo(true, userRatingForCurrentProduct);
+        }
+        selectedRating = 0;
+        hoveredRating = 0;
+    }
+
+    // ====== فتح تفاصيل المنتج ======
     async function openProductDetail(productId) {
         const product = allProducts.find(p => p.id === productId);
         if (!product) return;
@@ -3494,8 +3998,8 @@
         document.getElementById('product-detail-type').textContent = `${product.type} - ${product.subcategory}`;
         document.getElementById('product-detail-type-en').textContent = `${product.typeEn} - ${product.subcategoryEn}`;
         
-        // تحديث التقييم
-        updateRatingStars(product.rating);
+        // تحميل تقييمات المنتج
+        await loadProductRatings(productId);
         
         // إضافة قسم معلومات المنتج
         const summarySection = document.getElementById('product-summary-section');
@@ -3552,7 +4056,9 @@
                             <div>
                                 <div class="summary-label rtl-text">التقييم</div>
                                 <div class="summary-label ltr-text" style="display: none;">Rating</div>
-                                <div class="summary-value">${product.rating}/5</div>
+                                <div class="summary-value" id="product-rating-display">
+                                    <!-- سيتم تعبئته ديناميكياً -->
+                                </div>
                             </div>
                         </div>
                         
@@ -3568,6 +4074,28 @@
                     </div>
                 </div>
             `;
+        }
+        
+        // التحقق من شراء المستخدم للمنتج
+        const user = checkAuth();
+        if (user) {
+            const purchaseStatus = await checkProductPurchase(productId);
+            userRatingForCurrentProduct = await getUserRatingForProduct(productId, user.uid);
+            
+            // إنشاء واجهة التقييم في قسم معلومات المنتج
+            createRatingInProductInfo(purchaseStatus.purchased, userRatingForCurrentProduct);
+        } else {
+            // إذا لم يكن مسجلاً دخول
+            const ratingDisplay = document.getElementById('product-rating-display');
+            if (ratingDisplay) {
+                ratingDisplay.innerHTML = `
+                    <div style="color: var(--text-secondary); font-size: 14px;">
+                        <i class="fas fa-user" style="margin-left: 5px;"></i>
+                        <span class="rtl-text">تسجيل الدخول مطلوب</span>
+                        <span class="ltr-text" style="display: none;">Login required</span>
+                    </div>
+                `;
+            }
         }
         
         // تحديث العناصر بناءً على اللغة
@@ -3654,37 +4182,9 @@
         document.getElementById('product-detail-overlay').style.display = 'none';
         document.body.style.overflow = 'auto';
         currentProductId = null;
-    }
-    
-    function updateRatingStars(rating) {
-        const starsContainer = document.getElementById('product-detail-stars');
-        if (starsContainer) {
-            starsContainer.innerHTML = '';
-            
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < fullStars; i++) {
-                const star = document.createElement('i');
-                star.className = 'fas fa-star';
-                starsContainer.appendChild(star);
-            }
-            
-            if (hasHalfStar) {
-                const halfStar = document.createElement('i');
-                halfStar.className = 'fas fa-star-half-alt';
-                starsContainer.appendChild(halfStar);
-            }
-            
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            for (let i = 0; i < emptyStars; i++) {
-                const emptyStar = document.createElement('i');
-                emptyStar.className = 'far fa-star';
-                starsContainer.appendChild(emptyStar);
-            }
-            
-            document.getElementById('product-detail-rating').textContent = `${rating}/5`;
-        }
+        selectedRating = 0;
+        hoveredRating = 0;
+        userRatingForCurrentProduct = null;
     }
     
     function watchChapter(chapterId) {
@@ -3892,7 +4392,7 @@
         closeProductDetail();
     }
 
-    // ====== تحديث دالة البحث لجلب المنتجات من Firebase مباشرة ======
+    // ====== تحديث دالة البحث ======
     async function searchProducts() {
         const searchTerm = document.getElementById('search-input').value.toLowerCase();
         
@@ -3972,101 +4472,7 @@
         }
     }
 
-    // ====== دالة عرض كل القصص ======
-    function displayAllStories() {
-        const stories = allProducts.filter(p => p.category === 'قصص');
-        const sortedStories = sortProducts(stories);
-        
-        // إنشاء محتوى النافذة المنبثقة
-        const modalContent = `
-            <div class="all-stories-header">
-                <h2>
-                    <i class="fas fa-book"></i>
-                    <span class="rtl-text">جميع القصص (${sortedStories.length})</span>
-                    <span class="ltr-text" style="display: none;">All Stories (${sortedStories.length})</span>
-                </h2>
-                <button class="close-modal-btn" onclick="closeAllStories()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="all-stories-grid" id="all-stories-grid">
-                ${sortedStories.map(product => `
-                    <div class="all-stories-card" onclick="openProductDetail('${product.id}')">
-                        <div class="all-stories-card-image">
-                            <img src="${getProductImage(product)}" alt="${product.title}">
-                        </div>
-                        <div class="all-stories-card-content">
-                            <h3 class="all-stories-card-title rtl-text">${product.title}</h3>
-                            <h3 class="all-stories-card-title ltr-text" style="display: none;">${product.titleEn}</h3>
-                            
-                            <div class="all-stories-card-meta">
-                                <span class="all-stories-meta-item">
-                                    <i class="fas fa-star" style="color: var(--accent-color);"></i> ${product.rating}
-                                </span>
-                                
-                                <span class="all-stories-meta-item rtl-text">
-                                    <i class="fas fa-tag"></i> ${product.subcategory}
-                                </span>
-                                <span class="all-stories-meta-item ltr-text" style="display: none;">
-                                    <i class="fas fa-tag"></i> ${product.subcategoryEn}
-                                </span>
-                            </div>
-                            
-                            <p class="all-stories-card-description rtl-text">
-                                ${product.description.substring(0, 150)}...
-                            </p>
-                            <p class="all-stories-card-description ltr-text" style="display: none;">
-                                ${product.descriptionEn.substring(0, 150)}...
-                            </p>
-                            
-                            <div class="all-stories-card-footer">
-                                <div class="all-stories-card-price">${product.price}</div>
-                                <button class="all-stories-card-button" onclick="event.stopPropagation(); addToCart('${product.id}', event)">
-                                    <i class="fas fa-cart-plus"></i>
-                                    <span class="rtl-text">شراء</span>
-                                    <span class="ltr-text" style="display: none;">Buy</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        
-        // تعيين المحتوى في النافذة المنبثقة
-        document.getElementById('all-stories-content').innerHTML = modalContent;
-        
-        // إظهار النافذة المنبثقة مع تأثير انزلاقي
-        const modal = document.getElementById('all-stories-modal');
-        modal.style.display = 'block';
-        
-        // إضافة تأثير ظهور تدريجي
-        setTimeout(() => {
-            modal.style.opacity = '1';
-            modal.style.transform = 'translateY(0)';
-        }, 10);
-        
-        document.body.style.overflow = 'hidden';
-        
-        // تحديث العناصر بناءً على اللغة
-        updateLanguageElements();
-    }
-    
-    function closeAllStories() {
-        const modal = document.getElementById('all-stories-modal');
-        
-        // إضافة تأثير اختفاء تدريجي
-        modal.style.opacity = '0';
-        modal.style.transform = 'translateY(100%)';
-        
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-
-    // ====== لوحة البحث مع المنتجات الصغيرة ======
+    // ====== لوحة البحث ======
     function openSearch() {
         document.getElementById('search-overlay').style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -4212,57 +4618,6 @@
         });
     }
 
-    function openPrivacy() {
-        alert(currentLanguage === 'ar' ? 'صفحة الخصوصية قيد التطوير' : 'Privacy page under development');
-    }
-
-    function openOrderHistory() {
-        const user = checkAuth();
-        if (!user) return;
-        
-        alert(currentLanguage === 'ar' ? 'صفحة سجل الطلبات قيد التطوير' : 'Order history page under development');
-    }
-
-    function openAccount() {
-        const user = checkAuth();
-        if (!user) return;
-        
-        alert(currentLanguage === 'ar' ? 'صفحة الحساب قيد التطوير' : 'Account page under development');
-    }
-
-    function openFeedback() {
-        const user = checkAuth();
-        if (!user) return;
-        
-        alert(currentLanguage === 'ar' ? 'صفحة الرأي العام قيد التطوير' : 'Feedback page under development');
-    }
-
-    function openTerms() {
-        alert(currentLanguage === 'ar' ? 'صفحة سياسة الاستخدام قيد التطوير' : 'Terms page under development');
-    }
-
-    function openFAQ() {
-        alert(currentLanguage === 'ar' ? 'صفحة الأسئلة الشائعة قيد التطوير' : 'FAQ page under development');
-    }
-
-    function openContact() {
-        alert(currentLanguage === 'ar' ? 'صفحة الاتصال بنا قيد التطوير' : 'Contact page under development');
-    }
-
-    function openReport() {
-        const user = checkAuth();
-        if (!user) return;
-        
-        alert(currentLanguage === 'ar' ? 'صفحة الإبلاغ عن مشكلة قيد التطوير' : 'Report issue page under development');
-    }
-
-    function openSuggestions() {
-        const user = checkAuth();
-        if (!user) return;
-        
-        alert(currentLanguage === 'ar' ? 'صفحة المقترحات قيد التطوير' : 'Suggestions page under development');
-    }
-
     // ====== حفظ إحصائيات المستخدم ======
     async function trackUserActivity(action, productId = null) {
         try {
@@ -4290,13 +4645,6 @@
         // التحقق من تسجيل الدخول أولاً
         const user = checkAuth();
         if (!user) return;
-        
-        // عرض اسم المستخدم في الشريط العلوي
-        const userEmail = user.email || 'مستخدم';
-        const welcomeText = document.querySelector('.welcome-text');
-        if (welcomeText && currentLanguage === 'ar') {
-            welcomeText.textContent = `مرحباً ${userEmail.split('@')[0]}`;
-        }
         
         // استعادة الاتجاه
         const savedDirection = localStorage.getItem('direction') || 'rtl';
@@ -4389,21 +4737,6 @@
             });
         }
         
-        const allStoriesModal = document.getElementById('all-stories-modal');
-        if (allStoriesModal) {
-            allStoriesModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeAllStories();
-                }
-            });
-        }
-        
-        // إضافة حدث للنقر على زر "عرض الكل" للقصص
-        const showAllStoriesBtn = document.getElementById('show-all-stories');
-        if (showAllStoriesBtn) {
-            showAllStoriesBtn.addEventListener('click', displayAllStories);
-        }
-        
         // تحديث المعلومات الشخصية
         updateUserProfile();
     }
@@ -4440,7 +4773,7 @@
         }
     }
 
-    // إضافة أنماط CSS للرسوم المتحركة والعناصر الجديدة
+    // إضافة أنماط CSS للتقييم
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideOut {
@@ -4454,311 +4787,85 @@
             }
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .user-display-name {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        
-        /* أنماط التعليقات */
-        .comments-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: var(--border-radius-md);
-            border: 1px solid var(--border-color);
-        }
-        
-        .comment-form {
-            margin-bottom: 30px;
-        }
-        
-        .comment-input-container {
+        .stars-container-small, .rating-stars-small {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .comment-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            background: var(--darker-bg);
-            color: var(--text-primary);
-            font-family: inherit;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        
-        .comment-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        
-        .comment-submit-btn {
-            align-self: flex-end;
-            padding: 10px 25px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .comment-submit-btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        .comments-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .comment-item {
-            padding: 15px;
-            background: var(--darker-bg);
-            border-radius: var(--border-radius-sm);
-            border-left: 3px solid var(--primary-color);
-        }
-        
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .comment-author {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .comment-date {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        
-        .comment-text {
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-        
-        .no-comments {
-            text-align: center;
-            border-left: none;
-            background: transparent;
-        }
-        
-        /* تحسين عرض الصور Base64 */
-        .card-image, .scroll-image, .video-player img {
-            background: var(--darker-bg);
-            transition: transform 0.3s ease;
-        }
-        
-        .card-image:hover, .scroll-image:hover {
-            transform: scale(1.05);
-        }
-        
-        /* نافذة عرض كل القصص */
-        .all-stories-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: none;
-            opacity: 0;
-            transform: translateY(100%);
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        
-        .all-stories-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 20px;
-            background: var(--dark-bg);
-        }
-        
-        .all-stories-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color);
-        }
-        
-        .all-stories-header h2 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            color: var(--text-primary);
-        }
-        
-        .close-modal-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 24px;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-        
-        .close-modal-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .all-stories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 20px 0;
-        }
-        
-        .all-stories-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-        }
-        
-        .all-stories-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .all-stories-card-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .all-stories-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .all-stories-card:hover .all-stories-card-image img {
-            transform: scale(1.05);
-        }
-        
-        .all-stories-card-content {
-            padding: 20px;
-        }
-        
-        .all-stories-card-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            line-height: 1.4;
-        }
-        
-        .all-stories-card-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .all-stories-meta-item {
-            font-size: 12px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
             gap: 5px;
         }
         
-        .all-stories-card-description {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .all-stories-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .all-stories-card-price {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-        
-        .all-stories-card-button {
-            padding: 8px 20px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius-sm);
+        .stars-container-small .fa-star, .rating-stars-small .fa-star {
+            transition: all 0.2s ease;
             cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s;
+        }
+        
+        .stars-container-small .fa-star:hover, .rating-stars-small .fa-star:hover {
+            transform: scale(1.2);
+        }
+        
+        .product-detail-rating {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
-        .all-stories-card-button:hover {
-            transform: translateY(-2px);
+        .product-detail-rating .stars {
+            display: flex;
+            gap: 3px;
         }
         
-        /* إخفاء الأزرار إذا لم يكن هناك اتصال بالإنترنت */
+        .product-detail-rating .stars .fa-star {
+            color: #FFD700;
+            font-size: 16px;
+        }
+        
+        .product-detail-rating .stars .fa-star-half-alt {
+            color: #FFD700;
+            font-size: 16px;
+        }
+        
+        .product-detail-rating .stars .far.fa-star {
+            color: #666;
+        }
+        
+        .product-detail-rating .rating-value {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .product-detail-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--darker-bg);
+            border-radius: 8px;
+        }
+        
+        .summary-item i {
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .summary-value {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
         @media (max-width: 768px) {
-            .admin-nav {
-                flex-wrap: wrap;
-            }
-            
-            .all-stories-grid {
+            .product-detail-summary-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .all-stories-header h2 {
-                font-size: 20px;
             }
         }
     `;
@@ -4799,17 +4906,50 @@
     window.closeSearch = closeSearch;
     window.searchProducts = searchProducts;
     window.scrollToTop = scrollToTop;
-    window.openPrivacy = openPrivacy;
-    window.openOrderHistory = openOrderHistory;
-    window.openAccount = openAccount;
-    window.openFeedback = openFeedback;
-    window.openTerms = openTerms;
-    window.openFAQ = openFAQ;
-    window.openContact = openContact;
-    window.openReport = openReport;
-    window.openSuggestions = openSuggestions;
-    window.displayAllStories = displayAllStories;
-    window.closeAllStories = closeAllStories;
+    window.openPrivacy = function() {
+        alert(currentLanguage === 'ar' ? 'صفحة الخصوصية قيد التطوير' : 'Privacy page under development');
+    };
+    window.openOrderHistory = function() {
+        const user = checkAuth();
+        if (!user) return;
+        alert(currentLanguage === 'ar' ? 'صفحة سجل الطلبات قيد التطوير' : 'Order history page under development');
+    };
+    window.openAccount = function() {
+        const user = checkAuth();
+        if (!user) return;
+        alert(currentLanguage === 'ar' ? 'صفحة الحساب قيد التطوير' : 'Account page under development');
+    };
+    window.openFeedback = function() {
+        const user = checkAuth();
+        if (!user) return;
+        alert(currentLanguage === 'ar' ? 'صفحة الرأي العام قيد التطوير' : 'Feedback page under development');
+    };
+    window.openTerms = function() {
+        alert(currentLanguage === 'ar' ? 'صفحة سياسة الاستخدام قيد التطوير' : 'Terms page under development');
+    };
+    window.openFAQ = function() {
+        alert(currentLanguage === 'ar' ? 'صفحة الأسئلة الشائعة قيد التطوير' : 'FAQ page under development');
+    };
+    window.openContact = function() {
+        alert(currentLanguage === 'ar' ? 'صفحة الاتصال بنا قيد التطوير' : 'Contact page under development');
+    };
+    window.openReport = function() {
+        const user = checkAuth();
+        if (!user) return;
+        alert(currentLanguage === 'ar' ? 'صفحة الإبلاغ عن مشكلة قيد التطوير' : 'Report issue page under development');
+    };
+    window.openSuggestions = function() {
+        const user = checkAuth();
+        if (!user) return;
+        alert(currentLanguage === 'ar' ? 'صفحة المقترحات قيد التطوير' : 'Suggestions page under development');
+    };
+    window.hoverStar = hoverStar;
+    window.resetStars = resetStars;
+    window.selectStar = selectStar;
+    window.submitRating = submitRating;
+    window.editRating = editRating;
+    window.updateRating = updateRating;
+    window.cancelEdit = cancelEdit;
 </script>
 </body>
 </html>
